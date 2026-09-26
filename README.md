@@ -121,7 +121,7 @@ github-proxy: "https://custom-domain/raw/"
 <details>
   <summary>Show Details</summary>
 
-> **⚠️ Note:** 避免使用 Speedtest 或 Cloudflare 下载链接，因为部分节点会屏蔽Speed Test网站。
+> **⚠️ Note:** Avoid Speedtest or Cloudflare download links — some nodes block speed test sites.
 
 1. Deploy [worker.js](./doc/cloudflare/worker.js) to Cloudflare Workers.
 2. Bind a custom domain (to avoid being blocked by nodes).
@@ -202,12 +202,12 @@ go run . -f ./config/config.yaml
 <details>
   <summary>Show Details</summary>
 
-> **📦 支持 100+ 通知渠道**，通过 [Apprise](https://github.com/caronc/apprise) 发送通知。
+> **📦 Supports 100+ notification channels**，通过 [Apprise](https://github.com/caronc/apprise) 发送通知。
 
 ### 🌐 Vercel Deployment
 
-1. 点击[**此处**](https://vercel.com/new/clone?repository-url=https://github.com/Ezrabro/apprise_vercel)部署 Apprise。
-2. After deployment get API link，如 `https://testapprise-beck8s-projects.vercel.app/notify`。
+1. Click [**here**](https://vercel.com/new/clone?repository-url=https://github.com/Ezrabro/apprise_vercel)部署 Apprise。
+2. After deployment get API link, e.g. `https://testapprise-beck8s-projects.vercel.app/notify`.
 3. Recommend setting custom domain `diydomain.com` for Vercel project (access may be restricted in China).
 
 ### 🐳 Docker Deployment
@@ -236,18 +236,18 @@ apprise-api-server: "https://diydomain.com/notify"
 # Fill in notification targets
 # Supports 100+ notification channels, detailed format at https://github.com/caronc/apprise
 recipient-url: 
-  # telegram格式：tgram://{bot_token}/{chat_id}
+  # Telegram format:tgram://{bot_token}/{chat_id}
   # - tgram://xxxxxx/-1002149239223
-  # 钉钉格式：dingtalk://{Secret}@{ApiKey}
+  # DingTalk format:dingtalk://{Secret}@{ApiKey}
   # - dingtalk://xxxxxx@xxxxxxx
 # Custom Notification Title
-notify-title: "🔔 节点Status更新"
+notify-title: "🔔 Node Status Update"
 ```
 </details>
 
 ## 💾 Save Method Config
 
-> **⚠️ Note:** 选择保存方法时，请更改 `save-method` 配置。
+> **⚠️ Note:** When selecting save method, change `save-method` config.
 
 - **本地保存**：保存到 `./output` 文件夹。
 - **R2**：保存到 Cloudflare R2 [配置方法](./doc/r2.md)。
