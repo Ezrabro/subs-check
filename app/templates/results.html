@@ -596,7 +596,7 @@
                 return;
             }
             dom.summary.innerHTML = 'Done于 ' + esc(formatDateTime(new Date(data.checkedAt))) +
-                '<span class="sep">·</span>Total <span class="count">' + nodes.length + '</span> 个节点';
+                '<span class="sep">·</span>Total <span class="count">' + nodes.length + '</span> nodes';
             if (!nodes.length) {
                 showNotice('bi-inbox', 'No available nodes this round', 'All nodes failed check or were filtered out.');
                 return;
@@ -751,7 +751,7 @@
             dom.emptyFilter.hidden = state.view.length > 0;
             dom.tableFooter.hidden = remaining <= 0;
             dom.showMore.textContent = '显示更多（还有 ' + remaining + ' 个）';
-            dom.countText.textContent = hasFilters() ? 'Matching ' + state.view.length + ' / ' + total + ' 个节点' : '';
+            dom.countText.textContent = hasFilters() ? 'Matching ' + state.view.length + ' / ' + total + ' nodes' : '';
             dom.resetFilters.hidden = !hasFilters();
             syncChips();
         }
