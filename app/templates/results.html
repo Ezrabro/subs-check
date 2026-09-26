@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>检测结果 - Subs Check</title>
+    <title>Results - Subs Check</title>
     <link href="/static/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="/static/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="/static/css/app.css" rel="stylesheet">
@@ -342,7 +342,7 @@
     <main class="page">
         <div class="page-head">
             <div class="min-w-0">
-                <h1 class="page-title">检测结果</h1>
+                <h1 class="page-title">Results</h1>
                 <div class="page-sub" id="summary">加载中...</div>
             </div>
             <button id="openExport" class="btn btn-primary" type="button">
@@ -395,7 +395,7 @@
                 <div class="modal-header">
                     <div>
                         <h5 class="modal-title" id="exportTitle">导出订阅</h5>
-                        <div class="modal-sub">节点来自本轮检测结果，由内置 Sub-Store 转换为各客户端格式</div>
+                        <div class="modal-sub">节点来自本轮Results，由内置 Sub-Store 转换为各客户端格式</div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
                 </div>
@@ -430,7 +430,7 @@
             'skip-cert-verify': '跳过证书验证', 'ws-path': 'WS 路径', 'ws-host': 'WS Host',
             'grpc-service-name': 'gRPC 服务名', 'h2-path': 'H2 路径', 'http-path': 'HTTP 路径',
             'plugin': '插件', 'obfs': '混淆', 'protocol': '协议参数', 'up': '上行带宽', 'down': '下行带宽',
-            'ports': '端口跳跃', 'congestion-controller': '拥塞控制', 'udp-relay-mode': 'UDP 中继模式', 'version': '版本'
+            'ports': '端口跳跃', 'congestion-controller': '拥塞控制', 'udp-relay-mode': 'UDP 中继模式', 'version': 'Version'
         };
         // Columns narrower than minWidth are hidden; their values move to the detail panel.
         const COLUMNS = [
@@ -575,15 +575,15 @@
         function load() {
             if (!getApiKey()) {
                 dom.summary.textContent = '需要 API 密钥';
-                showNotice('bi-key', '需要 API 密钥', '请先在<a href="/admin">控制台</a>输入并保存 API 密钥。');
+                showNotice('bi-key', '需要 API 密钥', '请先在<a href="/admin">Dashboard</a>输入并保存 API 密钥。');
                 return;
             }
             api('/api/results').then(setData).catch(function (err) {
                 dom.summary.textContent = '加载失败';
                 if (err.unauthorized) {
-                    showNotice('bi-key', 'API 密钥无效', '请回到<a href="/admin">控制台</a>重新输入 API 密钥。');
+                    showNotice('bi-key', 'API 密钥无效', '请回到<a href="/admin">Dashboard</a>重新输入 API 密钥。');
                 } else {
-                    showNotice('bi-exclamation-triangle', '加载检测结果失败', esc(err.message));
+                    showNotice('bi-exclamation-triangle', '加载Results失败', esc(err.message));
                 }
             });
         }
@@ -591,8 +591,8 @@
         function setData(data) {
             const nodes = data.nodes || [];
             if (!data.checkedAt) {
-                dom.summary.textContent = '暂无检测结果';
-                showNotice('bi-inbox', '暂无检测结果', '完成一轮检测后，可以在这里查看节点列表。');
+                dom.summary.textContent = '暂无Results';
+                showNotice('bi-inbox', '暂无Results', '完成一轮检测后，可以在这里查看节点列表。');
                 return;
             }
             dom.summary.innerHTML = '完成于 ' + esc(formatDateTime(new Date(data.checkedAt))) +

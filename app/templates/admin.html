@@ -290,7 +290,7 @@
                     <i class="bi bi-stop-circle"></i>强制停止
                 </button>
                 <button id="triggerCheck" class="btn btn-primary btn-sm" type="button">
-                    <i class="bi bi-play-fill"></i>立即检测
+                    <i class="bi bi-play-fill"></i>Start Check
                 </button>
             </div>
         </section>
@@ -309,7 +309,7 @@
                         <div id="phaseStep1" class="phase-step" data-phase="1">
                             <span class="phase-icon"><i class="bi bi-heart-pulse"></i></span>
                             <span class="phase-text">
-                                <span class="phase-name">测活</span>
+                                <span class="phase-name">Liveness</span>
                                 <span class="phase-count" id="phaseCount1"></span>
                                 <span class="phase-link-hint">查看结果</span>
                             </span>
@@ -390,7 +390,7 @@
     <script>
         let editor;
         const PHASE_LABELS = {
-            1: { name: '测活', countLabel: '存活' },
+            1: { name: 'Liveness', countLabel: '存活' },
             2: { name: '流媒体+重命名', countLabel: '完成' },
             3: { name: '测速', countLabel: '通过' }
         };
@@ -630,7 +630,7 @@
             });
         });
 
-        // 立即检测
+        // Start Check
         document.getElementById('triggerCheck').addEventListener('click', function() {
             const button = this;
             const icon = button.querySelector('i');
@@ -773,7 +773,7 @@
                 if (on) {
                     step.setAttribute('role', 'link');
                     step.setAttribute('tabindex', '0');
-                    step.setAttribute('title', '查看检测结果');
+                    step.setAttribute('title', '查看Results');
                 } else {
                     step.removeAttribute('role');
                     step.removeAttribute('tabindex');
@@ -940,7 +940,7 @@
         setInterval(loadLogs, 10000);
         setInterval(updateStatus, 3000);
 
-        // 获取版本信息
+        // 获取Version信息
         function getVersionInfo() {
             fetch('/api/version', {
                 headers: addApiKeyHeader()
@@ -952,8 +952,8 @@
                 }
             })
             .catch(error => {
-                console.error('获取版本信息失败:', error);
-                dom.versionInfo.textContent = '版本未知';
+                console.error('获取Version信息失败:', error);
+                dom.versionInfo.textContent = 'Version未知';
             });
         }
 
