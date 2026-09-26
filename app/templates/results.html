@@ -343,7 +343,7 @@
         <div class="page-head">
             <div class="min-w-0">
                 <h1 class="page-title">Results</h1>
-                <div class="page-sub" id="summary">加载中...</div>
+                <div class="page-sub" id="summary">Loading...</div>
             </div>
             <button id="openExport" class="btn btn-primary" type="button">
                 <i class="bi bi-box-arrow-up-right"></i>导出订阅
@@ -395,7 +395,7 @@
                 <div class="modal-header">
                     <div>
                         <h5 class="modal-title" id="exportTitle">导出订阅</h5>
-                        <div class="modal-sub">节点来自本轮Results，由内置 Sub-Store 转换为各客户端格式</div>
+                        <div class="modal-sub">节点来自本轮Results，由Built-in Sub-Store 转换为各客户端格式</div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
                 </div>
@@ -514,7 +514,7 @@
             return fetch(path, Object.assign({}, options, { headers: headers })).then(function (resp) {
                 return resp.json().catch(function () { return {}; }).then(function (body) {
                     if (resp.status === 401) {
-                        const err = new Error('API密钥无效或未提供');
+                        const err = new Error('API Key无效或未提供');
                         err.unauthorized = true;
                         throw err;
                     }
@@ -857,7 +857,7 @@
                 }).join('') + '</div>';
 
             if (state.data.mediaCheck && n.media && n.media.length) {
-                html += '<div><div class="detail-title">流媒体解锁</div><div class="media-grid">' +
+                html += '<div><div class="detail-title">Streaming Unlock</div><div class="media-grid">' +
                     n.media.map(function (m) {
                         return m.tag
                             ? '<div class="media-item ok"><i class="bi bi-check-circle-fill"></i><span>' + esc(platformLabel(m.platform)) +
@@ -1069,7 +1069,7 @@
 
             let desc = '';
             if (busy) {
-                desc = '正在请求内置 Sub-Store 转换，可以关闭弹窗，Done后链接自动生效';
+                desc = '正在请求Built-in Sub-Store 转换，可以关闭弹窗，Done后链接自动生效';
             } else if (t.state === 'none') {
                 desc = t.preset
                     ? '每轮检测Done时自动写入 ' + t.path + '（需要启用 sub-store）'

@@ -274,7 +274,7 @@
             <div class="cb-field cb-key">
                 <label class="cb-label" for="apiKey"><i class="bi bi-key"></i>API 密钥</label>
                 <div class="key-input">
-                    <input type="password" class="form-control form-control-sm" id="apiKey" placeholder="请输入API密钥" autocomplete="off">
+                    <input type="password" class="form-control form-control-sm" id="apiKey" placeholder="请输入API Key" autocomplete="off">
                     <button class="icon-btn" type="button" id="toggleApiKey" title="显示/隐藏密钥">
                         <i class="bi bi-eye-slash"></i>
                     </button>
@@ -284,7 +284,7 @@
             <div class="cb-actions">
                 <span id="statusContainer" class="status-pill">
                     <span id="statusIcon" class="bi bi-hourglass-split"></span>
-                    <span id="nextCheckTime">加载中...</span>
+                    <span id="nextCheckTime">Loading...</span>
                 </span>
                 <button id="forceClose" class="btn btn-danger-soft btn-sm" type="button">
                     <i class="bi bi-stop-circle"></i>强制停止
@@ -298,7 +298,7 @@
         <div class="workspace">
             <section class="panel">
                 <div class="panel-header">
-                    <h2 class="panel-title"><i class="bi bi-terminal"></i>最近日志</h2>
+                    <h2 class="panel-title"><i class="bi bi-terminal"></i>最近Logs</h2>
                     <button id="refreshLogs" class="btn btn-ghost btn-sm" type="button">
                         <i class="bi bi-arrow-repeat"></i>刷新
                     </button>
@@ -415,11 +415,11 @@
             versionInfo: document.getElementById('versionInfo'),
         };
 
-        // 初始化API密钥
+        // 初始化API Key
         const storedApiKey = localStorage.getItem('apiKey') || '';
         dom.apiKey.value = storedApiKey;
 
-        // 切换API密钥可见性
+        // 切换API Key可见性
         dom.toggleApiKey.addEventListener('click', function() {
             const icon = this.querySelector('i');
 
@@ -432,7 +432,7 @@
             }
         });
 
-        // 保存API密钥到本地存储
+        // 保存API Key到本地存储
         dom.saveApiKey.addEventListener('click', function() {
             const apiKey = dom.apiKey.value.trim();
             localStorage.setItem('apiKey', apiKey);
@@ -450,7 +450,7 @@
                     alert('Invalid API key, please check and retry');
                     return false;
                 } else if (response.ok) {
-                    alert('API密钥有效，已保存到本地');
+                    alert('API Key有效，已保存到本地');
                     loadConfig();
                     loadLogs();
                     updateStatus();
@@ -461,8 +461,8 @@
                 }
             })
             .catch(error => {
-                console.error('验证API密钥失败:', error);
-                alert('验证API密钥时出错，但已保存到本地存储');
+                console.error('验证API Key失败:', error);
+                alert('验证API Key时出错，但已保存到本地存储');
             })
             .finally(() => {
                 button.disabled = false;
@@ -470,12 +470,12 @@
             });
         });
 
-        // 获取API密钥
+        // 获取API Key
         function getApiKey() {
             return localStorage.getItem('apiKey') || '';
         }
 
-        // 添加API密钥到请求头
+        // 添加API Key到请求头
         function addApiKeyHeader(headers = {}) {
             const apiKey = getApiKey();
             return { ...headers, 'X-API-Key': apiKey };
@@ -538,7 +538,7 @@
         function handleUnauthorized(response, showAlert = true) {
             if (response.status === 401) {
                 if (showAlert) {
-                    alert('API密钥无效或未提供，请检查您的API密钥');
+                    alert('API Key无效或未提供，请检查您的API Key');
                 }
                 return true;
             }
@@ -655,7 +655,7 @@
             });
         });
 
-        // 加载日志
+        // 加载Logs
         function loadLogs() {
             return fetch('/api/logs', {
                 headers: addApiKeyHeader()
@@ -666,7 +666,7 @@
             })
             .then(data => {
                 if (data.error) {
-                    dom.logs.textContent = '加载日志失败: ' + data.error;
+                    dom.logs.textContent = '加载Logs失败: ' + data.error;
                 } else {
                     const isScrolledToBottom = dom.logs.scrollHeight - dom.logs.clientHeight <= dom.logs.scrollTop + 1;
                     const fragment = document.createDocumentFragment();
@@ -685,7 +685,7 @@
             })
             .catch(error => {
                 if (error.message !== '未授权') {
-                    dom.logs.textContent = '加载日志失败: ' + error.message;
+                    dom.logs.textContent = '加载Logs失败: ' + error.message;
                 }
             });
         }
@@ -694,7 +694,7 @@
             return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
         }
 
-        // 为日志添加颜色
+        // 为Logs添加颜色
         const LOG_LEVEL_CLASS = { INF: 'log-info', ERR: 'log-error', WRN: 'log-warn', DBG: 'log-debug' };
         function colorizeLog(log) {
             log = escapeHtml(log);
@@ -703,7 +703,7 @@
             return log;
         }
 
-        // 刷新日志
+        // 刷新Logs
         document.getElementById('refreshLogs').addEventListener('click', function() {
             const button = this;
             const icon = button.querySelector('i');
@@ -820,7 +820,7 @@
             updatePhaseSteps(phase, available, total, phaseResults);
         }
 
-        // 重置进度条到初始状态
+        // 重置进度条到初始Status
         function resetProgress() {
             dom.progressText.textContent = 'N/A';
             dom.progressPercent.textContent = 'N/A';
@@ -833,7 +833,7 @@
             }
         }
 
-        // 更新状态
+        // 更新Status
         // Pipeline stages run concurrently, so rows stay "active" with live counts.
         // `done` counts items that finished the stage; `pass` counts items that moved on.
         // When speed testing is off, the speed row stays visible but inactive with an
@@ -919,8 +919,8 @@
                 }
             })
             .catch(error => {
-                console.error('获取状态失败:', error);
-                setStatus('error', 'bi-exclamation-triangle-fill', '获取状态失败');
+                console.error('获取Status失败:', error);
+                setStatus('error', 'bi-exclamation-triangle-fill', '获取Status失败');
                 resetProgress();
             });
         }
@@ -929,10 +929,10 @@
         updateStatus();
         loadLogs();
 
-        // 检查API密钥
+        // 检查API Key
         const apiKey = localStorage.getItem('apiKey');
         if (!apiKey) {
-            alert('请先输入API密钥以使用本系统');
+            alert('请先输入API Key以使用本系统');
             dom.apiKey.focus();
         }
 
