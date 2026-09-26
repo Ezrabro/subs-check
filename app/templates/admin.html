@@ -268,7 +268,7 @@
     <main class="dashboard">
         <section class="panel controlbar">
             <div class="cb-field cb-config">
-                <span class="cb-label"><i class="bi bi-file-earmark-code"></i>配置文件</span>
+                <span class="cb-label"><i class="bi bi-file-earmark-code"></i>Config File</span>
                 <span class="cb-value mono ellipsis" title="{{.configPath}}">{{.configPath}}</span>
             </div>
             <div class="cb-field cb-key">
@@ -318,7 +318,7 @@
                         <div id="phaseStep2" class="phase-step" data-phase="2">
                             <span class="phase-icon"><i class="bi bi-film"></i></span>
                             <span class="phase-text">
-                                <span class="phase-name">流媒体+重命名</span>
+                                <span class="phase-name">Streaming + Rename</span>
                                 <span class="phase-count" id="phaseCount2"></span>
                                 <span class="phase-link-hint">查看结果</span>
                             </span>
@@ -327,7 +327,7 @@
                         <div id="phaseStep3" class="phase-step" data-phase="3">
                             <span class="phase-icon"><i class="bi bi-speedometer"></i></span>
                             <span class="phase-text">
-                                <span class="phase-name">测速</span>
+                                <span class="phase-name">Speed Test</span>
                                 <span class="phase-count" id="phaseCount3"></span>
                                 <span class="phase-link-hint">查看结果</span>
                             </span>
@@ -340,7 +340,7 @@
                             <div><span id="progressPercent">N/A</span></div>
                         </div>
                         <div class="progress-info">
-                            <div id="successLabel">成功节点: <span id="successText">N/A</span></div>
+                            <div id="successLabel">Success Nodes: <span id="successText">N/A</span></div>
                             <div><span id="processPercent">N/A</span></div>
                         </div>
                     </div>
@@ -359,7 +359,7 @@
                             <i class="bi bi-eye-slash"></i>
                         </button>
                         <button id="reloadConfig" class="btn btn-ghost btn-sm" type="button">
-                            <i class="bi bi-arrow-repeat"></i>重载
+                            <i class="bi bi-arrow-repeat"></i>Reload
                         </button>
                         <button id="saveConfig" class="btn btn-primary btn-sm" type="button">
                             <i class="bi bi-save"></i>保存
@@ -370,7 +370,7 @@
                     <div id="editor"></div>
                     <div id="editorOverlay" class="editor-overlay">
                         <div class="editor-overlay-message">
-                            <i class="bi bi-eye-slash"></i>配置已隐藏，点击查看
+                            <i class="bi bi-eye-slash"></i>Config hidden, click to view
                         </div>
                     </div>
                 </div>
@@ -391,8 +391,8 @@
         let editor;
         const PHASE_LABELS = {
             1: { name: 'Liveness', countLabel: '存活' },
-            2: { name: '流媒体+重命名', countLabel: '完成' },
-            3: { name: '测速', countLabel: '通过' }
+            2: { name: 'Streaming + Rename', countLabel: 'Done' },
+            3: { name: 'Speed Test', countLabel: 'Passed' }
         };
 
         // 缓存高频访问的 DOM 元素
@@ -447,7 +447,7 @@
             })
             .then(response => {
                 if (response.status === 401) {
-                    alert('API密钥无效，请检查后重试');
+                    alert('Invalid API key, please check and retry');
                     return false;
                 } else if (response.ok) {
                     alert('API密钥有效，已保存到本地');
@@ -739,7 +739,7 @@
                 step.classList.remove('active', 'done');
 
                 if (i < phase) {
-                    // 已完成的阶段：用后端保存的结果
+                    // 已Done的阶段：用后端保存的结果
                     step.classList.add('done');
                     if (result) {
                         count.textContent = label + ': ' + result.available + '/' + result.total;
@@ -804,7 +804,7 @@
             dom.processPercent.textContent = percentSuccess + '%';
 
             // 显示阶段对应的标签
-            const label = (phase && PHASE_LABELS[phase]) ? PHASE_LABELS[phase].countLabel : '成功节点';
+            const label = (phase && PHASE_LABELS[phase]) ? PHASE_LABELS[phase].countLabel : 'Success Nodes';
             if (dom.successLabel && dom.successText) {
                 dom.successLabel.childNodes[0].textContent = label + ': ';
                 if (available > 0) {
@@ -828,7 +828,7 @@
             dom.progressBarTotal.style.width = '0%';
             dom.progressBarSuccess.style.width = '0%';
             if (dom.successLabel) {
-                dom.successLabel.childNodes[0].textContent = '成功节点: ';
+                dom.successLabel.childNodes[0].textContent = 'Success Nodes: ';
                 dom.successText.textContent = 'N/A';
             }
         }
@@ -843,8 +843,8 @@
             dom.phaseSteps.style.display = 'flex';
             const rows = [
                 { idx: 1, label: '存活', pass: p.alivePass,  total: p.total, active: true },
-                { idx: 2, label: '通过', pass: p.filterPass, total: p.alivePass, active: true },
-                { idx: 3, label: '通过', pass: p.speedPass, total: p.filterPass, active: hasSpeed },
+                { idx: 2, label: 'Passed', pass: p.filterPass, total: p.alivePass, active: true },
+                { idx: 3, label: 'Passed', pass: p.speedPass, total: p.filterPass, active: hasSpeed },
             ];
             for (const r of rows) {
                 const step = phaseStepEls[r.idx];
@@ -874,7 +874,7 @@
             dom.progressBarSuccess.style.width = pctSuccess + '%';
 
             if (dom.successLabel && dom.successText) {
-                dom.successLabel.childNodes[0].textContent = '通过: ';
+                dom.successLabel.childNodes[0].textContent = 'Passed: ';
                 dom.successText.innerHTML = success > 0
                     ? '<span class="success-highlight">' + success + '</span>/' + total
                     : success + '/' + total;
@@ -899,7 +899,7 @@
             .then(data => {
                 if (data) {
                     if (data.checking) {
-                        setStatus('running', 'bi-arrow-repeat rotate-animation', '正在检测中...');
+                        setStatus('running', 'bi-arrow-repeat rotate-animation', '正在Checking...');
 
                         if (data.pipeline) {
                             updatePipelineBar(data.pipeline, !!data.hasSpeedTest);

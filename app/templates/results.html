@@ -408,7 +408,7 @@
                 </div>
                 <div class="modal-footer-note">
                     <i class="bi bi-lock"></i>
-                    <span>生成需要 API 密钥；生成后链接无需密钥即可访问（与 /sub/ 相同），每轮检测完成后自动更新，重启后继续有效，停用后失效。</span>
+                    <span>生成需要 API 密钥；生成后链接无需密钥即可访问（与 /sub/ 相同），每轮检测Done后自动更新，重启后继续有效，停用后失效。</span>
                 </div>
             </div>
         </div>
@@ -592,13 +592,13 @@
             const nodes = data.nodes || [];
             if (!data.checkedAt) {
                 dom.summary.textContent = '暂无Results';
-                showNotice('bi-inbox', '暂无Results', '完成一轮检测后，可以在这里查看Node List。');
+                showNotice('bi-inbox', '暂无Results', 'Done一轮检测后，可以在这里查看Node List。');
                 return;
             }
-            dom.summary.innerHTML = '完成于 ' + esc(formatDateTime(new Date(data.checkedAt))) +
+            dom.summary.innerHTML = 'Done于 ' + esc(formatDateTime(new Date(data.checkedAt))) +
                 '<span class="sep">·</span>共 <span class="count">' + nodes.length + '</span> 个节点';
             if (!nodes.length) {
-                showNotice('bi-inbox', '本轮没有可用节点', '全部节点都未通过检测或被过滤。');
+                showNotice('bi-inbox', '本轮没有可用节点', '全部节点都未Passed检测或被过滤。');
                 return;
             }
 
@@ -1069,19 +1069,19 @@
 
             let desc = '';
             if (busy) {
-                desc = '正在请求内置 Sub-Store 转换，可以关闭弹窗，完成后链接自动生效';
+                desc = '正在请求内置 Sub-Store 转换，可以关闭弹窗，Done后链接自动生效';
             } else if (t.state === 'none') {
                 desc = t.preset
-                    ? '每轮检测完成时自动写入 ' + t.path + '（需要启用 sub-store）'
-                    : '尚未生成。生成后这个链接才能访问，之后每轮检测完成自动更新，直到停用';
+                    ? '每轮检测Done时自动写入 ' + t.path + '（需要启用 sub-store）'
+                    : '尚未生成。生成后这个链接才能访问，之后每轮检测Done自动更新，直到停用';
             } else if (t.state === 'ready') {
-                desc = relTime(t.generatedAt) + '生成 · ' + formatSize(t.size) + ' · 每轮检测完成后自动更新';
+                desc = relTime(t.generatedAt) + '生成 · ' + formatSize(t.size) + ' · 每轮检测Done后自动更新';
             } else if (t.state === 'outdated') {
-                desc = relTime(t.generatedAt) + '生成 · 内容来自上一轮检测，本轮检测完成后自动更新';
+                desc = relTime(t.generatedAt) + '生成 · 内容来自上一轮检测，本轮检测Done后自动更新';
             } else if (t.state === 'failed') {
                 desc = '生成失败：' + t.error + (t.generatedAt ? ' · 链接暂时提供' + relTime(t.generatedAt) + '生成的内容' : '');
             } else if (t.state === 'preset') {
-                desc = '每轮检测完成时写入 ' + t.path + ' · ' + relTime(t.generatedAt) + '更新 · ' + formatSize(t.size);
+                desc = '每轮检测Done时写入 ' + t.path + ' · ' + relTime(t.generatedAt) + '更新 · ' + formatSize(t.size);
             }
 
             let primary;
