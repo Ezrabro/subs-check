@@ -395,7 +395,7 @@
             3: { name: 'Speed Test', countLabel: 'Passed' }
         };
 
-        // 缓存高频访问的 DOM 元素
+        // 缓存高频访问的 DOM element
         const dom = {
             apiKey: document.getElementById('apiKey'),
             toggleApiKey: document.getElementById('toggleApiKey'),
@@ -415,11 +415,11 @@
             versionInfo: document.getElementById('versionInfo'),
         };
 
-        // 初始化API Key
+        // initAPI Key
         const storedApiKey = localStorage.getItem('apiKey') || '';
         dom.apiKey.value = storedApiKey;
 
-        // 切换API Key可见性
+        // switchAPI Key可见性
         dom.toggleApiKey.addEventListener('click', function() {
             const icon = this.querySelector('i');
 
@@ -432,7 +432,7 @@
             }
         });
 
-        // SaveAPI Key到本地存储
+        // SaveAPI Keyto local存储
         dom.saveApiKey.addEventListener('click', function() {
             const apiKey = dom.apiKey.value.trim();
             localStorage.setItem('apiKey', apiKey);
@@ -450,7 +450,7 @@
                     alert('Invalid API key, please check and retry');
                     return false;
                 } else if (response.ok) {
-                    alert('API Key有效，已Save到本地');
+                    alert('API Key有效，已Saveto local');
                     loadConfig();
                     loadLogs();
                     updateStatus();
@@ -462,7 +462,7 @@
             })
             .catch(error => {
                 console.error('验证API KeyFailed:', error);
-                alert('验证API Key时出错，但已Save到本地存储');
+                alert('验证API Key时出错，但已Saveto local存储');
             })
             .finally(() => {
                 button.disabled = false;
@@ -475,13 +475,13 @@
             return localStorage.getItem('apiKey') || '';
         }
 
-        // AddAPI Key到请求头
+        // AddAPI Keyto header
         function addApiKeyHeader(headers = {}) {
             const apiKey = getApiKey();
             return { ...headers, 'X-API-Key': apiKey };
         }
 
-        // 初始化Edit器
+        // initEdit器
         require(['vs/editor/editor.main'], function() {
             monaco.languages.register({ id: 'yaml' });
             monaco.languages.setMonarchTokensProvider('yaml', {
@@ -601,7 +601,7 @@
             });
         });
 
-        // 强制关闭
+        // 强制close
         document.getElementById('forceClose').addEventListener('click', function() {
             if (!confirm('Force stop current phase? Existing results will be kept.')) return;
 
@@ -714,7 +714,7 @@
             });
         });
 
-        // 缓存阶段步骤 DOM 元素
+        // 缓存阶段步骤 DOM element
         const phaseStepEls = [null, document.getElementById('phaseStep1'), document.getElementById('phaseStep2'), document.getElementById('phaseStep3')];
         const phaseCountEls = [null, document.getElementById('phaseCount1'), document.getElementById('phaseCount2'), document.getElementById('phaseCount3')];
 
@@ -773,7 +773,7 @@
                 if (on) {
                     step.setAttribute('role', 'link');
                     step.setAttribute('tabindex', '0');
-                    step.setAttribute('title', '查看Results');
+                    step.setAttribute('title', 'viewResults');
                 } else {
                     step.removeAttribute('role');
                     step.removeAttribute('tabindex');
@@ -932,7 +932,7 @@
         // 检查API Key
         const apiKey = localStorage.getItem('apiKey');
         if (!apiKey) {
-            alert('请先输入API Key以使用本系统');
+            alert('请先输入API Keyuse this system');
             dom.apiKey.focus();
         }
 
@@ -940,7 +940,7 @@
         setInterval(loadLogs, 10000);
         setInterval(updateStatus, 3000);
 
-        // GetVersion信息
+        // GetVersioninfo
         function getVersionInfo() {
             fetch('/api/version', {
                 headers: addApiKeyHeader()
@@ -952,7 +952,7 @@
                 }
             })
             .catch(error => {
-                console.error('GetVersion信息Failed:', error);
+                console.error('GetVersioninfoFailed:', error);
                 dom.versionInfo.textContent = 'Version未知';
             });
         }

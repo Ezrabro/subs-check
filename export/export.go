@@ -53,8 +53,8 @@ const (
 
 var (
 	ErrUnknownTarget = errors.New("不支持的导出格式")
-	ErrNotGenerated  = errors.New("该格式尚未生成，请在管理页面的导出订阅中生成")
-	ErrPreset        = errors.New("该格式每轮检测完成后自动生成，无需手动生成")
+	ErrNotGenerated  = errors.New("该格式尚未generate，请在管理页面的导出订阅中generate")
+	ErrPreset        = errors.New("该格式每轮check完成后自动generate，无需手动generate")
 )
 
 // CooldownError is returned when a target was generated too recently.
@@ -99,8 +99,8 @@ var targets = []Target{
 	lazy("stash", "Stash", "client", "", "Stash", textContent),
 	lazy("surfboard", "Surfboard", "client", "", "Surfboard", textContent),
 	lazy("egern", "Egern", "client", "", "Egern", textContent),
-	preset("mihomo", "Mihomo", "完整配置", "mihomo.yaml"),
-	lazy("clashmeta", "Clash.Meta", "core", "仅节点", "ClashMeta", textContent),
+	preset("mihomo", "Mihomo", "完整config", "mihomo.yaml"),
+	lazy("clashmeta", "Clash.Meta", "core", "仅node", "ClashMeta", textContent),
 	lazy("clash", "Clash", "core", "", "Clash", textContent),
 	lazy("sing-box", "sing-box", "core", "", "sing-box", "application/json; charset=utf-8"),
 	preset("v2ray", "V2Ray", "Base64", "base64.txt"),
@@ -272,7 +272,7 @@ func (c *Cache) Generate(id string) (Status, error) {
 		defer c.wg.Done()
 		defer c.track(id, -1)
 		if err := c.run(t); err != nil {
-			slog.Warn(fmt.Sprintf("生成导出订阅 %s 失败: %v", id, err))
+			slog.Warn(fmt.Sprintf("generate导出订阅 %s 失败: %v", id, err))
 			return
 		}
 		c.mu.Lock()

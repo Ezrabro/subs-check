@@ -15,7 +15,7 @@ var (
 	disneyMainPageRe  = regexp.MustCompile(`region"\s*:\s*"([^"]+)`)
 )
 
-// DisneyResult 表示 Disney+ 检测结果
+// DisneyResult 表示 Disney+ check结果
 type DisneyResult struct {
 	Unlocked bool   // 完全解锁
 	Soon     bool   // 该地区即将上线,当前仍不可用
@@ -23,11 +23,11 @@ type DisneyResult struct {
 	Region   string // 地区码
 }
 
-// CheckDisney 检测 Disney+ 解锁状态
+// CheckDisney check Disney+ 解锁状态
 func CheckDisney(httpClient *http.Client) (*DisneyResult, error) {
 	result := &DisneyResult{}
 
-	// 定义常量
+	// define常量
 	const (
 		cookie    = "grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Atoken-exchange&latitude=0&longitude=0&platform=browser&subject_token=DISNEYASSERTION&subject_token_type=urn%3Abamtech%3Aparams%3Aoauth%3Atoken-type%3Adevice"
 		assertion = `{"deviceFamily":"browser","applicationRuntime":"chrome","deviceProfile":"windows","attributes":{}}`
@@ -131,7 +131,7 @@ func CheckDisney(httpClient *http.Client) (*DisneyResult, error) {
 
 	regionMatch := disneyRegionRe.FindSubmatch(gqlBody)
 	if len(regionMatch) < 2 {
-		// GraphQL 响应里没有区域信息(例如接口异常/结构变化),回退去主页抓取
+		// GraphQL 响应里none区域info(例如接口异常/结构变化),回退去主页抓取
 		return checkDisneyMainPage(httpClient, result)
 	}
 	region := strings.ToUpper(string(regionMatch[1]))
@@ -158,7 +158,7 @@ func CheckDisney(httpClient *http.Client) (*DisneyResult, error) {
 	return result, nil
 }
 
-// checkDisneyMainPage 在 GraphQL 检测拿不到区域信息时,回退抓取 Disney+ 主页兜底判断
+// checkDisneyMainPage 在 GraphQL check拿不到区域info时,回退抓取 Disney+ 主页兜底判断
 func checkDisneyMainPage(httpClient *http.Client, result *DisneyResult) (*DisneyResult, error) {
 	req, err := http.NewRequest("GET", "https://www.disneyplus.com/", nil)
 	if err != nil {

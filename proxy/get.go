@@ -95,7 +95,7 @@ func GetProxies() ([]map[string]any, error) {
 						}
 					}
 
-					// 为每个节点添加订阅链接来源信息和备注
+					// 为每个node添加订阅链接来源info和备注
 					proxy["sub_url"] = url
 					if tag != "" {
 						proxy["sub_tag"] = tag
@@ -108,7 +108,7 @@ func GetProxies() ([]map[string]any, error) {
 
 			proxyInterface, ok := con["proxies"]
 			if !ok || proxyInterface == nil {
-				slog.Error("订阅链接没有proxies", "source", e.source, "url", url)
+				slog.Error("订阅链接noneproxies", "source", e.source, "url", url)
 				return
 			}
 
@@ -126,7 +126,7 @@ func GetProxies() ([]map[string]any, error) {
 							continue
 						}
 						// 虽然支持mihomo支持下划线，但是这里为了规范，还是改成横杠
-						// todo: 不知道后边还有没有这类问题
+						// todo: 不知道后边还有none这类问题
 						switch t {
 						case "hysteria2", "hy2":
 							if _, ok := proxyMap["obfs_password"]; ok {
@@ -135,7 +135,7 @@ func GetProxies() ([]map[string]any, error) {
 							}
 						}
 					}
-					// 为每个节点添加订阅链接来源信息和备注
+					// 为每个node添加订阅链接来源info和备注
 					proxyMap["sub_url"] = url
 					if tag != "" {
 						proxyMap["sub_tag"] = tag
@@ -150,7 +150,7 @@ func GetProxies() ([]map[string]any, error) {
 	// 等待所有工作协程完成
 	wg.Wait()
 
-	// 按订阅顺序合并,保证本地订阅在前、远程订阅在后,订阅内节点顺序也保留
+	// 按订阅顺序合并,保证本地订阅在前、远程订阅在后,订阅内node顺序也保留
 	total := 0
 	for _, b := range buckets {
 		total += len(b)
@@ -171,9 +171,9 @@ func resolveSubUrls() ([]subEntry, int, int) {
 	localNum = len(config.GlobalConfig.SubUrls)
 
 	entries := make([]subEntry, 0, len(config.GlobalConfig.SubUrls))
-	// 本地配置
+	// 本地config
 	for _, u := range config.GlobalConfig.SubUrls {
-		entries = append(entries, subEntry{url: u, source: "本地配置"})
+		entries = append(entries, subEntry{url: u, source: "本地config"})
 	}
 
 	// 远程清单

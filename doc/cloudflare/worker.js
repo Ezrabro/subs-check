@@ -106,7 +106,7 @@ const routeHandlers = {
             const speedTestUrl = `https://speed.cloudflare.com/__down?bytes=${bytes}`;
             // speed.cloudflare.com 对 bytes >= 1e8 (约 95.37 MiB) 的请求会做来源校验：
             // 缺少 Origin/Referer 的请求(如 subs-check/wget/curl 等非浏览器客户端)直接返回 403。
-            // 这里补上 Referer，使任意大小的测速请求都能通过；小于 1e8 时本就无此限制。
+            // 这里补上 Referer，使任意大小的Speed test请求都能through；小于 1e8 时本就无此限制。
             const headers = new Headers(request.headers);
             headers.set('Referer', 'https://speed.cloudflare.com/');
 
@@ -125,7 +125,7 @@ const routeHandlers = {
                 }
             });
         } catch (error) {
-            return handleError('测速失败: ' + error.message);
+            return handleError('Speed test失败: ' + error.message);
         }
     },
     async raw(request, url) {
@@ -166,7 +166,7 @@ const routeHandlers = {
             const headers = new Headers(request.headers);
             headers.set('User-Agent', 'Cloudflare-Worker');
 
-            // 通过 Cloudflare 代理下载
+            // through Cloudflare 代理下载
             const response = await fetch(targetUrl, {
                 method: 'GET',
                 headers

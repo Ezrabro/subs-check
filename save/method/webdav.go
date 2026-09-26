@@ -41,16 +41,16 @@ func UploadToWebDAV(yamlData []byte, filename string) error {
 	return uploader.Upload(yamlData, filename)
 }
 
-// ValiWebDAVConfig 验证WebDAV配置
+// ValiWebDAVConfig 验证WebDAVconfig
 func ValiWebDAVConfig() error {
 	if config.GlobalConfig.WebDAVURL == "" {
-		return fmt.Errorf("webdav URL未配置")
+		return fmt.Errorf("webdav URL未config")
 	}
 	if config.GlobalConfig.WebDAVUsername == "" {
-		return fmt.Errorf("webdav 用户名未配置")
+		return fmt.Errorf("webdav 用户名未config")
 	}
 	if config.GlobalConfig.WebDAVPassword == "" {
-		return fmt.Errorf("webdav 密码未配置")
+		return fmt.Errorf("webdav 密码未config")
 	}
 	return nil
 }
@@ -67,13 +67,13 @@ func (w *WebDAVUploader) Upload(yamlData []byte, filename string) error {
 // validateInput 验证输入参数
 func (w *WebDAVUploader) validateInput(yamlData []byte, filename string) error {
 	if len(yamlData) == 0 {
-		return fmt.Errorf("yaml数据为空")
+		return fmt.Errorf("yaml数据empty")
 	}
 	if filename == "" {
-		return fmt.Errorf("文件名不能为空")
+		return fmt.Errorf("文件名不能empty")
 	}
 	if w.baseURL == "" {
-		return fmt.Errorf("webdav URL未配置")
+		return fmt.Errorf("webdav URL未config")
 	}
 	return nil
 }

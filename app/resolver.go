@@ -74,7 +74,7 @@ func initResolver() error {
 	resolver.DefaultResolver = rs.Resolver
 	resolver.ProxyServerHostResolver = rs.ProxyResolver
 
-	slog.Info("DNS resolver 使用自定义 DNS",
+	slog.Info("DNS resolver use自define DNS",
 		"nameserver", len(main),
 		"proxy-server", len(proxySrv),
 		"default", len(def),

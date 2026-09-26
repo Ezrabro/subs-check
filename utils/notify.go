@@ -13,14 +13,14 @@ import (
 	"github.com/Ezrabro/subs-check/config"
 )
 
-// NotifyRequest 定义发送通知的请求结构
+// NotifyRequest definesend notification的请求结构
 type NotifyRequest struct {
 	URLs  string `json:"urls"`  // 通知目标的 URL（如 mailto://、discord://）
 	Body  string `json:"body"`  // 通知内容
 	Title string `json:"title"` // 通知标题（可选）
 }
 
-// Notify 发送通知
+// Notify send notification
 func Notify(request NotifyRequest) error {
 	// 构建请求体
 	body, err := json.Marshal(request)
@@ -48,14 +48,14 @@ func SendNotify(length int) {
 	if config.GlobalConfig.AppriseApiServer == "" {
 		return
 	} else if len(config.GlobalConfig.RecipientUrl) == 0 {
-		slog.Error("没有配置通知目标")
+		slog.Error("noneconfig通知目标")
 		return
 	}
 
 	for _, url := range config.GlobalConfig.RecipientUrl {
 		request := NotifyRequest{
 			URLs: url,
-			Body: fmt.Sprintf("✅ 可用节点：%d\n🕒 %s",
+			Body: fmt.Sprintf("✅ 可用node：%d\n🕒 %s",
 				length,
 				GetCurrentTime()),
 			Title: config.GlobalConfig.NotifyTitle,
@@ -69,7 +69,7 @@ func SendNotify(length int) {
 			}
 		}
 		if err != nil {
-			slog.Error(fmt.Sprintf("%s 发送通知失败: %v", strings.SplitN(url, "://", 2)[0], err))
+			slog.Error(fmt.Sprintf("%s send notification失败: %v", strings.SplitN(url, "://", 2)[0], err))
 		}
 	}
 }

@@ -17,7 +17,7 @@ const (
 	tiktokStatusYes
 )
 
-// CheckTikTok 检测 TikTok 解锁状态
+// CheckTikTok check TikTok 解锁状态
 // 优先请求 cdn-cgi/trace 快速判断该 IP 是否被 Cloudflare/TikTok 直接封禁,
 // 若拿不到区域码或请求失败,再回退请求首页做内容校验并提取区域。
 func CheckTikTok(httpClient *http.Client) (string, error) {

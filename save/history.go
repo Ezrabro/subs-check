@@ -19,7 +19,7 @@ const (
 	historyTimeFormat = "2006-01-02_1504"
 )
 
-// SaveHistory 保存本次检测的节点快照，如 history/all_2026-04-07_1430.yaml
+// SaveHistory save本次check的node快照，如 history/all_2026-04-07_1430.yaml
 func SaveHistory(yamlData []byte) {
 	dir := getHistoryDir()
 	if dir == "" {
@@ -30,13 +30,13 @@ func SaveHistory(yamlData []byte) {
 	filename := fmt.Sprintf("%s%s.yaml", historyPrefix, time.Now().Format(historyTimeFormat))
 	path := filepath.Join(dir, filename)
 	if err := os.WriteFile(path, yamlData, 0644); err != nil {
-		slog.Error(fmt.Sprintf("保存历史快照失败: %v", err))
+		slog.Error(fmt.Sprintf("save历史快照失败: %v", err))
 		return
 	}
-	slog.Info(fmt.Sprintf("保存历史快照: %s", filename))
+	slog.Info(fmt.Sprintf("save历史快照: %s", filename))
 }
 
-// LoadHistoryProxies 加载最近 N 天的历史节点，并清理过期文件
+// LoadHistoryProxies 加载Recent N 天的历史node，并清理过期文件
 func LoadHistoryProxies() []map[string]any {
 	dir := getHistoryDir()
 	if dir == "" {

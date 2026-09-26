@@ -202,11 +202,11 @@ go run . -f ./config/config.yaml
 <details>
   <summary>Show Details</summary>
 
-> **📦 Supports 100+ notification channels**，通过 [Apprise](https://github.com/caronc/apprise) 发送通知。
+> **📦 Supports 100+ notification channels**，through [Apprise](https://github.com/caronc/apprise) send notification。
 
 ### 🌐 Vercel Deployment
 
-1. Click [**here**](https://vercel.com/new/clone?repository-url=https://github.com/Ezrabro/apprise_vercel)部署 Apprise。
+1. Click [**here**](https://vercel.com/new/clone?repository-url=https://github.com/Ezrabro/apprise_vercel)deploy Apprise。
 2. After deployment get API link, e.g. `https://testapprise-beck8s-projects.vercel.app/notify`.
 3. Recommend setting custom domain `diydomain.com` for Vercel project (access may be restricted in China).
 
@@ -249,15 +249,15 @@ notify-title: "🔔 Node Status Update"
 
 > **⚠️ Note:** When selecting save method, change `save-method` config.
 
-- **本地保存**：保存到 `./output` 文件夹。
-- **R2**：保存到 Cloudflare R2 [配置方法](./doc/r2.md)。
-- **Gist**：保存到 GitHub Gist [配置方法](./doc/gist.md)。
-- **WebDAV**：保存到 WebDAV 服务器 [配置方法](./doc/webdav.md)。
-- **S3**：保存到 S3 对象存储。
+- **本地save**：save到 `./output` 文件夹。
+- **R2**：save到 Cloudflare R2 [config方法](./doc/r2.md)。
+- **Gist**：save到 GitHub Gist [config方法](./doc/gist.md)。
+- **WebDAV**：save到 WebDAV 服务器 [config方法](./doc/webdav.md)。
+- **S3**：save到 S3 对象存储。
 
 ## 📲 Subscription Usage Method
 
-> **💡 提示：** Built-in Sub-Store，可生成多种订阅格式；高级玩家可DIY很多功能
+> **💡 提示：** Built-in Sub-Store，可generate多种订阅格式；高级玩家可DIY很多功能
 
 **🚀 Universal Subscription**
 ```bash
@@ -293,7 +293,7 @@ http://127.0.0.1:8299/download/sub?target=Surfboard
 ```
 
 **🚀 Mihomo/Clash Subscription (with rules):**
-> 默认使用 `https://raw.githubusercontent.com/Ezrabro/override-hub/refs/heads/main/yaml/ACL4SSR_Online_Full.yaml` overwrite  
+> 默认use `https://raw.githubusercontent.com/Ezrabro/override-hub/refs/heads/main/yaml/ACL4SSR_Online_Full.yaml` overwrite  
 Can change `mihomo-overwrite-url` in config.
 ```bash
 http://127.0.0.1:8299/api/file/mihomo
@@ -307,11 +307,11 @@ http://127.0.0.1:8299/api/file/mihomo
 | `http://127.0.0.1:8199/sub/all.yaml`   | Clash format nodes | Generated directly by subs-check|
 | `http://127.0.0.1:8199/sub/mihomo.yaml`| Mihomo/Clash subscription with split rules | Converted/downloaded by sub-store above|
 | `http://127.0.0.1:8199/sub/base64.txt` | Base64 format subscription | Converted/downloaded by sub-store above|
-| `http://127.0.0.1:8199/export/surge` 等 | Surge / Loon / Quantumult X / Shadowrocket / Stash / Surfboard / Egern / Clash.Meta / Clash / sing-box / URI Subscription |在 Web 控制面板生成后提供|
+| `http://127.0.0.1:8199/export/surge` 等 | Surge / Loon / Quantumult X / Shadowrocket / Stash / Surfboard / Egern / Clash.Meta / Clash / sing-box / URI Subscription |在 Web 控制面板generate后提供|
 
 > Results & Export: After check completes, click 'Speed Test' card in panel to enter `/admin/results`，Can filter/sort nodes (protocol, server, SNI, TLS/UDP, stream unlock, speed) and generate subscription links per client.
 > - Only formats previously generated in panel (requires API key) accessible via `/export/<format>`; public access won't trigger sub-store conversion
-> - 生成过的格式每轮检测完成后自动更新，程序Restart后继续有效；在「导出订阅」中停用后链接失效
+> - generate过的格式每轮check完成后自动更新，程序Restart后继续有效；在「导出订阅」中停用后链接失效
 > - Requires sub-store enabled (`sub-store-port`)
 > - Result snapshots and subscriptions saved in `cache/` beside config (Docker mount `/app/config` also persists); files contain node credentials — don't expose directory
 

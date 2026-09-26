@@ -168,11 +168,11 @@ func saveResultsSnapshot(nodes []NodeRecord) {
 		Nodes:      nodes,
 	})
 	if err != nil {
-		slog.Error(fmt.Sprintf("序列化检测结果快照失败: %v", err))
+		slog.Error(fmt.Sprintf("序列化check结果快照失败: %v", err))
 		return
 	}
 	if err := utils.WriteFileAtomic(ResultsPath(), data); err != nil {
-		slog.Error(fmt.Sprintf("保存检测结果快照失败: %v", err))
+		slog.Error(fmt.Sprintf("savecheck结果快照失败: %v", err))
 	}
 }
 

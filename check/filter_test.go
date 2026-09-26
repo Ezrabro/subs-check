@@ -24,7 +24,7 @@ func TestFilterResults_NoFilter_PassesAll(t *testing.T) {
 }
 
 func TestFilterResults_MatchByOriginalName(t *testing.T) {
-	// 关闭 rename,filter 按原名里的关键字匹配
+	// close rename,filter 按原名里的关键字匹配
 	withConfig(t, config.Config{
 		RenameNode: false,
 		Filter:     []string{"香港|HK"},

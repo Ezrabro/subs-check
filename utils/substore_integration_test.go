@@ -5,7 +5,7 @@
 //
 //	go test -tags substore_it ./utils/ -run TestSubStore -v
 //
-// 依赖当前平台已嵌入的 node 二进制(assets.EmbeddedNode),与正式运行用的是同一份。
+// 依赖当前平台已嵌入的 node 二进制(assets.EmbeddedNode),与正式run用的是同一份。
 package utils
 
 import (
@@ -28,7 +28,7 @@ import (
 )
 
 // 不能 import assets 包(会形成 assets -> save/method -> utils 的 import cycle),
-// 所以直接读 ../assets 下的 .zst 资源文件,和正式运行用的是同一份。
+// 所以直接读 ../assets 下的 .zst 资源文件,和正式run用的是同一份。
 func assetsDir() string {
 	_, thisFile, _, _ := runtime.Caller(0)
 	return filepath.Join(filepath.Dir(thisFile), "..", "assets")
@@ -60,7 +60,7 @@ func startTempSubStore(t *testing.T) string {
 	ad := assetsDir()
 	nodeSrc := filepath.Join(ad, nodeAssetName())
 	if _, err := os.Stat(nodeSrc); err != nil {
-		t.Skipf("当前平台没有内嵌 node 资源 (%s),跳过集成测试", nodeSrc)
+		t.Skipf("当前平台none内嵌 node 资源 (%s),跳过集成测试", nodeSrc)
 	}
 	nodePath := filepath.Join(dir, nodeName)
 	jsPath := filepath.Join(dir, "sub-store.bundle.js")
@@ -83,7 +83,7 @@ func startTempSubStore(t *testing.T) string {
 	if err := cmd.Start(); err != nil {
 		t.Fatalf("启动 sub-store 失败: %v", err)
 	}
-	t.Logf("临时 sub-store 已启动: pid=%d 端口=%s 运行目录=%s", cmd.Process.Pid, port, dir)
+	t.Logf("临时 sub-store 已启动: pid=%d 端口=%s run目录=%s", cmd.Process.Pid, port, dir)
 	t.Cleanup(func() {
 		_ = cmd.Process.Kill()
 		_, _ = cmd.Process.Wait()
@@ -147,7 +147,7 @@ func waitReady(t *testing.T, base string) {
 	t.Fatal("sub-store 在超时内未就绪")
 }
 
-// patchRaw 直接发一个 PATCH,用于在测试里模拟"用户在 UI 里改了配置"。
+// patchRaw 直接发一个 PATCH,用于在测试里模拟"用户在 UI 里改了config"。
 func patchRaw(t *testing.T, url string, body any) {
 	t.Helper()
 	b, _ := json.Marshal(body)
@@ -319,7 +319,7 @@ func TestSubStoreLegacyFileMigration(t *testing.T) {
 		t.Fatalf("createSub: %v", err)
 	}
 
-	// 直接 POST 一个"老格式" file:link 模式的 Script Operator,但没有 customName 标记
+	// 直接 POST 一个"老格式" file:link 模式的 Script Operator,但none customName 标记
 	legacy := map[string]any{
 		"name": MihomoName,
 		"process": []map[string]any{

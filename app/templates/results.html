@@ -360,7 +360,7 @@
                         <input type="search" id="searchInput" placeholder="搜索名称、Server、SNI、IP 或解锁标签" autocomplete="off">
                     </label>
                     <select id="countrySelect" class="form-select form-select-sm filter-select" aria-label="地区">
-                        <option value="">全部地区</option>
+                        <option value="">all regions</option>
                     </select>
                     <button id="resetFilters" class="btn btn-link reset-link" type="button" hidden>Clear Filter</button>
                     <div class="toolbar-count" id="countText"></div>
@@ -397,11 +397,11 @@
                         <h5 class="modal-title" id="exportTitle">Export Sub</h5>
                         <div class="modal-sub">Nodes from this round's Results, converted by Built-in Sub-Store to client formats</div>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
                 </div>
                 <div class="modal-body" id="exportBody">
                     <div id="exportDisabled" class="alert alert-warning" hidden>
-                        <i class="bi bi-exclamation-triangle me-1"></i>sub-store not enabled (sub-store-port 为空），无法Export Sub。
+                        <i class="bi bi-exclamation-triangle me-1"></i>sub-store not enabled (sub-store-port empty），无法Export Sub。
                     </div>
                     <div id="targetGroups" class="target-groups"></div>
                     <div id="targetDetail" class="target-detail" hidden></div>
@@ -429,7 +429,7 @@
             'cipher': '加密方式', 'flow': '流控', 'client-fingerprint': '客户端指纹', 'alpn': 'ALPN',
             'skip-cert-verify': '跳过证书验证', 'ws-path': 'WS Path', 'ws-host': 'WS Host',
             'grpc-service-name': 'gRPC 服务名', 'h2-path': 'H2 Path', 'http-path': 'HTTP Path',
-            'plugin': '插件', 'obfs': '混淆', 'protocol': '协议参数', 'up': '上行带宽', 'down': '下行带宽',
+            'plugin': '插件', 'obfs': '混淆', 'protocol': '协议参数', 'up': 'upload', 'down': 'download',
             'ports': 'Port Jump', 'congestion-controller': 'Congestion Control', 'udp-relay-mode': 'UDP Relay Mode', 'version': 'Version'
         };
         // Columns narrower than minWidth are hidden; their values move to the detail panel.
@@ -538,7 +538,7 @@
         function relTime(iso) {
             const diff = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
             if (diff < 60) return '刚刚';
-            if (diff < 3600) return Math.floor(diff / 60) + ' 分钟前';
+            if (diff < 3600) return Math.floor(diff / 60) + ' min ago';
             if (diff < 86400) return Math.floor(diff / 3600) + ' 小时前';
             return formatDateTime(new Date(iso));
         }
@@ -667,7 +667,7 @@
             const countries = Object.keys(countryCounts).sort(function (a, b) {
                 return countryCounts[b] - countryCounts[a] || a.localeCompare(b);
             });
-            dom.country.innerHTML = '<option value="">全部地区</option>' + countries.map(function (c) {
+            dom.country.innerHTML = '<option value="">all regions</option>' + countries.map(function (c) {
                 return '<option value="' + esc(c) + '">' + esc(c === '-' ? '未知' : c) + '（' + countryCounts[c] + '）</option>';
             }).join('');
         }
@@ -840,8 +840,8 @@
             if (!shown.sni) fields.push(['SNI', n.sni || '—']);
             if (!shown.tls) fields.push(['TLS', n.tls ? '是' : '否']);
             if (!shown.udp) fields.push(['UDP', n.udp ? '是' : '否']);
-            fields.push(['传输', n.network + (n.reality ? ' · Reality' : '')]);
-            if (n.ip) fields.push(['出口 IP', n.ip]);
+            fields.push(['transfer', n.network + (n.reality ? ' · Reality' : '')]);
+            if (n.ip) fields.push(['exit IP', n.ip]);
             if (n.country) fields.push(['地区', n.country]);
             if (n.ipRisk) fields.push(['IP 风险', n.ipRisk]);
             if (n.subTag) fields.push(['Subscription Tag', n.subTag]);
@@ -975,8 +975,8 @@
         // ---------------- Export ----------------
 
         const GROUPS = [
-            { key: 'client', name: '代理客户端' },
-            { key: 'core', name: '内核与通用格式' }
+            { key: 'client', name: 'proxy client' },
+            { key: 'core', name: 'core and universal format' }
         ];
         const STATE_META = {
             none: '未Generate',
@@ -1069,7 +1069,7 @@
 
             let desc = '';
             if (busy) {
-                desc = '正在请求Built-in Sub-Store 转换，可以关闭弹窗，Done后链接自动生效';
+                desc = '正在请求Built-in Sub-Store 转换，可以close弹窗，Done后链接自动生效';
             } else if (t.state === 'none') {
                 desc = t.preset
                     ? 'Auto-written each round after check completes: ' + t.path + '（NeedEnable sub-store）'
@@ -1116,7 +1116,7 @@
                 (t.note ? '<span class="note">' + esc(t.note) + '</span>' : '') +
                 '<span class="state-pill state-' + esc(stateKey) + '">' + esc(stateLabel) + '</span></div>' +
                 '<div class="link-row"><div class="link-box mono" title="' + esc(url) + '">' + esc(url) + '</div>' + primary + '</div>' +
-                (t.id === 'clash' ? '<div class="detail-warn">Clash original kernel doesn'tt support VLESS, Hysteria2, TUIC, etc.，这些节点会被跳过</div>' : '') +
+                (t.id === 'clash' ? '<div class="detail-warn">Clash original kernel doesn'tt support VLESS, Hysteria2, TUIC, etc.，这些node会被跳过</div>' : '') +
                 (exp.message ? '<div class="detail-error">' + esc(exp.message) + '</div>' : '') +
                 '<div class="action-row"><div class="action-desc">' + esc(desc) + '</div>' +
                 (buttons.length ? '<div class="action-buttons">' + buttons.join('') + '</div>' : '') + '</div>';

@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-// CheckSpotify 检测 Spotify 解锁状态
+// CheckSpotify check Spotify 解锁状态
 // 优先从重定向后的 URL 路径提取地区码（如 /us/...），兜底从 body 中提取 countryCode
 // 返回地区二字码（如 "US"），空字符串表示不可用
 func CheckSpotify(httpClient *http.Client) (string, error) {
@@ -79,7 +79,7 @@ func extractRegionFromPath(path string) string {
 		segment = path[:idx]
 	}
 
-	// 跳过 api 开头（说明没有重定向）
+	// 跳过 api 开头（说明none重定向）
 	if segment == "" || segment == "api" {
 		return ""
 	}

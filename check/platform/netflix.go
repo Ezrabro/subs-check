@@ -9,7 +9,7 @@ import (
 
 var netflixRe = regexp.MustCompile(`/([a-z]{2})/title/`)
 
-// NetflixResult 表示 Netflix 检测结果
+// NetflixResult 表示 Netflix check结果
 type NetflixResult struct {
 	Full          bool   // 全解锁
 	OriginalsOnly bool   // 仅自制剧
@@ -17,8 +17,8 @@ type NetflixResult struct {
 	Region        string // 地区码
 }
 
-// CheckNetflix 检测 Netflix 解锁状态
-//  1. 优先请求 Fast.com 的 Netflix 测速 API,一次请求即可拿到区域,比传统 title 探测更快;
+// CheckNetflix check Netflix 解锁状态
+//  1. 优先请求 Fast.com 的 Netflix Speed test API,一次请求即可拿到区域,比传统 title 探测更快;
 //     该接口返回 403 时说明 IP 已被 Netflix 直接封禁。
 //  2. Fast.com 未给出结论时回退到传统 title 探测:
 //     - 全解锁: 非自制剧title返回200/301，提取地区码 → NF-US
@@ -56,8 +56,8 @@ func CheckNetflix(httpClient *http.Client) (*NetflixResult, error) {
 	return result, nil
 }
 
-// checkNetflixCDN 通过 Fast.com 的 Netflix 测速 API 快速判断解锁情况。
-// 返回区域码为空且 banned 为 false 时表示该接口未能给出结论,需要走传统探测。
+// checkNetflixCDN through Fast.com 的 Netflix Speed test API 快速判断解锁情况。
+// 返回区域码empty且 banned 为 false 时表示该接口未能给出结论,需要走传统探测。
 func checkNetflixCDN(httpClient *http.Client) (region string, banned bool) {
 	req, err := http.NewRequest("GET", "https://api.fast.com/netflix/speedtest/v2?https=true&token=YXNkZmFzZGxmbnNkYWZoYXNkZmhrYWxm&urlCount=1", nil)
 	if err != nil {
@@ -94,7 +94,7 @@ func checkNetflixCDN(httpClient *http.Client) (region string, banned bool) {
 	return strings.ToUpper(data.Targets[0].Location.Country), false
 }
 
-// checkNetflixTitle 检测指定 Netflix title 的 HTTP 状态码
+// checkNetflixTitle check指定 Netflix title 的 HTTP 状态码
 func checkNetflixTitle(httpClient *http.Client, titleID string) int {
 	req, err := http.NewRequest("GET", "https://www.netflix.com/title/"+titleID, nil)
 	if err != nil {
@@ -111,7 +111,7 @@ func checkNetflixTitle(httpClient *http.Client, titleID string) int {
 	return resp.StatusCode
 }
 
-// getNetflixRegion 通过访问特定title提取地区码
+// getNetflixRegion through访问特定title提取地区码
 func getNetflixRegion(httpClient *http.Client) string {
 	req, err := http.NewRequest("GET", "https://www.netflix.com/title/80018499", nil)
 	if err != nil {

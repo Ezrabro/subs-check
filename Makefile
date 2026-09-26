@@ -1,7 +1,7 @@
-# 使用 bash 作为默认 shell
+# use bash as默认 shell
 SHELL=/usr/bin/env bash
 
-# 定义变量
+# define variables
 BINARY := subs-check
 COMMIT := $(shell git rev-parse --short HEAD)
 COMMIT_TIMESTAMP := $(shell git log -1 --format=%ct)
@@ -71,12 +71,12 @@ build-all:
 	CGO_ENABLED=$(CGO_ENABLED) GOOS=darwin GOARCH=amd64 $(GO_BIN) build -o build/$(BINARY)_darwin_amd64 $(FLAGS) -ldflags "$(LDFLAGS)"; \
 	CGO_ENABLED=$(CGO_ENABLED) GOOS=darwin GOARCH=arm64 $(GO_BIN) build -o build/$(BINARY)_darwin_arm64 $(FLAGS) -ldflags "$(LDFLAGS)"
 
-# 帮助信息
+# 帮助info
 help:
 	@echo "make              - 整理 Go 代码并编译当前环境的二进制文件"
 	@echo "make build        - 编译当前环境的二进制文件"
-	@echo "make run          - 直接运行 Go 代码"
-	@echo "make gotool       - 运行 Go 工具 'mod tidy', 'fmt' 和 'vet'"
+	@echo "make run          - 直接run Go 代码"
+	@echo "make gotool       - run Go 工具 'mod tidy', 'fmt' 和 'vet'"
 	@echo "make clean        - 移除二进制文件和构建目录"
 	@echo "make linux-amd64  - 编译 Linux/amd64 二进制文件"
 	@echo "make linux-arm64  - 编译 Linux/arm64 二进制文件"
@@ -88,4 +88,4 @@ help:
 	@echo "make darwin-amd64 - 编译 macOS/amd64 二进制文件"
 	@echo "make darwin-arm64 - 编译 macOS/arm64 二进制文件"
 	@echo "make build-all    - 编译所有指定平台的二进制文件到 build/ 目录"
-	@echo "make help         - 显示此帮助信息"
+	@echo "make help         - 显示此帮助info"

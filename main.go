@@ -13,7 +13,7 @@ func main() {
 	slog.Info(fmt.Sprintf("当前版本: %s-%s", Version, CurrentCommit))
 
 	if err := application.Initialize(); err != nil {
-		slog.Error(fmt.Sprintf("初始化失败: %v", err))
+		slog.Error(fmt.Sprintf("init失败: %v", err))
 		os.Exit(1)
 	}
 

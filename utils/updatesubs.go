@@ -11,7 +11,7 @@ import (
 	"github.com/Ezrabro/subs-check/config"
 )
 
-// 定义通用的 HTTP 客户端接口
+// define通用的 HTTP 客户端接口
 type httpClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
@@ -59,7 +59,7 @@ func makeRequest(client httpClient, method, url string) ([]byte, error) {
 
 func UpdateSubs() {
 	if config.GlobalConfig.MihomoApiUrl == "" {
-		// slog.Warn("未配置 MihomoApiUrl，跳过更新")
+		// slog.Warn("未config MihomoApiUrl，跳过更新")
 		return
 	}
 
@@ -93,7 +93,7 @@ func getVersion(client httpClient) (string, error) {
 
 	var version versionResponse
 	if err := json.Unmarshal(body, &version); err != nil {
-		return "", fmt.Errorf("解析版本信息失败: %w", err)
+		return "", fmt.Errorf("解析版本info失败: %w", err)
 	}
 	return version.Version, nil
 }
@@ -107,7 +107,7 @@ func getNeedUpdateNames(client httpClient) ([]string, error) {
 
 	var response providersResponse
 	if err := json.Unmarshal(body, &response); err != nil {
-		return nil, fmt.Errorf("解析提供者信息失败: %w", err)
+		return nil, fmt.Errorf("解析提供者info失败: %w", err)
 	}
 
 	var names []string

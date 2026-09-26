@@ -8,7 +8,7 @@ import (
 )
 
 // youtubeReList 按优先级排列的区域提取正则,前面匹配不到才尝试后面的,
-// 避免像旧版那样依赖单一正则,一旦谷歌调整页面结构就整体检测失效。
+// 避免像旧版那样依赖单一正则,一旦谷歌调整页面结构就整体check失效。
 var youtubeReList = []*regexp.Regexp{
 	regexp.MustCompile(`"INNERTUBE_CONTEXT_GL"\s*:\s*"([^"]+)"`),
 	regexp.MustCompile(`id=["']country-code["'][^>]*>\s*([A-Za-z]{2,3})\s*<`),

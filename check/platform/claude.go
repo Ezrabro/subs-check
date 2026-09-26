@@ -13,8 +13,8 @@ var claudeBlockedRegions = map[string]bool{
 	"IR": true, "KP": true, "MO": true, "RU": true, "SY": true,
 }
 
-// CheckClaude 检测 Claude 解锁状态
-// 通过 cdn-cgi/trace 提取地区码，再用封禁列表过滤
+// CheckClaude check Claude 解锁状态
+// through cdn-cgi/trace 提取地区码，再用封禁列表过滤
 // 返回地区二字码（如 "US"），空字符串表示不可用
 func CheckClaude(httpClient *http.Client) (string, error) {
 	req, err := http.NewRequest("GET", "https://claude.ai/cdn-cgi/trace", nil)

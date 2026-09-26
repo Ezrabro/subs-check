@@ -18,14 +18,14 @@ var CurrentCommit = "unknown"
 var TempLog string
 
 func init() {
-	// 设置依赖库日志级别
+	// 设置依赖库Logs级别
 	if os.Getenv("MIHOMO_DEBUG") != "" {
 		mihomoLog.SetLevel(mihomoLog.DEBUG)
 	} else {
 		mihomoLog.SetLevel(mihomoLog.SILENT)
 	}
 
-	// 获取日志级别
+	// 获取Logs级别
 	logLevel := getLogLevel()
 
 	// 创建两个单独的handler
@@ -42,7 +42,7 @@ func init() {
 		NoColor:    true, // 禁用颜色
 	})
 
-	// 创建一个自定义的Slog处理器，将日志同时发送到两个处理器
+	// 创建一个自define的Slog处理器，将Logs同时发送到两个处理器
 	handler := &multiHandler{
 		console: consoleHandler,
 		file:    fileHandler,
@@ -50,7 +50,7 @@ func init() {
 
 	logger := slog.New(handler)
 
-	// 设置为全局日志记录器
+	// 设置为全局Logs记录器
 	slog.SetDefault(logger)
 
 	fmt.Println("==================== WARNING ====================")

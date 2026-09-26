@@ -54,7 +54,7 @@ func ExecuteCallback(successCount int) {
 		// Windows 系统
 		if strings.HasSuffix(strings.ToLower(callbackScript), ".bat") ||
 			strings.HasSuffix(strings.ToLower(callbackScript), ".cmd") {
-			// 使用完整路径，并正确处理带空格的路径
+			// use完整路径，并正确处理带空格的路径
 			absPath, err := filepath.Abs(callbackScript)
 			if err != nil {
 				slog.Error(fmt.Sprintf("获取脚本绝对路径失败: %v", err))
@@ -68,7 +68,7 @@ func ExecuteCallback(successCount int) {
 				slog.Error(fmt.Sprintf("获取脚本绝对路径失败: %v", err))
 				return
 			}
-			// 使用 -ExecutionPolicy Bypass 绕过执行策略限制
+			// use -ExecutionPolicy Bypass 绕过执行策略限制
 			cmd = exec.Command("powershell", "-ExecutionPolicy", "Bypass", "-File", absPath)
 		} else {
 			cmd = exec.Command(callbackScript)
@@ -80,7 +80,7 @@ func ExecuteCallback(successCount int) {
 		cmd = exec.Command(callbackScript)
 	}
 
-	// 设置环境变量，传递成功节点数量
+	// 设置环境变量，传递成功node数量
 	cmd.Env = append(os.Environ(), fmt.Sprintf("SUCCESS_COUNT=%d", successCount))
 
 	// 执行命令

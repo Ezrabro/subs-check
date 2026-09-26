@@ -1,5 +1,5 @@
 #!/bin/sh
-# subs-check 一键安装脚本
+# subs-check One-Click Install Script
 # 兼容 bash / sh / dash
 # 用法: curl -fsSL https://raw.githubusercontent.com/Ezrabro/subs-check/master/install.sh | bash
 #   或: wget -qO- https://raw.githubusercontent.com/Ezrabro/subs-check/master/install.sh | bash
@@ -7,7 +7,7 @@
 
 set -e
 
-# ============ 配置 ============
+# ============ Config ============
 REPO="Ezrabro/subs-check"
 INSTALL_DIR="/opt/subs-check"
 BINARY_NAME="subs-check"
@@ -16,11 +16,11 @@ SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
 GITHUB_API="https://api.github.com/repos/${REPO}/releases/latest"
 GITHUB_PROXY="${1:-}"
 
-# ============ 运行状态 ============
+# ============ Status ============
 HAS_SYSTEMD=1
 IS_UPGRADE=0
 
-# ============ 颜色输出 ============
+# ============ Color Output ============
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -32,30 +32,30 @@ ok()    { printf "${GREEN}[OK]${NC} %s\n" "$1"; }
 warn()  { printf "${YELLOW}[WARN]${NC} %s\n" "$1"; }
 error() { printf "${RED}[ERROR]${NC} %s\n" "$1"; exit 1; }
 
-# ============ 前置检查 ============
+# ============ Pre-check ============
 check_root() {
     if [ "$(id -u)" -ne 0 ]; then
-        error "请使用 root 用户或 sudo 运行此脚本"
+        error "Please run as root or with sudo"
     fi
 }
 
 check_os() {
     if [ "$(uname -s)" != "Linux" ]; then
-        error "此脚本仅支持 Linux 系统"
+        error "This script supports Linux only"
     fi
 }
 
 check_systemd() {
     if ! command -v systemctl >/dev/null 2>&1; then
         HAS_SYSTEMD=0
-        warn "未检测到 systemd，将跳过服务配置，安装完成后需手动运行"
+        warn "未check到 systemd，将跳过服务Config，安装完成后需手动run"
     fi
 }
 
 check_existing() {
     if [ -f "${INSTALL_DIR}/${BINARY_NAME}" ]; then
         IS_UPGRADE=1
-        info "检测到已有安装，将执行升级操作"
+        info "Existing installation detected; performing upgrade"
     fi
 }
 
@@ -89,7 +89,7 @@ fetch_url() {
     fi
 }
 
-# ============ 架构检测 ============
+# ============ 架构check ============
 detect_arch() {
     arch="$(uname -m)"
     case "$arch" in
@@ -109,7 +109,7 @@ detect_arch() {
             error "不支持的架构: $arch"
             ;;
     esac
-    ok "检测到系统架构: $ARCH"
+    ok "check到系统架构: $ARCH"
 }
 
 # ============ 获取最新版本 ============
@@ -147,10 +147,10 @@ install_binary() {
     mkdir -p "$INSTALL_DIR"
     tar -xzf "${TMP_DIR}/${FILE_NAME}" -C "$TMP_DIR"
 
-    # 升级时停止正在运行的服务
+    # 升级时停止正在run的服务
     if [ "$IS_UPGRADE" -eq 1 ] && [ "$HAS_SYSTEMD" -eq 1 ]; then
         if systemctl is-active --quiet "$SERVICE_NAME" 2>/dev/null; then
-            warn "检测到服务正在运行，正在停止..."
+            warn "check到服务正在run，正在停止..."
             systemctl stop "$SERVICE_NAME"
         fi
     fi
@@ -165,12 +165,12 @@ install_binary() {
     fi
 }
 
-# ============ 配置 systemd ============
+# ============ Config systemd ============
 setup_systemd() {
-    info "正在配置 systemd 服务..."
+    info "正在Config systemd 服务..."
     cat > "$SERVICE_FILE" <<EOF
 [Unit]
-Description=Subs Check - 订阅检测转换工具
+Description=Subs Check - 订阅check转换工具
 After=network-online.target
 Wants=network-online.target
 StartLimitBurst=5
@@ -188,7 +188,7 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 EOF
     systemctl daemon-reload
-    ok "systemd 服务配置完成"
+    ok "systemd 服务Config完成"
 }
 
 # ============ 交互式选择 ============
@@ -220,7 +220,7 @@ ask_start() {
     esac
 }
 
-# ============ 打印信息 ============
+# ============ 打印info ============
 print_info() {
     printf "\n"
     printf "${GREEN}========================================${NC}\n"
@@ -233,15 +233,15 @@ print_info() {
     printf "\n"
     printf "  版本:       %s\n" "$LATEST_VERSION"
     printf "  安装目录:   %s\n" "$INSTALL_DIR"
-    printf "  配置文件:   %s/config/config.yaml\n" "$INSTALL_DIR"
+    printf "  Config文件:   %s/config/config.yaml\n" "$INSTALL_DIR"
 
     if [ "$HAS_SYSTEMD" -eq 1 ]; then
         printf "  服务管理:\n"
         printf "    启动:     systemctl start %s\n" "$SERVICE_NAME"
         printf "    停止:     systemctl stop %s\n" "$SERVICE_NAME"
-        printf "    重启:     systemctl restart %s\n" "$SERVICE_NAME"
+        printf "    restart:     systemctl restart %s\n" "$SERVICE_NAME"
         printf "    状态:     systemctl status %s\n" "$SERVICE_NAME"
-        printf "    日志:     journalctl -u %s -f\n" "$SERVICE_NAME"
+        printf "    Logs:     journalctl -u %s -f\n" "$SERVICE_NAME"
         printf "\n"
         printf "  卸载方法:\n"
         printf "    systemctl stop %s\n" "$SERVICE_NAME"
@@ -250,25 +250,25 @@ print_info() {
         printf "    systemctl daemon-reload\n"
     else
         printf "\n"
-        printf "${YELLOW}  未检测到 systemd，请手动运行：${NC}\n"
+        printf "${YELLOW}  未check到 systemd，请手动run：${NC}\n"
         printf "    cd %s && ./%s\n" "$INSTALL_DIR" "$BINARY_NAME"
         printf "\n"
-        printf "  后台运行:\n"
+        printf "  后台run:\n"
         printf "    cd %s && nohup ./%s > subs-check.log 2>&1 &\n" "$INSTALL_DIR" "$BINARY_NAME"
         printf "\n"
-        printf "  查看日志:\n"
+        printf "  viewLogs:\n"
         printf "    tail -f %s/subs-check.log\n" "$INSTALL_DIR"
         printf "\n"
         printf "  卸载方法:\n"
         printf "    rm -rf %s\n" "$INSTALL_DIR"
     fi
     printf "\n"
-    printf "${YELLOW}  如需修改参数，请编辑配置文件：${NC}\n"
+    printf "${YELLOW}  如需修改参数，请editConfig文件：${NC}\n"
     printf "    %s/config/config.yaml\n" "$INSTALL_DIR"
     if [ "$HAS_SYSTEMD" -eq 1 ]; then
-        printf "  修改后重启服务：systemctl restart %s\n" "$SERVICE_NAME"
+        printf "  修改后restart服务：systemctl restart %s\n" "$SERVICE_NAME"
     else
-        printf "  修改后重新运行程序即可生效\n"
+        printf "  修改后重新run程序即可生效\n"
     fi
     printf "\n"
 }
@@ -277,7 +277,7 @@ print_info() {
 main() {
     printf "\n"
     printf "${GREEN}========================================${NC}\n"
-    printf "${GREEN} subs-check 一键安装脚本${NC}\n"
+    printf "${GREEN} subs-check One-Click Install Script${NC}\n"
     printf "${GREEN}========================================${NC}\n"
     printf "\n"
 

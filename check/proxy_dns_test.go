@@ -2,7 +2,7 @@ package check
 
 import "testing"
 
-// wireguard/masque/openvpn/zerotier 配置 remote-dns-resolve + dns 时，adapter.ParseProxy 会调用
+// wireguard/masque/openvpn/zerotier config remote-dns-resolve + dns 时，adapter.ParseProxy 会调用
 // dns.ParseNameServer；它只在 mihomo/config 的 init() 中赋值，check.go 不引入该包会 nil pointer panic。
 func TestCreateClientWithRemoteDNS(t *testing.T) {
 	client := CreateClient(map[string]any{

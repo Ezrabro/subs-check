@@ -18,7 +18,7 @@ const (
 	retryInterval = 2 * time.Second
 )
 
-// KVPayload 定义上传到R2的数据结构
+// KVPayload define上传到R2的数据结构
 type KVPayload struct {
 	Filename string `json:"filename"`
 	Value    string `json:"value"`
@@ -46,13 +46,13 @@ func UploadToR2Storage(yamlData []byte, filename string) error {
 	return uploader.Upload(yamlData, filename)
 }
 
-// valiR2Config 验证R2配置
+// valiR2Config 验证R2config
 func ValiR2Config() error {
 	if config.GlobalConfig.WorkerURL == "" {
-		return fmt.Errorf("worker url未配置")
+		return fmt.Errorf("worker url未config")
 	}
 	if config.GlobalConfig.WorkerToken == "" {
-		return fmt.Errorf("worker token未配置")
+		return fmt.Errorf("worker token未config")
 	}
 	return nil
 }
@@ -82,13 +82,13 @@ func (r *R2Uploader) Upload(yamlData []byte, filename string) error {
 // validateInput 验证输入参数
 func (r *R2Uploader) validateInput(yamlData []byte, filename string) error {
 	if len(yamlData) == 0 {
-		return fmt.Errorf("yaml数据为空")
+		return fmt.Errorf("yaml数据empty")
 	}
 	if filename == "" {
-		return fmt.Errorf("filename不能为空")
+		return fmt.Errorf("filename不能empty")
 	}
 	if r.workerURL == "" || r.token == "" {
-		return fmt.Errorf("Worker配置不完整")
+		return fmt.Errorf("Workerconfig不完整")
 	}
 	return nil
 }

@@ -24,7 +24,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-// initHttpServer 初始化HTTP服务器
+// initHttpServer initHTTP服务器
 func (app *App) initHttpServer() error {
 	gin.SetMode(gin.ReleaseMode)
 	// Route gin's access log and panic stacks into their own temp file
@@ -44,7 +44,7 @@ func (app *App) initHttpServer() error {
 	go func() {
 		for {
 			if err := router.Run(config.GlobalConfig.ListenPort); err != nil {
-				slog.Error(fmt.Sprintf("HTTP服务器启动失败，正在重启中: %v", err))
+				slog.Error(fmt.Sprintf("HTTP服务器启动失败，正在restart中: %v", err))
 			}
 			time.Sleep(30 * time.Second)
 		}
@@ -82,14 +82,14 @@ func (app *App) newRouter() (*gin.Engine, error) {
 	// pprof 路由，空闲时不消耗性能
 	pprof.Register(router)
 
-	// 根据配置决定是否启用Web控制面板
+	// 根据config决定是否启用Web控制面板
 	if config.GlobalConfig.EnableWebUI {
 		if config.GlobalConfig.APIKey == "" {
 			if apiKey := os.Getenv("API_KEY"); apiKey != "" {
 				config.GlobalConfig.APIKey = apiKey
 			} else {
 				config.GlobalConfig.APIKey = GenerateSimpleKey()
-				slog.Warn("未设置api-key，已生成一个随机api-key", "api-key", config.GlobalConfig.APIKey)
+				slog.Warn("未设置api-key，已generate一个随机api-key", "api-key", config.GlobalConfig.APIKey)
 			}
 		}
 		slog.Info("启用Web控制面板", "path", "http://ip:port/admin", "api-key", config.GlobalConfig.APIKey)
@@ -119,7 +119,7 @@ func (app *App) newRouter() (*gin.Engine, error) {
 			// 版本相关API
 			api.GET("/version", app.getVersion)
 
-			// 日志相关API
+			// Logs相关API
 			api.GET("/logs", app.getLogs)
 
 			// Results and export API
@@ -179,7 +179,7 @@ func (app *App) getResults(c *gin.Context) {
 		return
 	}
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("读取检测结果失败: %v", err)})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("读取check结果失败: %v", err)})
 		return
 	}
 	c.Header("Cache-Control", "no-store")
@@ -208,7 +208,7 @@ func (app *App) generateExport(c *gin.Context) {
 		return
 	}
 	if !export.Enabled() {
-		c.JSON(http.StatusServiceUnavailable, gin.H{"error": "未启用 sub-store（sub-store-port 为空），无法导出订阅"})
+		c.JSON(http.StatusServiceUnavailable, gin.H{"error": "未启用 sub-store（sub-store-port empty），无法导出订阅"})
 		return
 	}
 
@@ -233,7 +233,7 @@ func (app *App) disableExport(c *gin.Context) {
 		return
 	}
 	if t.Preset {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "该格式每轮检测完成后自动生成，不能停用"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "该格式每轮check完成后自动generate，不能停用"})
 		return
 	}
 
@@ -251,18 +251,18 @@ func (app *App) authMiddleware(key string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		apiKey := c.GetHeader("X-API-Key")
 		if subtle.ConstantTimeCompare([]byte(apiKey), []byte(key)) != 1 {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "无效的API密钥"})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "无效的API Key"})
 			return
 		}
 		c.Next()
 	}
 }
 
-// getConfig 获取配置文件内容
+// getConfig 获取config文件内容
 func (app *App) getConfig(c *gin.Context) {
 	configData, err := os.ReadFile(app.configPath)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("读取配置文件失败: %v", err)})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("读取config文件失败: %v", err)})
 		return
 	}
 
@@ -271,7 +271,7 @@ func (app *App) getConfig(c *gin.Context) {
 	})
 }
 
-// updateConfig 更新配置文件内容
+// updateConfig 更新config文件内容
 func (app *App) updateConfig(c *gin.Context) {
 	var req struct {
 		Content string `json:"content"`
@@ -288,14 +288,14 @@ func (app *App) updateConfig(c *gin.Context) {
 		return
 	}
 
-	// 写入新配置
+	// 写入新config
 	if err := os.WriteFile(app.configPath, []byte(req.Content), 0644); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("保存配置文件失败: %v", err)})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("saveconfig文件失败: %v", err)})
 		return
 	}
 
-	// Config文件监听器会自动重新加载配置
-	c.JSON(http.StatusOK, gin.H{"message": "配置已更新"})
+	// Config文件监听器会自动重新加载config
+	c.JSON(http.StatusOK, gin.H{"message": "config已更新"})
 }
 
 // getStatus 获取应用状态
@@ -329,21 +329,21 @@ func (app *App) getStatus(c *gin.Context) {
 	})
 }
 
-// triggerCheckHandler 手动触发检测
+// triggerCheckHandler 手动触发check
 func (app *App) triggerCheckHandler(c *gin.Context) {
 	app.TriggerCheck()
-	c.JSON(http.StatusOK, gin.H{"message": "已触发检测"})
+	c.JSON(http.StatusOK, gin.H{"message": "已触发check"})
 }
 
-// forceCloseHandler 强制关闭
+// forceCloseHandler 强制close
 func (app *App) forceCloseHandler(c *gin.Context) {
 	check.RequestCancel()
-	c.JSON(http.StatusOK, gin.H{"message": "已强制关闭"})
+	c.JSON(http.StatusOK, gin.H{"message": "已强制close"})
 }
 
-// getLogs 获取最近日志
+// getLogs 获取RecentLogs
 func (app *App) getLogs(c *gin.Context) {
-	// 简单实现，从日志文件读取最后xx行
+	// 简单实现，从Logs文件读取最后xx行
 	logPath := TempLog()
 
 	if _, err := os.Stat(logPath); os.IsNotExist(err) {
@@ -352,13 +352,13 @@ func (app *App) getLogs(c *gin.Context) {
 	}
 	lines, err := ReadLastNLines(logPath, 100)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("读取日志失败: %v", err)})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("读取Logs失败: %v", err)})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"logs": lines})
 }
 
-// getLogs 获取最近日志
+// getLogs 获取RecentLogs
 func (app *App) getVersion(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"version": app.version})
 }

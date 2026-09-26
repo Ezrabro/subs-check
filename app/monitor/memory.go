@@ -14,7 +14,7 @@ import (
 
 // StartMemoryMonitor 启动内存监控
 func StartMemoryMonitor() {
-	// mihomo的内存问题解决不了，所以加个内存限制自动重启
+	// mihomo的内存问题解决不了，所以加个内存限制自动restart
 	// 解决了，暂时保留逻辑
 	if limit := os.Getenv("SUB_CHECK_MEM_LIMIT"); limit != "" {
 		memoryLimit, err := human.FromHumanSize(limit)
@@ -35,7 +35,7 @@ func StartMemoryMonitor() {
 		}()
 	}
 
-	// 添加内存使用情况监控
+	// 添加内存use情况监控
 	if strings.ToLower(os.Getenv("SUB_CHECK_MEM_MONITOR")) != "" {
 		go func() {
 			var m runtime.MemStats
@@ -44,7 +44,7 @@ func StartMemoryMonitor() {
 
 			for range ticker.C {
 				runtime.ReadMemStats(&m)
-				slog.Info("内存使用情况",
+				slog.Info("内存use情况",
 					"Alloc", formatBytes(m.Alloc),
 					"TotalAlloc", formatBytes(m.TotalAlloc),
 					"Sys", formatBytes(m.Sys),
@@ -75,7 +75,7 @@ func StartMemoryMonitor() {
 	}
 }
 
-// checkMemory 检查内存使用情况
+// checkMemory 检查内存use情况
 func checkMemory(memoryLimit uint64) {
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
@@ -84,7 +84,7 @@ func checkMemory(memoryLimit uint64) {
 		metadata := m.Sys - m.HeapSys - m.StackSys
 		heapFrag := m.HeapInuse - m.HeapAlloc
 		approxRSS := m.HeapAlloc + m.StackInuse + metadata + heapFrag
-		slog.Warn("内存超过使用限制",
+		slog.Warn("内存超过use限制",
 			"rss", human.HumanSize(float64(approxRSS)),
 			"metadata", human.HumanSize(float64(metadata)),
 			"heapFrag", human.HumanSize(float64(heapFrag)),
@@ -96,7 +96,7 @@ func checkMemory(memoryLimit uint64) {
 			cmd.Stdout = os.Stdout
 			cmd.Stderr = os.Stderr
 			cmd.Start() // 让新进程启动
-			slog.Warn("因为内存问题启动了新进程，二进制用户如果需要关闭请关闭此窗口/终端")
+			slog.Warn("因为内存问题启动了新进程，二进制用户如果需要close请close此窗口/终端")
 		}
 
 		// 退出当前进程
@@ -112,7 +112,7 @@ func getSelfCommand() *exec.Cmd {
 		return nil
 	}
 	args := os.Args[1:] // 获取参数（不包括程序名）
-	slog.Warn("🔄 进程即将重启...", "path", exePath, "args", args)
+	slog.Warn("🔄 进程即将restart...", "path", exePath, "args", args)
 	return exec.Command(exePath, args...)
 }
 

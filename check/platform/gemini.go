@@ -16,7 +16,7 @@ var geminiBlockedCodes = map[string]bool{
 	"IRN": true, "PRK": true, "SYR": true, "HKG": true, "MAC": true,
 }
 
-// alpha3ToAlpha2 使用 countries 库将三字码转换为二字码
+// alpha3ToAlpha2 use countries 库将三字码转换为二字码
 func alpha3ToAlpha2(alpha3 string) string {
 	code := strings.ToUpper(alpha3)
 	country := countries.ByName(code)
@@ -26,7 +26,7 @@ func alpha3ToAlpha2(alpha3 string) string {
 	return country.Alpha2()
 }
 
-// CheckGemini 检测 Google Gemini 解锁状态
+// CheckGemini check Google Gemini 解锁状态
 // 返回地区二字码（如 "US"），空字符串表示不可用
 func CheckGemini(httpClient *http.Client) (string, error) {
 	req, err := http.NewRequest("GET", "https://gemini.google.com/", nil)

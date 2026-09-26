@@ -82,10 +82,10 @@ type DNSConfig struct {
 }
 
 var GlobalConfig = &Config{
-	// 新增配置，给未更改配置文件的用户一个默认值
+	// 新增config，给未更改config文件的用户一个默认值
 	IPv6:               true,
 	ListenPort:         ":8199",
-	NotifyTitle:        "🔔 节点状态更新",
+	NotifyTitle:        "🔔 node状态更新",
 	MihomoOverwriteUrl: "http://127.0.0.1:8199/sub/ACL4SSR_Online_Full.yaml",
 	MediaCheckTimeout:  10,
 	Platforms:          []string{"openai", "youtube", "netflix", "disney", "gemini", "iprisk"},

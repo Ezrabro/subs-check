@@ -14,26 +14,26 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-// SaveFunc 定义保存方法的函数签名
+// SaveFunc definesave方法的函数签名
 type SaveFunc func(data []byte, filename string) error
 
-// SaveConfig 保存检查结果到本地，并可选保存到远程存储。
+// SaveConfig save检查结果to local，并可选save到远程存储。
 //
 // 执行顺序很关键:
-//  1. 先把 results 序列化保存到 history(此时 proxy["name"] 仍是原始名,
+//  1. 先把 results 序列化save到 history(此时 proxy["name"] 仍是原始名,
 //     history 文件天然干净,keep-days 下次加载时不会累积标签)
 //  2. 然后原地 mutate 每个 result.Proxy["name"] 为最终展示名
-//     (调 check.RenderName 生成 base + 媒体标签 + 速度标签 + sub_tag)
+//     (调 check.RenderName generate base + 媒体标签 + 速度标签 + sub_tag)
 //  3. 最后用 mutate 过的 results 序列化成 all.yaml、mihomo.yaml、base64.txt
 //     并写本地 / 远程 / SubStore
 //
 // 隐式契约: SaveConfig 调用后 results 视为已消费,调用方不应再读
 // results[i].Proxy["name"](那已经是展示名,不是原始名)。
 func SaveConfig(results []check.Result) {
-	// 0 节点是常见的合理结果(如全部超时或全部被 filter 过滤),
-	// 此时所有下游序列化都会失败,统一在入口短路并以 Warn 记录,避免多余的 Error 日志
+	// 0 node是常见的合理结果(如全部超时或全部被 filter 过滤),
+	// 此时所有下游序列化都会失败,统一在入口短路并以 Warn 记录,避免多余的 Error Logs
 	if len(results) == 0 {
-		slog.Warn("本轮没有可保存的节点，跳过保存")
+		slog.Warn("this roundnone可save的node，跳过save")
 		saveResultsSnapshot(nil)
 		return
 	}
@@ -68,9 +68,9 @@ func SaveConfig(results []check.Result) {
 		return
 	}
 
-	// 保存 all.yaml 到本地
+	// save all.yaml to local
 	if err := method.SaveToLocal(allYamlData, "all.yaml"); err != nil {
-		slog.Error(fmt.Sprintf("保存all.yaml到本地失败: %v", err))
+		slog.Error(fmt.Sprintf("saveall.yamlto local失败: %v", err))
 	}
 
 	// 更新 SubStore 并获取衍生文件(mihomo.yaml / base64.txt)
@@ -90,17 +90,17 @@ func SaveConfig(results []check.Result) {
 		)
 	}
 
-	// 保存衍生文件到本地
+	// save衍生文件to local
 	saveIfNotEmpty(method.SaveToLocal, mihomoData, "mihomo.yaml")
 	saveIfNotEmpty(method.SaveToLocal, base64Data, "base64.txt")
 
-	// 保存所有文件到远程(如果配置了远程保存方式)
+	// save所有文件到远程(如果config了远程save方式)
 	if config.GlobalConfig.SaveMethod == "local" {
 		return
 	}
 	remoteSaver, err := newRemoteSaver()
 	if err != nil {
-		slog.Error(fmt.Sprintf("初始化远程保存方法(%s)失败: %v", config.GlobalConfig.SaveMethod, err))
+		slog.Error(fmt.Sprintf("init远程save方法(%s)失败: %v", config.GlobalConfig.SaveMethod, err))
 		return
 	}
 	saveIfNotEmpty(remoteSaver, allYamlData, "all.yaml")
@@ -115,7 +115,7 @@ func marshalProxies(results []check.Result) ([]byte, error) {
 		proxies = append(proxies, result.Proxy)
 	}
 	if len(proxies) == 0 {
-		return nil, fmt.Errorf("没有可用的代理节点")
+		return nil, fmt.Errorf("none可用的代理node")
 	}
 	return yaml.Marshal(map[string]any{"proxies": proxies})
 }
@@ -135,46 +135,46 @@ func fetchSubStoreData(url, name string) []byte {
 		return nil
 	}
 	if resp.StatusCode != http.StatusOK {
-		slog.Error(fmt.Sprintf("获取%s失败, 状态码: %d, 错误信息: %s", name, resp.StatusCode, body))
+		slog.Error(fmt.Sprintf("获取%s失败, 状态码: %d, 错误info: %s", name, resp.StatusCode, body))
 		return nil
 	}
 	return body
 }
 
-// saveIfNotEmpty 当数据非空时执行保存
+// saveIfNotEmpty 当数据非空时执行save
 func saveIfNotEmpty(saver SaveFunc, data []byte, filename string) {
 	if len(data) == 0 {
 		return
 	}
 	if err := saver(data, filename); err != nil {
-		slog.Error(fmt.Sprintf("保存%s到%s失败: %v", filename, config.GlobalConfig.SaveMethod, err))
+		slog.Error(fmt.Sprintf("save%s到%s失败: %v", filename, config.GlobalConfig.SaveMethod, err))
 	}
 }
 
-// newRemoteSaver 根据配置创建远程保存方法
+// newRemoteSaver 根据config创建远程save方法
 func newRemoteSaver() (SaveFunc, error) {
 	switch config.GlobalConfig.SaveMethod {
 	case "r2":
 		if err := method.ValiR2Config(); err != nil {
-			return nil, fmt.Errorf("R2配置不完整: %w", err)
+			return nil, fmt.Errorf("R2config不完整: %w", err)
 		}
 		return method.UploadToR2Storage, nil
 	case "gist":
 		if err := method.ValiGistConfig(); err != nil {
-			return nil, fmt.Errorf("Gist配置不完整: %w", err)
+			return nil, fmt.Errorf("Gistconfig不完整: %w", err)
 		}
 		return method.UploadToGist, nil
 	case "webdav":
 		if err := method.ValiWebDAVConfig(); err != nil {
-			return nil, fmt.Errorf("WebDAV配置不完整: %w", err)
+			return nil, fmt.Errorf("WebDAVconfig不完整: %w", err)
 		}
 		return method.UploadToWebDAV, nil
 	case "s3":
 		if err := method.ValiS3Config(); err != nil {
-			return nil, fmt.Errorf("S3配置不完整: %w", err)
+			return nil, fmt.Errorf("S3config不完整: %w", err)
 		}
 		return method.UploadToS3, nil
 	default:
-		return nil, fmt.Errorf("未知的保存方法: %s", config.GlobalConfig.SaveMethod)
+		return nil, fmt.Errorf("未知的save方法: %s", config.GlobalConfig.SaveMethod)
 	}
 }

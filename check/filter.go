@@ -48,9 +48,9 @@ func MatchesFilter(r Result, patterns []*regexp.Regexp) bool {
 	return false
 }
 
-// FilterResults 根据配置的正则表达式过滤节点。
+// FilterResults 根据config的正则表达式过滤node。
 //
-// 只有渲染后的展示名(不含速度标签)匹配任一正则的节点才会被保留。
+// 只有渲染后的展示名(不含速度标签)匹配任一正则的node才会被保留。
 // 这里用 RenderName(r, false) 而不是 r.Proxy["name"] 是为了让 filter 能看到
 // 国家+媒体标签的完整视图,同时保持 proxy["name"] 不被修改。
 func FilterResults(results []Result) []Result {
@@ -59,7 +59,7 @@ func FilterResults(results []Result) []Result {
 		return results
 	}
 
-	slog.Info(fmt.Sprintf("应用节点过滤规则，共 %d 个正则表达式", len(patterns)))
+	slog.Info(fmt.Sprintf("应用node过滤规则，共 %d 个正则表达式", len(patterns)))
 
 	var filtered []Result
 	for _, r := range results {
@@ -68,6 +68,6 @@ func FilterResults(results []Result) []Result {
 		}
 	}
 
-	slog.Info(fmt.Sprintf("过滤后节点数量: %d (过滤前: %d)", len(filtered), len(results)))
+	slog.Info(fmt.Sprintf("过滤后node数量: %d (过滤前: %d)", len(filtered), len(results)))
 	return filtered
 }

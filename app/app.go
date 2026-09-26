@@ -35,7 +35,7 @@ type App struct {
 
 // New creates a new app instance
 func New(version string) *App {
-	configPath := flag.String("f", "", "配置文件路径")
+	configPath := flag.String("f", "", "config文件路径")
 	flag.Parse()
 
 	return &App{
@@ -50,27 +50,27 @@ func New(version string) *App {
 func (app *App) Initialize() error {
 	// Initialize config file path
 	if err := app.initConfigPath(); err != nil {
-		return fmt.Errorf("初始化配置文件路径失败: %w", err)
+		return fmt.Errorf("initconfig文件路径失败: %w", err)
 	}
 	// Results snapshot and export cache live beside the config file.
 	utils.SetCacheDir(app.configPath)
 
 	// Load configuration file
 	if err := app.loadConfig(); err != nil {
-		return fmt.Errorf("加载配置文件失败: %w", err)
+		return fmt.Errorf("加载config文件失败: %w", err)
 	}
 
-	// 初始化 DNS resolver（必须在任何 proxy 连接之前，影响 mihomo 全局 resolver）
+	// init DNS resolver（必须在任何 proxy 连接之前，影响 mihomo 全局 resolver）
 	if err := initResolver(); err != nil {
-		return fmt.Errorf("初始化 DNS 失败: %w", err)
+		return fmt.Errorf("init DNS 失败: %w", err)
 	}
 
-	// 初始化配置文件监听
+	// initconfig文件监听
 	if err := app.initConfigWatcher(); err != nil {
-		return fmt.Errorf("初始化配置文件监听失败: %w", err)
+		return fmt.Errorf("initconfig文件监听失败: %w", err)
 	}
 
-	// 从配置文件中读取代理，设置代理
+	// 从config文件中读取代理，设置代理
 	if config.GlobalConfig.Proxy != "" {
 		os.Setenv("HTTP_PROXY", config.GlobalConfig.Proxy)
 		os.Setenv("HTTPS_PROXY", config.GlobalConfig.Proxy)
@@ -85,7 +85,7 @@ func (app *App) Initialize() error {
 
 	if config.GlobalConfig.ListenPort != "" {
 		if err := app.initHttpServer(); err != nil {
-			return fmt.Errorf("初始化HTTP服务器失败: %w", err)
+			return fmt.Errorf("initHTTP服务器失败: %w", err)
 		}
 	}
 
@@ -94,7 +94,7 @@ func (app *App) Initialize() error {
 			slog.Warn("node不支持Linux 32位系统，不启动sub-store服务")
 		}
 		go assets.RunSubStoreService()
-		// 求等吗得，日志会按预期顺序输出
+		// 求等吗得，Logs会按预期顺序输出
 		time.Sleep(500 * time.Millisecond)
 	}
 
@@ -106,7 +106,7 @@ func (app *App) Initialize() error {
 	return nil
 }
 
-// Run 运行应用程序主循环
+// Run run应用程序主循环
 func (app *App) Run() {
 	defer func() {
 		app.watcher.Close()
@@ -121,9 +121,9 @@ func (app *App) Run() {
 	// 设置初始定时器模式
 	app.setTimer()
 
-	// 仅在cron表达式为空时，首次启动立即执行检测
+	// 仅在cron表达式empty时，首次启动立即执行check
 	if config.GlobalConfig.CronExpression != "" {
-		slog.Warn("使用cron表达式，首次启动不立即执行检测")
+		slog.Warn("usecron表达式，首次启动不立即执行check")
 	} else {
 		app.triggerCheck()
 	}
@@ -134,7 +134,7 @@ func (app *App) Run() {
 	}
 }
 
-// setTimer 根据配置设置定时器
+// setTimer 根据config设置定时器
 func (app *App) setTimer() {
 	// 停止现有定时器
 	if app.ticker != nil {
@@ -153,28 +153,28 @@ func (app *App) setTimer() {
 
 	// 检查是否设置了cron表达式
 	if config.GlobalConfig.CronExpression != "" {
-		slog.Info(fmt.Sprintf("使用cron表达式: %s", config.GlobalConfig.CronExpression))
+		slog.Info(fmt.Sprintf("usecron表达式: %s", config.GlobalConfig.CronExpression))
 		app.cron = cron.New()
 		_, err := app.cron.AddFunc(config.GlobalConfig.CronExpression, func() {
 			app.triggerCheck()
 		})
 		if err != nil {
-			slog.Error(fmt.Sprintf("cron表达式 '%s' 解析失败: %v，将使用检查间隔时间",
+			slog.Error(fmt.Sprintf("cron表达式 '%s' 解析失败: %v，将use检查间隔时间",
 				config.GlobalConfig.CronExpression, err))
-			// 使用间隔时间
+			// use间隔时间
 			app.useIntervalTimer()
 		} else {
 			app.cron.Start()
 		}
 	} else {
-		// 使用间隔时间
+		// use间隔时间
 		app.useIntervalTimer()
 	}
 }
 
-// useIntervalTimer 使用间隔时间模式运行
+// useIntervalTimer use间隔时间模式run
 func (app *App) useIntervalTimer() {
-	// 初始化定时器
+	// init定时器
 	app.ticker = time.NewTicker(time.Duration(app.interval) * time.Minute)
 	done := app.done
 	// 启动一个goroutine监听定时器事件
@@ -190,38 +190,38 @@ func (app *App) useIntervalTimer() {
 	}()
 }
 
-// TriggerCheck 供外部调用的触发检测方法
+// TriggerCheck 供外部调用的触发check方法
 func (app *App) TriggerCheck() {
 	select {
 	case app.checkChan <- struct{}{}:
-		slog.Info("手动触发检测")
+		slog.Info("手动触发check")
 	default:
-		slog.Warn("已有检测正在进行，忽略本次触发")
+		slog.Warn("已有check正在进行，忽略本次触发")
 	}
 }
 
-// triggerCheck 内部检测方法
+// triggerCheck 内部check方法
 func (app *App) triggerCheck() {
-	// 如果已经在检测中，直接返回
+	// 如果已经在check中，直接返回
 	if !app.checking.CompareAndSwap(false, true) {
-		slog.Warn("已有检测正在进行，跳过本次检测")
+		slog.Warn("已有check正在进行，跳过本次check")
 		return
 	}
 	defer app.checking.Store(false)
 
 	if err := app.checkProxies(); err != nil {
-		slog.Error(fmt.Sprintf("检测代理失败: %v", err))
+		slog.Error(fmt.Sprintf("check代理失败: %v", err))
 		os.Exit(1)
 	}
 
-	// 检测完成后显示下次检查时间
+	// check完成后显示下次检查时间
 	if app.ticker != nil {
-		// 使用间隔时间模式
+		// use间隔时间模式
 		app.ticker.Reset(time.Duration(app.interval) * time.Minute)
 		nextCheck := time.Now().Add(time.Duration(app.interval) * time.Minute)
 		slog.Info(fmt.Sprintf("下次检查时间: %s", nextCheck.Format("2006-01-02 15:04:05")))
 	} else if app.cron != nil {
-		// 使用cron模式
+		// usecron模式
 		entries := app.cron.Entries()
 		if len(entries) > 0 {
 			nextTime := entries[0].Next
@@ -231,11 +231,11 @@ func (app *App) triggerCheck() {
 	debug.FreeOSMemory()
 }
 
-// checkProxies 执行代理检测
+// checkProxies 执行代理check
 func (app *App) checkProxies() error {
-	slog.Info("开始准备检测代理", "进度展示", config.GlobalConfig.PrintProgress)
+	slog.Info("开始准备check代理", "进度展示", config.GlobalConfig.PrintProgress)
 
-	// 加载历史可用节点到待测队列
+	// 加载历史可用node到待测队列
 	if config.GlobalConfig.KeepDays > 0 {
 		if hp := save.LoadHistoryProxies(); len(hp) > 0 {
 			config.GlobalProxies = append(config.GlobalProxies, hp...)
@@ -244,9 +244,9 @@ func (app *App) checkProxies() error {
 
 	results, err := check.Check()
 	if err != nil {
-		return fmt.Errorf("检测代理失败: %w", err)
+		return fmt.Errorf("check代理失败: %w", err)
 	}
-	slog.Info("检测完成")
+	slog.Info("check完成")
 	save.SaveConfig(results)
 	utils.SendNotify(len(results))
 	utils.UpdateSubs()

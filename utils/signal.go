@@ -22,7 +22,7 @@ func SetupSignalHandler(onCancel func()) {
 		for sig := range hubSigChan {
 			slog.Debug(fmt.Sprintf("收到 HUB 信号: %s", sig))
 			onCancel()
-			slog.Debug("HUB 模式: 已请求取消当前任务，程序继续运行")
+			slog.Debug("HUB 模式: 已请求取消当前任务，程序继续run")
 		}
 	}()
 }

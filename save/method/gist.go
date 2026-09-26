@@ -59,13 +59,13 @@ func UploadToGist(yamlData []byte, filename string) error {
 	return uploader.Upload(yamlData, filename)
 }
 
-// ValiGistConfig 验证Gist配置
+// ValiGistConfig 验证Gistconfig
 func ValiGistConfig() error {
 	if config.GlobalConfig.GithubToken == "" {
-		return fmt.Errorf("github token未配置")
+		return fmt.Errorf("github token未config")
 	}
 	if config.GlobalConfig.GithubGistID == "" {
-		return fmt.Errorf("gist id未配置")
+		return fmt.Errorf("gist id未config")
 	}
 	return nil
 }
@@ -97,13 +97,13 @@ func (g *GistUploader) Upload(yamlData []byte, filename string) error {
 // validateInput 验证输入参数
 func (g *GistUploader) validateInput(yamlData []byte, filename string) error {
 	if len(yamlData) == 0 {
-		return fmt.Errorf("yaml数据为空")
+		return fmt.Errorf("yaml数据empty")
 	}
 	if filename == "" {
-		return fmt.Errorf("文件名不能为空")
+		return fmt.Errorf("文件名不能empty")
 	}
 	if g.token == "" {
-		return fmt.Errorf("github token未配置")
+		return fmt.Errorf("github token未config")
 	}
 	return nil
 }

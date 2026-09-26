@@ -20,9 +20,9 @@ import (
 // sub-store 数据模型速览(后端是 schemaless 的,数据以 JSON 存盘,字段即下面这些)
 //
 // 两种顶层对象:
-//   - subscription(订阅)  /api/sub/:name   —— 一组节点的来源。我们用名为 "sub"
-//     的本地订阅(source=local)装检测后的节点(content 字段,yaml)。见 sub 结构体。
-//   - file(文件)         /api/file/:name  —— 由某个 source 生成的产物文件。我们用
+//   - subscription(订阅)  /api/sub/:name   —— 一组node的来源。我们用名为 "sub"
+//     的本地订阅(source=local)装check后的node(content 字段,yaml)。见 sub 结构体。
+//   - file(文件)         /api/file/:name  —— 由某个 source generate的产物文件。我们用
 //     名为 "mihomo" 的 file(type=mihomoProfile, sourceName="sub")做 mihomo 覆写。
 //     见 file 结构体。
 //
@@ -117,10 +117,10 @@ const (
 	overwriteOpMarker = "subs-check专用,勿动"
 )
 
-// 用来判断用户是否在运行时更改了覆写订阅的url
+// 用来判断用户是否在run时更改了覆写订阅的url
 var mihomoOverwriteUrl string
 
-// 基础URL配置
+// 基础URLconfig
 var BaseURL string
 
 // UpdateSubStore writes this round's nodes to sub-store. A nil error means the
@@ -137,9 +137,9 @@ func UpdateSubStore(yamlData []byte) error {
 	BaseURL = SubStoreBaseURL()
 
 	if err := checkSub(); err != nil {
-		slog.Debug(fmt.Sprintf("检查sub配置文件失败: %v, 正在创建中...", err))
+		slog.Debug(fmt.Sprintf("检查subconfig文件失败: %v, 正在创建中...", err))
 		if err := createSub(yamlData); err != nil {
-			slog.Error(fmt.Sprintf("创建sub配置文件失败: %v", err))
+			slog.Error(fmt.Sprintf("创建subconfig文件失败: %v", err))
 			return err
 		}
 	}
@@ -148,21 +148,21 @@ func UpdateSubStore(yamlData []byte) error {
 		return fmt.Errorf("mihomo覆写订阅url未设置")
 	}
 	if err := checkfile(); err != nil {
-		slog.Debug(fmt.Sprintf("检查mihomo配置文件失败: %v, 正在创建中...", err))
+		slog.Debug(fmt.Sprintf("检查mihomoconfig文件失败: %v, 正在创建中...", err))
 		if err := createfile(); err != nil {
-			slog.Error(fmt.Sprintf("创建mihomo配置文件失败: %v", err))
+			slog.Error(fmt.Sprintf("创建mihomoconfig文件失败: %v", err))
 			return err
 		}
 		mihomoOverwriteUrl = config.GlobalConfig.MihomoOverwriteUrl
 	}
 	if err := updateSub(yamlData); err != nil {
-		slog.Error(fmt.Sprintf("更新sub配置文件失败: %v", err))
+		slog.Error(fmt.Sprintf("更新subconfig文件失败: %v", err))
 		return err
 	}
 	if config.GlobalConfig.MihomoOverwriteUrl != mihomoOverwriteUrl {
 		if err := updatefile(); err != nil {
 			// The sub is already updated; only the overwrite file failed.
-			slog.Error(fmt.Sprintf("更新mihomo配置文件失败: %v", err))
+			slog.Error(fmt.Sprintf("更新mihomoconfig文件失败: %v", err))
 			return nil
 		}
 		mihomoOverwriteUrl = config.GlobalConfig.MihomoOverwriteUrl
@@ -181,7 +181,7 @@ func checkSub() error {
 		return err
 	}
 	// sub-store 对不存在的 sub 会返回 500 + HTML(而非干净的 JSON),
-	// 先判状态码,避免把 HTML 丢给 json 解析报出 "invalid character '<'" 这种迷惑日志
+	// 先判状态码,避免把 HTML 丢给 json 解析报出 "invalid character '<'" 这种迷惑Logs
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("sub 不存在或 sub-store 未就绪 (HTTP %d)", resp.StatusCode)
 	}
@@ -190,7 +190,7 @@ func checkSub() error {
 		return fmt.Errorf("解析 sub 响应失败: %w", err)
 	}
 	if result.Status != "success" {
-		return fmt.Errorf("获取sub配置文件失败")
+		return fmt.Errorf("获取subconfig文件失败")
 	}
 	return nil
 }
@@ -215,13 +215,13 @@ func createSub(data []byte) error {
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusCreated {
-		return fmt.Errorf("创建sub配置文件失败,错误码:%d", resp.StatusCode)
+		return fmt.Errorf("创建subconfig文件失败,错误码:%d", resp.StatusCode)
 	}
 	return nil
 }
 
 func updateSub(data []byte) error {
-	// PATCH 是浅合并 ({...old, ...body})，只发 content 即可刷新节点，
+	// PATCH 是浅合并 ({...old, ...body})，只发 content 即可刷新node，
 	// 用户对 sub 的其它改动 (process/remark/tag 等) 都会保留。
 	payload, err := json.Marshal(map[string]string{"content": string(data)})
 	if err != nil {
@@ -240,7 +240,7 @@ func updateSub(data []byte) error {
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("更新sub配置文件失败,错误码:%d", resp.StatusCode)
+		return fmt.Errorf("更新subconfig文件失败,错误码:%d", resp.StatusCode)
 	}
 	return nil
 }
@@ -263,7 +263,7 @@ func checkfile() error {
 		return fmt.Errorf("解析 mihomo 文件响应失败: %w", err)
 	}
 	if result.Status != "success" {
-		return fmt.Errorf("获取mihomo配置文件失败")
+		return fmt.Errorf("获取mihomoconfig文件失败")
 	}
 	return nil
 }
@@ -296,7 +296,7 @@ func createfile() error {
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusCreated {
-		return fmt.Errorf("创建mihomo配置文件失败,错误码:%d", resp.StatusCode)
+		return fmt.Errorf("创建mihomoconfig文件失败,错误码:%d", resp.StatusCode)
 	}
 	return nil
 }
@@ -323,7 +323,7 @@ func updatefile() error {
 		return err
 	}
 	if result.Status != "success" {
-		return fmt.Errorf("获取mihomo配置文件失败")
+		return fmt.Errorf("获取mihomoconfig文件失败")
 	}
 
 	newContent := WarpUrl(config.GlobalConfig.MihomoOverwriteUrl)
@@ -361,7 +361,7 @@ func updatefile() error {
 			}
 		}
 	}
-	// 3) 都没有(用户删了)，把带标记的算子放到最前面
+	// 3) 都none(用户删了)，把带标记的算子放到最前面
 	if !found {
 		process = append([]map[string]any{{
 			"type":       "Script Operator",
@@ -371,7 +371,7 @@ func updatefile() error {
 		changed = true
 	}
 
-	// 内容没有变化就不发 PATCH，也不打日志——避免"我没改却每次都说已更新"
+	// 内容none变化就不发 PATCH，也不打Logs——避免"我没改却每次都说已更新"
 	if !changed {
 		return nil
 	}
@@ -393,7 +393,7 @@ func updatefile() error {
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("更新mihomo配置文件失败,错误码:%d", resp.StatusCode)
+		return fmt.Errorf("更新mihomoconfig文件失败,错误码:%d", resp.StatusCode)
 	}
 	slog.Debug("mihomo覆写订阅url已更新")
 	return nil
@@ -421,7 +421,7 @@ func SubStoreBaseURL() string {
 func WarpUrl(url string) string {
 	url = formatTimePlaceholders(url, time.Now())
 
-	// 如果url中以https://raw.githubusercontent.com开头，那么就使用github代理
+	// 如果url中以https://raw.githubusercontent.com开头，那么就usegithub代理
 	if strings.HasPrefix(url, "https://raw.githubusercontent.com") {
 		return config.GlobalConfig.GithubProxy + url
 	}
@@ -429,7 +429,7 @@ func WarpUrl(url string) string {
 }
 
 // 动态时间占位符
-// 支持在链接中使用时间占位符，会自动替换成当前日期/时间:
+// 支持在链接中use时间占位符，会自动替换成当前日期/时间:
 // - `{Y}` - 四位年份 (2023)
 // - `{m}` - 两位月份 (01-12)
 // - `{d}` - 两位日期 (01-31)

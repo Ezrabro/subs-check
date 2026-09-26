@@ -74,7 +74,7 @@ hosts:
 # 'alpha.mihomo.dev': '::1'
 # test.com: [1.1.1.1, 2.2.2.2]
 # home.lan: lan # lan 为特别字段，将加入本地所有网卡的地址
-# baidu.com: google.com # 只允许配置一个别名
+# baidu.com: google.com # 只允许config一个别名
 
 profile:
   store-selected: false
@@ -142,24 +142,24 @@ proxy-groups:
       - 🙏 自动选择
       - 💪 手动选择
       - 🎡负载均衡
-      - 🇭🇰 香港节点
-      - 🇯🇵 日本节点
-      - 🇰🇷 韩国节点
-      - 🇸🇬 新加坡节点
-      - 🇺🇸 美国节点
-      - 🇬🇧 英国节点
-      - 🇫🇷 法国节点
-      - 🇩🇪 德国节点
-      - 🇨🇦 加拿大节点
-      - 🇦🇺 澳大利亚节点
-      - 🇳🇱 荷兰节点
-      - 🇷🇺 俄罗斯节点
-      - 🇭🇺 匈牙利节点
-      - 🇺🇦 乌克兰节点
-      - 🇵🇱 波兰节点
-      - 🇮🇹 意大利节点
-      - 🇮🇷 伊朗节点
-      - 🇦🇸 亚太节点
+      - 🇭🇰 香港node
+      - 🇯🇵 日本node
+      - 🇰🇷 韩国node
+      - 🇸🇬 新加坡node
+      - 🇺🇸 美国node
+      - 🇬🇧 英国node
+      - 🇫🇷 法国node
+      - 🇩🇪 德国node
+      - 🇨🇦 加拿大node
+      - 🇦🇺 澳大利亚node
+      - 🇳🇱 荷兰node
+      - 🇷🇺 俄罗斯node
+      - 🇭🇺 匈牙利node
+      - 🇺🇦 乌克兰node
+      - 🇵🇱 波兰node
+      - 🇮🇹 意大利node
+      - 🇮🇷 伊朗node
+      - 🇦🇸 亚太node
     icon: https://cdn.jsdelivr.net/gh/mihomo-party-org/mihomo-party/resources/icon.png
   - name: Cloudflare
     type: select
@@ -171,25 +171,25 @@ proxy-groups:
     proxies:
       - Proxy
       - DIRECT
-      - 🇭🇰 香港节点
-      - 🇯🇵 日本节点
-      - 🇰🇷 韩国节点
-      - 🇸🇬 新加坡节点
-      - 🇺🇸 美国节点
-      - 🇬🇧 英国节点
-      - 🇫🇷 法国节点
-      - 🇩🇪 德国节点
-      - 🇨🇦 加拿大节点
-      - 🇦🇺 澳大利亚节点
-      - 🇳🇱 荷兰节点
-      - 🇷🇺 俄罗斯节点
-      - 🇭🇺 匈牙利节点
-      - 🇺🇦 乌克兰节点
-      - 🇵🇱 波兰节点
-      - 🇮🇹 意大利节点
-      - 🇮🇷 伊朗节点
-      - 🇦🇸 亚太节点
-      - 其他节点
+      - 🇭🇰 香港node
+      - 🇯🇵 日本node
+      - 🇰🇷 韩国node
+      - 🇸🇬 新加坡node
+      - 🇺🇸 美国node
+      - 🇬🇧 英国node
+      - 🇫🇷 法国node
+      - 🇩🇪 德国node
+      - 🇨🇦 加拿大node
+      - 🇦🇺 澳大利亚node
+      - 🇳🇱 荷兰node
+      - 🇷🇺 俄罗斯node
+      - 🇭🇺 匈牙利node
+      - 🇺🇦 乌克兰node
+      - 🇵🇱 波兰node
+      - 🇮🇹 意大利node
+      - 🇮🇷 伊朗node
+      - 🇦🇸 亚太node
+      - 其他node
     icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/cloudflare.png
   - name: Bing
     type: select
@@ -201,25 +201,25 @@ proxy-groups:
     proxies:
       - DIRECT
       - Proxy
-      - 🇭🇰 香港节点
-      - 🇯🇵 日本节点
-      - 🇰🇷 韩国节点
-      - 🇸🇬 新加坡节点
-      - 🇺🇸 美国节点
-      - 🇬🇧 英国节点
-      - 🇫🇷 法国节点
-      - 🇩🇪 德国节点
-      - 🇨🇦 加拿大节点
-      - 🇦🇺 澳大利亚节点
-      - 🇳🇱 荷兰节点
-      - 🇷🇺 俄罗斯节点
-      - 🇭🇺 匈牙利节点
-      - 🇺🇦 乌克兰节点
-      - 🇵🇱 波兰节点
-      - 🇮🇹 意大利节点
-      - 🇮🇷 伊朗节点
-      - 🇦🇸 亚太节点
-      - 其他节点
+      - 🇭🇰 香港node
+      - 🇯🇵 日本node
+      - 🇰🇷 韩国node
+      - 🇸🇬 新加坡node
+      - 🇺🇸 美国node
+      - 🇬🇧 英国node
+      - 🇫🇷 法国node
+      - 🇩🇪 德国node
+      - 🇨🇦 加拿大node
+      - 🇦🇺 澳大利亚node
+      - 🇳🇱 荷兰node
+      - 🇷🇺 俄罗斯node
+      - 🇭🇺 匈牙利node
+      - 🇺🇦 乌克兰node
+      - 🇵🇱 波兰node
+      - 🇮🇹 意大利node
+      - 🇮🇷 伊朗node
+      - 🇦🇸 亚太node
+      - 其他node
     icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/microsoft-bing.png
   - name: Github
     type: select
@@ -230,25 +230,25 @@ proxy-groups:
     max-failed-times: 3
     proxies:
       - Proxy
-      - 🇭🇰 香港节点
-      - 🇯🇵 日本节点
-      - 🇰🇷 韩国节点
-      - 🇸🇬 新加坡节点
-      - 🇺🇸 美国节点
-      - 🇬🇧 英国节点
-      - 🇫🇷 法国节点
-      - 🇩🇪 德国节点
-      - 🇨🇦 加拿大节点
-      - 🇦🇺 澳大利亚节点
-      - 🇳🇱 荷兰节点
-      - 🇷🇺 俄罗斯节点
-      - 🇭🇺 匈牙利节点
-      - 🇺🇦 乌克兰节点
-      - 🇵🇱 波兰节点
-      - 🇮🇹 意大利节点
-      - 🇮🇷 伊朗节点
-      - 🇦🇸 亚太节点
-      - 其他节点
+      - 🇭🇰 香港node
+      - 🇯🇵 日本node
+      - 🇰🇷 韩国node
+      - 🇸🇬 新加坡node
+      - 🇺🇸 美国node
+      - 🇬🇧 英国node
+      - 🇫🇷 法国node
+      - 🇩🇪 德国node
+      - 🇨🇦 加拿大node
+      - 🇦🇺 澳大利亚node
+      - 🇳🇱 荷兰node
+      - 🇷🇺 俄罗斯node
+      - 🇭🇺 匈牙利node
+      - 🇺🇦 乌克兰node
+      - 🇵🇱 波兰node
+      - 🇮🇹 意大利node
+      - 🇮🇷 伊朗node
+      - 🇦🇸 亚太node
+      - 其他node
     icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/github.png
   - name: OpenAI
     type: select
@@ -260,25 +260,25 @@ proxy-groups:
     proxies:
       - 🙏 自动选择 openai
       - 💪 手动选择 openai
-      - 🇺🇸 美国节点 openai
-      - 🇭🇰 香港节点 openai
-      - 🇹🇼 台湾节点 openai
-      - 🇯🇵 日本节点 openai
-      - 🇰🇷 韩国节点 openai
-      - 🇸🇬 新加坡节点 openai
-      - 🇬🇧 英国节点 openai
-      - 🇫🇷 法国节点 openai
-      - 🇩🇪 德国节点 openai
-      - 🇨🇦 加拿大节点 openai
-      - 🇦🇺 澳大利亚节点 openai
-      - 🇳🇱 荷兰节点 openai
-      - 🇷🇺 俄罗斯节点 openai
-      - 🇭🇺 匈牙利节点 openai
-      - 🇺🇦 乌克兰节点 openai
-      - 🇵🇱 波兰节点 openai
-      - 🇮🇹 意大利节点 openai
-      - 🇮🇷 伊朗节点 openai
-      - 🇦🇸 亚太节点 openai
+      - 🇺🇸 美国node openai
+      - 🇭🇰 香港node openai
+      - 🇹🇼 台湾node openai
+      - 🇯🇵 日本node openai
+      - 🇰🇷 韩国node openai
+      - 🇸🇬 新加坡node openai
+      - 🇬🇧 英国node openai
+      - 🇫🇷 法国node openai
+      - 🇩🇪 德国node openai
+      - 🇨🇦 加拿大node openai
+      - 🇦🇺 澳大利亚node openai
+      - 🇳🇱 荷兰node openai
+      - 🇷🇺 俄罗斯node openai
+      - 🇭🇺 匈牙利node openai
+      - 🇺🇦 乌克兰node openai
+      - 🇵🇱 波兰node openai
+      - 🇮🇹 意大利node openai
+      - 🇮🇷 伊朗node openai
+      - 🇦🇸 亚太node openai
     icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/chatgpt.png
   - name: Netflix
     type: select
@@ -290,25 +290,25 @@ proxy-groups:
     proxies:
       - 🙏 自动选择 netflix
       - 💪 手动选择 netflix
-      - 🇺🇸 美国节点 netflix
-      - 🇭🇰 香港节点 netflix
-      - 🇹🇼 台湾节点 netflix
-      - 🇯🇵 日本节点 netflix
-      - 🇰🇷 韩国节点 netflix
-      - 🇸🇬 新加坡节点 netflix
-      - 🇬🇧 英国节点 netflix
-      - 🇫🇷 法国节点 netflix
-      - 🇩🇪 德国节点 netflix
-      - 🇨🇦 加拿大节点 netflix
-      - 🇦🇺 澳大利亚节点 netflix
-      - 🇳🇱 荷兰节点 netflix
-      - 🇷🇺 俄罗斯节点 netflix
-      - 🇭🇺 匈牙利节点 netflix
-      - 🇺🇦 乌克兰节点 netflix
-      - 🇵🇱 波兰节点 netflix
-      - 🇮🇹 意大利节点 netflix
-      - 🇮🇷 伊朗节点 netflix
-      - 🇦🇸 亚太节点 netflix
+      - 🇺🇸 美国node netflix
+      - 🇭🇰 香港node netflix
+      - 🇹🇼 台湾node netflix
+      - 🇯🇵 日本node netflix
+      - 🇰🇷 韩国node netflix
+      - 🇸🇬 新加坡node netflix
+      - 🇬🇧 英国node netflix
+      - 🇫🇷 法国node netflix
+      - 🇩🇪 德国node netflix
+      - 🇨🇦 加拿大node netflix
+      - 🇦🇺 澳大利亚node netflix
+      - 🇳🇱 荷兰node netflix
+      - 🇷🇺 俄罗斯node netflix
+      - 🇭🇺 匈牙利node netflix
+      - 🇺🇦 乌克兰node netflix
+      - 🇵🇱 波兰node netflix
+      - 🇮🇹 意大利node netflix
+      - 🇮🇷 伊朗node netflix
+      - 🇦🇸 亚太node netflix
     icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/netflix.png
   - name: Disney+
     type: select
@@ -320,25 +320,25 @@ proxy-groups:
     proxies:
       - 🙏 自动选择 disney
       - 💪 手动选择 disney
-      - 🇺🇸 美国节点 disney
-      - 🇭🇰 香港节点 disney
-      - 🇹🇼 台湾节点 disney
-      - 🇯🇵 日本节点 disney
-      - 🇰🇷 韩国节点 disney
-      - 🇸🇬 新加坡节点 disney
-      - 🇬🇧 英国节点 disney
-      - 🇫🇷 法国节点 disney
-      - 🇩🇪 德国节点 disney
-      - 🇨🇦 加拿大节点 disney
-      - 🇦🇺 澳大利亚节点 disney
-      - 🇳🇱 荷兰节点 disney
-      - 🇷🇺 俄罗斯节点 disney
-      - 🇭🇺 匈牙利节点 disney
-      - 🇺🇦 乌克兰节点 disney
-      - 🇵🇱 波兰节点 disney
-      - 🇮🇹 意大利节点 disney
-      - 🇮🇷 伊朗节点 disney
-      - 🇦🇸 亚太节点 disney
+      - 🇺🇸 美国node disney
+      - 🇭🇰 香港node disney
+      - 🇹🇼 台湾node disney
+      - 🇯🇵 日本node disney
+      - 🇰🇷 韩国node disney
+      - 🇸🇬 新加坡node disney
+      - 🇬🇧 英国node disney
+      - 🇫🇷 法国node disney
+      - 🇩🇪 德国node disney
+      - 🇨🇦 加拿大node disney
+      - 🇦🇺 澳大利亚node disney
+      - 🇳🇱 荷兰node disney
+      - 🇷🇺 俄罗斯node disney
+      - 🇭🇺 匈牙利node disney
+      - 🇺🇦 乌克兰node disney
+      - 🇵🇱 波兰node disney
+      - 🇮🇹 意大利node disney
+      - 🇮🇷 伊朗node disney
+      - 🇦🇸 亚太node disney
     icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/disney-plus.png
   - name: YouTube
     type: select
@@ -350,73 +350,73 @@ proxy-groups:
     proxies:
       - 🙏 自动选择 youtube
       - 💪 手动选择 youtube
-      - 🇺🇸 美国节点 youtube
-      - 🇭🇰 香港节点 youtube
-      - 🇹🇼 台湾节点 youtube
-      - 🇯🇵 日本节点 youtube
-      - 🇰🇷 韩国节点 youtube
-      - 🇸🇬 新加坡节点 youtube
-      - 🇬🇧 英国节点 youtube
-      - 🇫🇷 法国节点 youtube
-      - 🇩🇪 德国节点 youtube
-      - 🇨🇦 加拿大节点 youtube
-      - 🇦🇺 澳大利亚节点 youtube
-      - 🇳🇱 荷兰节点 youtube
-      - 🇷🇺 俄罗斯节点 youtube
-      - 🇭🇺 匈牙利节点 youtube
-      - 🇺🇦 乌克兰节点 youtube
-      - 🇵🇱 波兰节点 youtube
-      - 🇮🇹 意大利节点 youtube
-      - 🇮🇷 伊朗节点 youtube
-      - 🇦🇸 亚太节点 youtube
+      - 🇺🇸 美国node youtube
+      - 🇭🇰 香港node youtube
+      - 🇹🇼 台湾node youtube
+      - 🇯🇵 日本node youtube
+      - 🇰🇷 韩国node youtube
+      - 🇸🇬 新加坡node youtube
+      - 🇬🇧 英国node youtube
+      - 🇫🇷 法国node youtube
+      - 🇩🇪 德国node youtube
+      - 🇨🇦 加拿大node youtube
+      - 🇦🇺 澳大利亚node youtube
+      - 🇳🇱 荷兰node youtube
+      - 🇷🇺 俄罗斯node youtube
+      - 🇭🇺 匈牙利node youtube
+      - 🇺🇦 乌克兰node youtube
+      - 🇵🇱 波兰node youtube
+      - 🇮🇹 意大利node youtube
+      - 🇮🇷 伊朗node youtube
+      - 🇦🇸 亚太node youtube
     icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/youtube.png
   - name: TikTok
     type: select
     proxies:
       - Proxy
-      - 🇭🇰 香港节点
-      - 🇯🇵 日本节点
-      - 🇰🇷 韩国节点
-      - 🇸🇬 新加坡节点
-      - 🇺🇸 美国节点
-      - 🇬🇧 英国节点
-      - 🇫🇷 法国节点
-      - 🇩🇪 德国节点
-      - 🇨🇦 加拿大节点
-      - 🇦🇺 澳大利亚节点
-      - 🇳🇱 荷兰节点
-      - 🇷🇺 俄罗斯节点
-      - 🇭🇺 匈牙利节点
-      - 🇺🇦 乌克兰节点
-      - 🇵🇱 波兰节点
-      - 🇮🇹 意大利节点
-      - 🇮🇷 伊朗节点
-      - 🇦🇸 亚太节点
-      - 其他节点
+      - 🇭🇰 香港node
+      - 🇯🇵 日本node
+      - 🇰🇷 韩国node
+      - 🇸🇬 新加坡node
+      - 🇺🇸 美国node
+      - 🇬🇧 英国node
+      - 🇫🇷 法国node
+      - 🇩🇪 德国node
+      - 🇨🇦 加拿大node
+      - 🇦🇺 澳大利亚node
+      - 🇳🇱 荷兰node
+      - 🇷🇺 俄罗斯node
+      - 🇭🇺 匈牙利node
+      - 🇺🇦 乌克兰node
+      - 🇵🇱 波兰node
+      - 🇮🇹 意大利node
+      - 🇮🇷 伊朗node
+      - 🇦🇸 亚太node
+      - 其他node
     icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/tiktok.png
   - name: Spotify
     type: select
     proxies:
       - Proxy
-      - 🇭🇰 香港节点
-      - 🇯🇵 日本节点
-      - 🇰🇷 韩国节点
-      - 🇸🇬 新加坡节点
-      - 🇺🇸 美国节点
-      - 🇬🇧 英国节点
-      - 🇫🇷 法国节点
-      - 🇩🇪 德国节点
-      - 🇨🇦 加拿大节点
-      - 🇦🇺 澳大利亚节点
-      - 🇳🇱 荷兰节点
-      - 🇷🇺 俄罗斯节点
-      - 🇭🇺 匈牙利节点
-      - 🇺🇦 乌克兰节点
-      - 🇵🇱 波兰节点
-      - 🇮🇹 意大利节点
-      - 🇮🇷 伊朗节点
-      - 🇦🇸 亚太节点
-      - 其他节点
+      - 🇭🇰 香港node
+      - 🇯🇵 日本node
+      - 🇰🇷 韩国node
+      - 🇸🇬 新加坡node
+      - 🇺🇸 美国node
+      - 🇬🇧 英国node
+      - 🇫🇷 法国node
+      - 🇩🇪 德国node
+      - 🇨🇦 加拿大node
+      - 🇦🇺 澳大利亚node
+      - 🇳🇱 荷兰node
+      - 🇷🇺 俄罗斯node
+      - 🇭🇺 匈牙利node
+      - 🇺🇦 乌克兰node
+      - 🇵🇱 波兰node
+      - 🇮🇹 意大利node
+      - 🇮🇷 伊朗node
+      - 🇦🇸 亚太node
+      - 其他node
     icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/spotify.png
   - name: Telegram
     type: select
@@ -426,100 +426,100 @@ proxy-groups:
     max-failed-times: 3
     proxies:
       - Proxy
-      - 🇭🇰 香港节点
-      - 🇯🇵 日本节点
-      - 🇰🇷 韩国节点
-      - 🇸🇬 新加坡节点
-      - 🇺🇸 美国节点
-      - 🇬🇧 英国节点
-      - 🇫🇷 法国节点
-      - 🇩🇪 德国节点
-      - 🇨🇦 加拿大节点
-      - 🇦🇺 澳大利亚节点
-      - 🇳🇱 荷兰节点
-      - 🇷🇺 俄罗斯节点
-      - 🇭🇺 匈牙利节点
-      - 🇺🇦 乌克兰节点
-      - 🇵🇱 波兰节点
-      - 🇮🇹 意大利节点
-      - 🇮🇷 伊朗节点
-      - 🇦🇸 亚太节点
-      - 其他节点
+      - 🇭🇰 香港node
+      - 🇯🇵 日本node
+      - 🇰🇷 韩国node
+      - 🇸🇬 新加坡node
+      - 🇺🇸 美国node
+      - 🇬🇧 英国node
+      - 🇫🇷 法国node
+      - 🇩🇪 德国node
+      - 🇨🇦 加拿大node
+      - 🇦🇺 澳大利亚node
+      - 🇳🇱 荷兰node
+      - 🇷🇺 俄罗斯node
+      - 🇭🇺 匈牙利node
+      - 🇺🇦 乌克兰node
+      - 🇵🇱 波兰node
+      - 🇮🇹 意大利node
+      - 🇮🇷 伊朗node
+      - 🇦🇸 亚太node
+      - 其他node
     icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/telegram.png
   - name: Microsoft
     type: select
     proxies:
       - DIRECT
       - Proxy
-      - 🇭🇰 香港节点
-      - 🇯🇵 日本节点
-      - 🇰🇷 韩国节点
-      - 🇸🇬 新加坡节点
-      - 🇺🇸 美国节点
-      - 🇬🇧 英国节点
-      - 🇫🇷 法国节点
-      - 🇩🇪 德国节点
-      - 🇨🇦 加拿大节点
-      - 🇦🇺 澳大利亚节点
-      - 🇳🇱 荷兰节点
-      - 🇷🇺 俄罗斯节点
-      - 🇭🇺 匈牙利节点
-      - 🇺🇦 乌克兰节点
-      - 🇵🇱 波兰节点
-      - 🇮🇹 意大利节点
-      - 🇮🇷 伊朗节点
-      - 🇦🇸 亚太节点
-      - 其他节点
+      - 🇭🇰 香港node
+      - 🇯🇵 日本node
+      - 🇰🇷 韩国node
+      - 🇸🇬 新加坡node
+      - 🇺🇸 美国node
+      - 🇬🇧 英国node
+      - 🇫🇷 法国node
+      - 🇩🇪 德国node
+      - 🇨🇦 加拿大node
+      - 🇦🇺 澳大利亚node
+      - 🇳🇱 荷兰node
+      - 🇷🇺 俄罗斯node
+      - 🇭🇺 匈牙利node
+      - 🇺🇦 乌克兰node
+      - 🇵🇱 波兰node
+      - 🇮🇹 意大利node
+      - 🇮🇷 伊朗node
+      - 🇦🇸 亚太node
+      - 其他node
     icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/microsoft.png
   - name: Onedrive
     type: select
     proxies:
       - DIRECT
       - Proxy
-      - 🇭🇰 香港节点
-      - 🇯🇵 日本节点
-      - 🇰🇷 韩国节点
-      - 🇸🇬 新加坡节点
-      - 🇺🇸 美国节点
-      - 🇬🇧 英国节点
-      - 🇫🇷 法国节点
-      - 🇩🇪 德国节点
-      - 🇨🇦 加拿大节点
-      - 🇦🇺 澳大利亚节点
-      - 🇳🇱 荷兰节点
-      - 🇷🇺 俄罗斯节点
-      - 🇭🇺 匈牙利节点
-      - 🇺🇦 乌克兰节点
-      - 🇵🇱 波兰节点
-      - 🇮🇹 意大利节点
-      - 🇮🇷 伊朗节点
-      - 🇦🇸 亚太节点
-      - 其他节点
+      - 🇭🇰 香港node
+      - 🇯🇵 日本node
+      - 🇰🇷 韩国node
+      - 🇸🇬 新加坡node
+      - 🇺🇸 美国node
+      - 🇬🇧 英国node
+      - 🇫🇷 法国node
+      - 🇩🇪 德国node
+      - 🇨🇦 加拿大node
+      - 🇦🇺 澳大利亚node
+      - 🇳🇱 荷兰node
+      - 🇷🇺 俄罗斯node
+      - 🇭🇺 匈牙利node
+      - 🇺🇦 乌克兰node
+      - 🇵🇱 波兰node
+      - 🇮🇹 意大利node
+      - 🇮🇷 伊朗node
+      - 🇦🇸 亚太node
+      - 其他node
     icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/microsoft-onedrive.png
   - name: Apple
     type: select
     proxies:
       - DIRECT
       - Proxy
-      - 🇭🇰 香港节点
-      - 🇯🇵 日本节点
-      - 🇰🇷 韩国节点
-      - 🇸🇬 新加坡节点
-      - 🇺🇸 美国节点
-      - 🇬🇧 英国节点
-      - 🇫🇷 法国节点
-      - 🇩🇪 德国节点
-      - 🇨🇦 加拿大节点
-      - 🇦🇺 澳大利亚节点
-      - 🇳🇱 荷兰节点
-      - 🇷🇺 俄罗斯节点
-      - 🇭🇺 匈牙利节点
-      - 🇺🇦 乌克兰节点
-      - 🇵🇱 波兰节点
-      - 🇮🇹 意大利节点
-      - 🇮🇷 伊朗节点
-      - 🇦🇸 亚太节点
-      - 其他节点
+      - 🇭🇰 香港node
+      - 🇯🇵 日本node
+      - 🇰🇷 韩国node
+      - 🇸🇬 新加坡node
+      - 🇺🇸 美国node
+      - 🇬🇧 英国node
+      - 🇫🇷 法国node
+      - 🇩🇪 德国node
+      - 🇨🇦 加拿大node
+      - 🇦🇺 澳大利亚node
+      - 🇳🇱 荷兰node
+      - 🇷🇺 俄罗斯node
+      - 🇭🇺 匈牙利node
+      - 🇺🇦 乌克兰node
+      - 🇵🇱 波兰node
+      - 🇮🇹 意大利node
+      - 🇮🇷 伊朗node
+      - 🇦🇸 亚太node
+      - 其他node
     icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/apple.png
   - name: Gamer
     type: select
@@ -534,25 +534,25 @@ proxy-groups:
     proxies:
       - Proxy
       - DIRECT
-      - 🇭🇰 香港节点
-      - 🇯🇵 日本节点
-      - 🇰🇷 韩国节点
-      - 🇸🇬 新加坡节点
-      - 🇺🇸 美国节点
-      - 🇬🇧 英国节点
-      - 🇫🇷 法国节点
-      - 🇩🇪 德国节点
-      - 🇨🇦 加拿大节点
-      - 🇦🇺 澳大利亚节点
-      - 🇳🇱 荷兰节点
-      - 🇷🇺 俄罗斯节点
-      - 🇭🇺 匈牙利节点
-      - 🇺🇦 乌克兰节点
-      - 🇵🇱 波兰节点
-      - 🇮🇹 意大利节点
-      - 🇮🇷 伊朗节点
-      - 🇦🇸 亚太节点
-      - 其他节点
+      - 🇭🇰 香港node
+      - 🇯🇵 日本node
+      - 🇰🇷 韩国node
+      - 🇸🇬 新加坡node
+      - 🇺🇸 美国node
+      - 🇬🇧 英国node
+      - 🇫🇷 法国node
+      - 🇩🇪 德国node
+      - 🇨🇦 加拿大node
+      - 🇦🇺 澳大利亚node
+      - 🇳🇱 荷兰node
+      - 🇷🇺 俄罗斯node
+      - 🇭🇺 匈牙利node
+      - 🇺🇦 乌克兰node
+      - 🇵🇱 波兰node
+      - 🇮🇹 意大利node
+      - 🇮🇷 伊朗node
+      - 🇦🇸 亚太node
+      - 其他node
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/ForeignMedia.png
   - name: 💪 手动选择
     type: select
@@ -640,7 +640,7 @@ proxy-groups:
     strategy: sticky-sessions
     use:
       - ProviderALL
-  - name: 🇭🇰 香港节点
+  - name: 🇭🇰 香港node
     type: url-test
     tolerance: 100
     interval: 60
@@ -652,7 +652,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇭🇰|香港|(\b(HK|Hong)\b))).*$
     use:
       - ProviderALL
-  - name: 🇹🇼 台湾节点
+  - name: 🇹🇼 台湾node
     type: url-test
     tolerance: 100
     interval: 60
@@ -664,7 +664,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇹🇼|台湾|(\b(TW|Taiwan)\b))).*$
     use:
       - ProviderALL
-  - name: 🇯🇵 日本节点
+  - name: 🇯🇵 日本node
     type: url-test
     tolerance: 100
     interval: 60
@@ -676,7 +676,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|Japan)\b))).*$
     use:
       - ProviderALL
-  - name: 🇰🇷 韩国节点
+  - name: 🇰🇷 韩国node
     type: url-test
     tolerance: 100
     interval: 60
@@ -688,7 +688,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|Korea)\b))).*$
     use:
       - ProviderALL
-  - name: 🇸🇬 新加坡节点
+  - name: 🇸🇬 新加坡node
     type: url-test
     tolerance: 100
     interval: 60
@@ -700,7 +700,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|Singapore)\b))).*$
     use:
       - ProviderALL
-  - name: 🇺🇸 美国节点
+  - name: 🇺🇸 美国node
     type: url-test
     tolerance: 100
     interval: 60
@@ -713,7 +713,7 @@ proxy-groups:
       States)\b))).*$
     use:
       - ProviderALL
-  - name: 🇬🇧 英国节点
+  - name: 🇬🇧 英国node
     type: url-test
     tolerance: 100
     interval: 60
@@ -725,7 +725,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇬🇧|英国|伦敦|(\b(UK|United Kingdom)\b))).*$
     use:
       - ProviderALL
-  - name: 🇫🇷 法国节点
+  - name: 🇫🇷 法国node
     type: url-test
     tolerance: 100
     interval: 60
@@ -737,7 +737,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇫🇷|法国|(\b(FR|France)\b))).*$
     use:
       - ProviderALL
-  - name: 🇩🇪 德国节点
+  - name: 🇩🇪 德国node
     type: url-test
     tolerance: 100
     interval: 60
@@ -749,7 +749,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇩🇪|德国|(\b(DE|Germany)\b))).*$
     use:
       - ProviderALL
-  - name: 🇨🇦 加拿大节点
+  - name: 🇨🇦 加拿大node
     type: url-test
     tolerance: 100
     interval: 60
@@ -761,7 +761,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇨🇦|加拿大|(\b(CA|Canada)\b))).*$
     use:
       - ProviderALL
-  - name: 🇦🇺 澳大利亚节点
+  - name: 🇦🇺 澳大利亚node
     type: url-test
     tolerance: 100
     interval: 60
@@ -773,7 +773,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇦🇺|澳大利亚|(\b(AU|Australia)\b))).*$
     use:
       - ProviderALL
-  - name: 🇳🇱 荷兰节点
+  - name: 🇳🇱 荷兰node
     type: url-test
     tolerance: 100
     interval: 60
@@ -785,7 +785,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇳🇱|荷兰|(\b(NL|Netherlands)\b))).*$
     use:
       - ProviderALL
-  - name: 🇷🇺 俄罗斯节点
+  - name: 🇷🇺 俄罗斯node
     type: url-test
     tolerance: 100
     interval: 60
@@ -797,7 +797,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇷🇺|俄罗斯|(\b(RU|Russia)\b))).*$
     use:
       - ProviderALL
-  - name: 🇭🇺 匈牙利节点
+  - name: 🇭🇺 匈牙利node
     type: url-test
     tolerance: 100
     interval: 60
@@ -809,7 +809,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇭🇺|匈牙利|(\b(HU|Hungary)\b))).*$
     use:
       - ProviderALL
-  - name: 🇺🇦 乌克兰节点
+  - name: 🇺🇦 乌克兰node
     type: url-test
     tolerance: 100
     interval: 60
@@ -821,7 +821,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇺🇦|乌克兰|(\b(UA|Ukraine)\b))).*$
     use:
       - ProviderALL
-  - name: 🇵🇱 波兰节点
+  - name: 🇵🇱 波兰node
     type: url-test
     tolerance: 100
     interval: 60
@@ -833,7 +833,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇵🇱|波兰|(\b(PL|Poland)\b))).*$
     use:
       - ProviderALL
-  - name: 🇮🇹 意大利节点
+  - name: 🇮🇹 意大利node
     type: url-test
     tolerance: 100
     interval: 60
@@ -845,7 +845,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇮🇹|意大利|(\b(IT|Italy)\b))).*$
     use:
       - ProviderALL
-  - name: 🇮🇷 伊朗节点
+  - name: 🇮🇷 伊朗node
     type: url-test
     tolerance: 100
     interval: 60
@@ -857,7 +857,7 @@ proxy-groups:
     filter: ^(?=.*((?i)🇮🇷|伊朗|(\b(IR|Iran)\b))).*$
     use:
       - ProviderALL
-  - name: 🇦🇸 亚太节点
+  - name: 🇦🇸 亚太node
     type: url-test
     tolerance: 100
     interval: 60
@@ -869,7 +869,7 @@ proxy-groups:
     filter: ^(?=.*((?i)亚太|(\b(AP|Asia Pacific)\b))).*$
     use:
       - ProviderALL
-  - name: 其他节点
+  - name: 其他node
     type: url-test
     tolerance: 100
     interval: 60
@@ -881,7 +881,7 @@ proxy-groups:
     filter: ^(?=.*((?i)其他|(\b(OTHER)\b))).*$
     use:
       - ProviderALL
-  - name: 🇭🇰 香港节点 openai
+  - name: 🇭🇰 香港node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -896,7 +896,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇹🇼 台湾节点 openai
+  - name: 🇹🇼 台湾node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -911,7 +911,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇯🇵 日本节点 openai
+  - name: 🇯🇵 日本node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -926,7 +926,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇰🇷 韩国节点 openai
+  - name: 🇰🇷 韩国node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -941,7 +941,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇸🇬 新加坡节点 openai
+  - name: 🇸🇬 新加坡node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -956,7 +956,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇺🇸 美国节点 openai
+  - name: 🇺🇸 美国node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -972,7 +972,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇬🇧 英国节点 openai
+  - name: 🇬🇧 英国node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -987,7 +987,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇫🇷 法国节点 openai
+  - name: 🇫🇷 法国node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -1002,7 +1002,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇩🇪 德国节点 openai
+  - name: 🇩🇪 德国node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -1017,7 +1017,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇨🇦 加拿大节点 openai
+  - name: 🇨🇦 加拿大node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -1032,7 +1032,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇦🇺 澳大利亚节点 openai
+  - name: 🇦🇺 澳大利亚node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -1047,7 +1047,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇳🇱 荷兰节点 openai
+  - name: 🇳🇱 荷兰node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -1062,7 +1062,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇷🇺 俄罗斯节点 openai
+  - name: 🇷🇺 俄罗斯node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -1077,7 +1077,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇭🇺 匈牙利节点 openai
+  - name: 🇭🇺 匈牙利node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -1092,7 +1092,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇺🇦 乌克兰节点 openai
+  - name: 🇺🇦 乌克兰node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -1107,7 +1107,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇵🇱 波兰节点 openai
+  - name: 🇵🇱 波兰node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -1122,7 +1122,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇮🇹 意大利节点 openai
+  - name: 🇮🇹 意大利node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -1137,7 +1137,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇮🇷 伊朗节点 openai
+  - name: 🇮🇷 伊朗node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -1152,7 +1152,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇦🇸 亚太节点 openai
+  - name: 🇦🇸 亚太node openai
     type: url-test
     tolerance: 100
     interval: 60
@@ -1167,7 +1167,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇭🇰 香港节点 netflix
+  - name: 🇭🇰 香港node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1182,7 +1182,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇹🇼 台湾节点 netflix
+  - name: 🇹🇼 台湾node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1197,7 +1197,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇯🇵 日本节点 netflix
+  - name: 🇯🇵 日本node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1212,7 +1212,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇰🇷 韩国节点 netflix
+  - name: 🇰🇷 韩国node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1227,7 +1227,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇸🇬 新加坡节点 netflix
+  - name: 🇸🇬 新加坡node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1242,7 +1242,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇺🇸 美国节点 netflix
+  - name: 🇺🇸 美国node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1258,7 +1258,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇬🇧 英国节点 netflix
+  - name: 🇬🇧 英国node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1273,7 +1273,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇫🇷 法国节点 netflix
+  - name: 🇫🇷 法国node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1288,7 +1288,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇩🇪 德国节点 netflix
+  - name: 🇩🇪 德国node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1303,7 +1303,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇨🇦 加拿大节点 netflix
+  - name: 🇨🇦 加拿大node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1318,7 +1318,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇦🇺 澳大利亚节点 netflix
+  - name: 🇦🇺 澳大利亚node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1333,7 +1333,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇳🇱 荷兰节点 netflix
+  - name: 🇳🇱 荷兰node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1348,7 +1348,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇷🇺 俄罗斯节点 netflix
+  - name: 🇷🇺 俄罗斯node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1363,7 +1363,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇭🇺 匈牙利节点 netflix
+  - name: 🇭🇺 匈牙利node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1378,7 +1378,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇺🇦 乌克兰节点 netflix
+  - name: 🇺🇦 乌克兰node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1393,7 +1393,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇵🇱 波兰节点 netflix
+  - name: 🇵🇱 波兰node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1408,7 +1408,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇮🇹 意大利节点 netflix
+  - name: 🇮🇹 意大利node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1423,7 +1423,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇮🇷 伊朗节点 netflix
+  - name: 🇮🇷 伊朗node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1438,7 +1438,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇦🇸 亚太节点 netflix
+  - name: 🇦🇸 亚太node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1453,7 +1453,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 其他节点 netflix
+  - name: 其他node netflix
     type: url-test
     tolerance: 100
     interval: 60
@@ -1468,7 +1468,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇭🇰 香港节点 disney
+  - name: 🇭🇰 香港node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1483,7 +1483,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇹🇼 台湾节点 disney
+  - name: 🇹🇼 台湾node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1498,7 +1498,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇯🇵 日本节点 disney
+  - name: 🇯🇵 日本node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1513,7 +1513,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇰🇷 韩国节点 disney
+  - name: 🇰🇷 韩国node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1528,7 +1528,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇸🇬 新加坡节点 disney
+  - name: 🇸🇬 新加坡node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1543,7 +1543,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇺🇸 美国节点 disney
+  - name: 🇺🇸 美国node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1559,7 +1559,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇬🇧 英国节点 disney
+  - name: 🇬🇧 英国node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1574,7 +1574,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇫🇷 法国节点 disney
+  - name: 🇫🇷 法国node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1589,7 +1589,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇩🇪 德国节点 disney
+  - name: 🇩🇪 德国node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1604,7 +1604,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇨🇦 加拿大节点 disney
+  - name: 🇨🇦 加拿大node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1619,7 +1619,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇦🇺 澳大利亚节点 disney
+  - name: 🇦🇺 澳大利亚node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1634,7 +1634,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇳🇱 荷兰节点 disney
+  - name: 🇳🇱 荷兰node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1649,7 +1649,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇷🇺 俄罗斯节点 disney
+  - name: 🇷🇺 俄罗斯node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1664,7 +1664,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇭🇺 匈牙利节点 disney
+  - name: 🇭🇺 匈牙利node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1679,7 +1679,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇺🇦 乌克兰节点 disney
+  - name: 🇺🇦 乌克兰node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1694,7 +1694,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇵🇱 波兰节点 disney
+  - name: 🇵🇱 波兰node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1709,7 +1709,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇮🇹 意大利节点 disney
+  - name: 🇮🇹 意大利node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1724,7 +1724,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇮🇷 伊朗节点 disney
+  - name: 🇮🇷 伊朗node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1739,7 +1739,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇦🇸 亚太节点 disney
+  - name: 🇦🇸 亚太node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1754,7 +1754,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 其他节点 disney
+  - name: 其他node disney
     type: url-test
     tolerance: 100
     interval: 60
@@ -1769,7 +1769,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇭🇰 香港节点 youtube
+  - name: 🇭🇰 香港node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -1784,7 +1784,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇹🇼 台湾节点 youtube
+  - name: 🇹🇼 台湾node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -1799,7 +1799,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇯🇵 日本节点 youtube
+  - name: 🇯🇵 日本node youtube
     type: url-test
     tolerance: 50
     interval: 60
@@ -1814,7 +1814,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇰🇷 韩国节点 youtube
+  - name: 🇰🇷 韩国node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -1829,7 +1829,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇸🇬 新加坡节点 youtube
+  - name: 🇸🇬 新加坡node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -1844,7 +1844,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇺🇸 美国节点 youtube
+  - name: 🇺🇸 美国node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -1860,7 +1860,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇬🇧 英国节点 youtube
+  - name: 🇬🇧 英国node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -1875,7 +1875,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇫🇷 法国节点 youtube
+  - name: 🇫🇷 法国node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -1890,7 +1890,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇩🇪 德国节点 youtube
+  - name: 🇩🇪 德国node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -1905,7 +1905,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇨🇦 加拿大节点 youtube
+  - name: 🇨🇦 加拿大node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -1920,7 +1920,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇦🇺 澳大利亚节点 youtube
+  - name: 🇦🇺 澳大利亚node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -1935,7 +1935,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇳🇱 荷兰节点 youtube
+  - name: 🇳🇱 荷兰node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -1950,7 +1950,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇷🇺 俄罗斯节点 youtube
+  - name: 🇷🇺 俄罗斯node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -1965,7 +1965,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇭🇺 匈牙利节点 youtube
+  - name: 🇭🇺 匈牙利node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -1980,7 +1980,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇺🇦 乌克兰节点 youtube
+  - name: 🇺🇦 乌克兰node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -1995,7 +1995,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇵🇱 波兰节点 youtube
+  - name: 🇵🇱 波兰node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -2010,7 +2010,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇮🇹 意大利节点 youtube
+  - name: 🇮🇹 意大利node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -2025,7 +2025,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇮🇷 伊朗节点 youtube
+  - name: 🇮🇷 伊朗node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -2040,7 +2040,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 🇦🇸 亚太节点 youtube
+  - name: 🇦🇸 亚太node youtube
     type: url-test
     tolerance: 100
     interval: 60
@@ -2055,7 +2055,7 @@ proxy-groups:
     proxies:
       - REJECT
     hidden: true
-  - name: 其他节点 youtube
+  - name: 其他node youtube
     type: url-test
     tolerance: 100
     interval: 60
