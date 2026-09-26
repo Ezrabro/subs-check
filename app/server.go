@@ -14,11 +14,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/beck-8/subs-check/check"
-	"github.com/beck-8/subs-check/config"
-	"github.com/beck-8/subs-check/export"
-	"github.com/beck-8/subs-check/save"
-	"github.com/beck-8/subs-check/save/method"
+	"github.com/Ezrabro/subs-check/check"
+	"github.com/Ezrabro/subs-check/config"
+	"github.com/Ezrabro/subs-check/export"
+	"github.com/Ezrabro/subs-check/save"
+	"github.com/Ezrabro/subs-check/save/method"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	"gopkg.in/yaml.v3"
@@ -108,7 +108,7 @@ func (app *App) newRouter() (*gin.Engine, error) {
 		api := router.Group("/api")
 		api.Use(app.authMiddleware(config.GlobalConfig.APIKey)) // 添加认证中间件
 		{
-			// 配置相关API
+			// Config相关API
 			api.GET("/config", app.getConfig)
 			api.POST("/config", app.updateConfig)
 
@@ -129,7 +129,7 @@ func (app *App) newRouter() (*gin.Engine, error) {
 			api.DELETE("/export/:target", app.disableExport)
 		}
 
-		// 配置页面
+		// Config页面
 		router.GET("/admin", func(c *gin.Context) {
 			c.HTML(http.StatusOK, "admin.html", gin.H{
 				"configPath": app.configPath,
@@ -294,7 +294,7 @@ func (app *App) updateConfig(c *gin.Context) {
 		return
 	}
 
-	// 配置文件监听器会自动重新加载配置
+	// Config文件监听器会自动重新加载配置
 	c.JSON(http.StatusOK, gin.H{"message": "配置已更新"})
 }
 

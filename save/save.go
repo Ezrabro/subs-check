@@ -6,11 +6,11 @@ import (
 	"log/slog"
 	"net/http"
 
-	"github.com/beck-8/subs-check/check"
-	"github.com/beck-8/subs-check/config"
-	"github.com/beck-8/subs-check/export"
-	"github.com/beck-8/subs-check/save/method"
-	"github.com/beck-8/subs-check/utils"
+	"github.com/Ezrabro/subs-check/check"
+	"github.com/Ezrabro/subs-check/config"
+	"github.com/Ezrabro/subs-check/export"
+	"github.com/Ezrabro/subs-check/save/method"
+	"github.com/Ezrabro/subs-check/utils"
 	"gopkg.in/yaml.v3"
 )
 

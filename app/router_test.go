@@ -8,8 +8,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/beck-8/subs-check/config"
-	"github.com/beck-8/subs-check/save"
+	"github.com/Ezrabro/subs-check/config"
+	"github.com/Ezrabro/subs-check/save"
 	"github.com/gin-gonic/gin"
 )
 

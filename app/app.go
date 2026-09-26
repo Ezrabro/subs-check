@@ -10,30 +10,30 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/beck-8/subs-check/app/monitor"
-	"github.com/beck-8/subs-check/assets"
-	"github.com/beck-8/subs-check/check"
-	"github.com/beck-8/subs-check/config"
-	"github.com/beck-8/subs-check/save"
-	"github.com/beck-8/subs-check/utils"
+	"github.com/Ezrabro/subs-check/app/monitor"
+	"github.com/Ezrabro/subs-check/assets"
+	"github.com/Ezrabro/subs-check/check"
+	"github.com/Ezrabro/subs-check/config"
+	"github.com/Ezrabro/subs-check/save"
+	"github.com/Ezrabro/subs-check/utils"
 	"github.com/fsnotify/fsnotify"
 	"github.com/robfig/cron/v3"
 )
 
-// App 结构体用于管理应用程序状态
+// App struct manages application state
 type App struct {
 	configPath string
 	interval   int
 	watcher    *fsnotify.Watcher
-	checkChan  chan struct{} // 触发检测的通道
-	checking   atomic.Bool   // 检测状态标志
+	checkChan  chan struct{} // Channel to trigger checks
+	checking   atomic.Bool   // Check status flag
 	ticker     *time.Ticker
-	done       chan struct{} // 用于结束ticker goroutine的信号
-	cron       *cron.Cron    // crontab调度器
+	done       chan struct{} // Signal to end ticker goroutine
+	cron       *cron.Cron    // Crontab scheduler
 	version    string
 }
 
-// New 创建新的应用实例
+// New creates a new app instance
 func New(version string) *App {
 	configPath := flag.String("f", "", "配置文件路径")
 	flag.Parse()
@@ -46,16 +46,16 @@ func New(version string) *App {
 	}
 }
 
-// Initialize 初始化应用程序
+// Initialize initializes the application
 func (app *App) Initialize() error {
-	// 初始化配置文件路径
+	// Initialize config file path
 	if err := app.initConfigPath(); err != nil {
 		return fmt.Errorf("初始化配置文件路径失败: %w", err)
 	}
 	// Results snapshot and export cache live beside the config file.
 	utils.SetCacheDir(app.configPath)
 
-	// 加载配置文件
+	// Load configuration file
 	if err := app.loadConfig(); err != nil {
 		return fmt.Errorf("加载配置文件失败: %w", err)
 	}

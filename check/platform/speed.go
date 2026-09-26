@@ -9,7 +9,7 @@ import (
 
 	"log/slog"
 
-	"github.com/beck-8/subs-check/config"
+	"github.com/Ezrabro/subs-check/config"
 	"github.com/juju/ratelimit"
 	"github.com/metacubex/mihomo/common/convert"
 )

@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/beck-8/subs-check/check"
-	"github.com/beck-8/subs-check/config"
-	"github.com/beck-8/subs-check/utils"
+	"github.com/Ezrabro/subs-check/check"
+	"github.com/Ezrabro/subs-check/config"
+	"github.com/Ezrabro/subs-check/utils"
 )
 
 // ResultsPath returns where the snapshot for /admin/results is stored: this

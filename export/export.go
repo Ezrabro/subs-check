@@ -27,9 +27,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/beck-8/subs-check/config"
-	"github.com/beck-8/subs-check/save/method"
-	"github.com/beck-8/subs-check/utils"
+	"github.com/Ezrabro/subs-check/config"
+	"github.com/Ezrabro/subs-check/save/method"
+	"github.com/Ezrabro/subs-check/utils"
 	"golang.org/x/sync/singleflight"
 )
 

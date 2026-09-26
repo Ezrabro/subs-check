@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/beck-8/subs-check/config"
-	"github.com/beck-8/subs-check/utils"
+	"github.com/Ezrabro/subs-check/config"
+	"github.com/Ezrabro/subs-check/utils"
 	"github.com/fsnotify/fsnotify"
 	"gopkg.in/yaml.v3"
 )
@@ -125,7 +125,7 @@ func (app *App) initConfigWatcher() error {
 		}
 	}()
 
-	// 开始监听配置文件目录
+	// Start监听配置文件目录
 	if err := watcher.Add(filepath.Dir(app.configPath)); err != nil {
 		return fmt.Errorf("添加配置文件监听失败: %w", err)
 	}

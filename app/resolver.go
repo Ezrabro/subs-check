@@ -6,7 +6,7 @@ import (
 	"net"
 	"strings"
 
-	"github.com/beck-8/subs-check/config"
+	"github.com/Ezrabro/subs-check/config"
 	"github.com/metacubex/mihomo/component/resolver"
 	_ "github.com/metacubex/mihomo/config" // init() sets dns.ParseNameServer, used by parseNameservers
 	"github.com/metacubex/mihomo/dns"

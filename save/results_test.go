@@ -7,8 +7,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/beck-8/subs-check/check"
-	"github.com/beck-8/subs-check/config"
+	"github.com/Ezrabro/subs-check/check"
+	"github.com/Ezrabro/subs-check/config"
 )
 
 func withMediaCheck(t *testing.T, on bool) {
