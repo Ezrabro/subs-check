@@ -17,10 +17,10 @@ shuffle-test-order: true
 check-interval: 120
 # Cron expression: if set, ignores check-interval
 # Supports standard cron expressions, e.g.:
-# "0 */2 * * *" 表示每2小时的整点执行
-# "0 0 */2 * *" 表示每2天的0点执行
-# "0 0 1 * *" 表示每月1日0点执行
-# "*/30 * * * *" 表示每30分钟执行一次
+# "0 */2 * * *" runs at every 2-hour mark
+# "0 0 */2 * *" runs at 00:00 every 2 days
+# "0 0 1 * *" runs at 00:00 on 1st of each month
+# "*/30 * * * *" runs every 30 minutes
 # cron-expression: "*/30 * * * *"
 
 # Save how many successful nodes; 0 means unlimited 
@@ -28,18 +28,18 @@ check-interval: 120
 # success-limit <= success <= success-limit+concurrent
 success-limit: 0
 
-# 超时时间(毫秒)(节点的最大延迟)
+# Timeout in ms (max node delay)
 timeout: 5000
-# 延迟测试URL
-# 一些高级用法需要自己摸索，比如想要拒绝某些CF类节点，可将url替换为https://www.cloudflare.com
+# Alive-test URL
+# Advanced: replace URL with https://www.cloudflare.com
 alive-test-url: http://gstatic.com/generate_204
-# 测速地址(注意 并发数*节点速度<最大网速 否则测速结果不准确)
-# 尽量不要使用Speedtest，Cloudflare提供的下载链接，因为很多节点屏蔽测速网站
-# 如果找不到稳定的测速地址，可以自建测速地址
+# Speed test URL (note: concurrency * node speed < max bandwidth)
+# Avoid using Speedtest; many nodes block it
+# If no stable URL, self-host
 speed-test-url: https://github.com/AaronFeng753/Waifu2x-Extension-GUI/releases/download/v2.21.12/Waifu2x-Extension-GUI-v2.21.12-Portable.7z
-# 最低测速结果舍弃(KB/s)
+# Minimum speed result discard (KB/s)
 min-speed: 512
-# 下载测试时间(s)(与下载链接大小相关，默认最大测试10s)
+# Download test time in seconds (depends on file size; max 10s by default)
 download-timeout: 10
 # 单节点测速下载数据大小(MB)限制，0为不限
 download-mb: 20
