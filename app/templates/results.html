@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -592,7 +592,7 @@
             const nodes = data.nodes || [];
             if (!data.checkedAt) {
                 dom.summary.textContent = '暂无Results';
-                showNotice('bi-inbox', '暂无Results', '完成一轮检测后，可以在这里查看节点列表。');
+                showNotice('bi-inbox', '暂无Results', '完成一轮检测后，可以在这里查看Node List。');
                 return;
             }
             dom.summary.innerHTML = '完成于 ' + esc(formatDateTime(new Date(data.checkedAt))) +

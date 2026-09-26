@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subs Check 配置管理</title>
+    <title>Subs Check Config</title>
     <link href="/static/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="/static/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="/static/monaco/vs/editor/editor.main.css" rel="stylesheet">
@@ -353,7 +353,7 @@
 
             <section class="panel">
                 <div class="panel-header">
-                    <h2 class="panel-title"><i class="bi bi-sliders"></i>配置编辑器</h2>
+                    <h2 class="panel-title"><i class="bi bi-sliders"></i>Config Editor器</h2>
                     <div class="panel-actions">
                         <button id="toggleConfig" class="icon-btn bordered" type="button" title="显示/隐藏配置">
                             <i class="bi bi-eye-slash"></i>
@@ -564,7 +564,7 @@
             });
         }
 
-        // 保存配置
+        // Save Config
         document.getElementById('saveConfig').addEventListener('click', function() {
             const content = editor.getValue();
 
