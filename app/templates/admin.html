@@ -272,14 +272,14 @@
                 <span class="cb-value mono ellipsis" title="{{.configPath}}">{{.configPath}}</span>
             </div>
             <div class="cb-field cb-key">
-                <label class="cb-label" for="apiKey"><i class="bi bi-key"></i>API 密钥</label>
+                <label class="cb-label" for="apiKey"><i class="bi bi-key"></i>API Key</label>
                 <div class="key-input">
                     <input type="password" class="form-control form-control-sm" id="apiKey" placeholder="请输入API Key" autocomplete="off">
-                    <button class="icon-btn" type="button" id="toggleApiKey" title="显示/隐藏密钥">
+                    <button class="icon-btn" type="button" id="toggleApiKey" title="显示/隐藏Key">
                         <i class="bi bi-eye-slash"></i>
                     </button>
                 </div>
-                <button id="saveApiKey" class="btn btn-soft btn-sm" type="button">Save密钥</button>
+                <button id="saveApiKey" class="btn btn-soft btn-sm" type="button">SaveKey</button>
             </div>
             <div class="cb-actions">
                 <span id="statusContainer" class="status-pill">
@@ -470,7 +470,7 @@
             });
         });
 
-        // 获取API Key
+        // GetAPI Key
         function getApiKey() {
             return localStorage.getItem('apiKey') || '';
         }
@@ -919,8 +919,8 @@
                 }
             })
             .catch(error => {
-                console.error('获取StatusFailed:', error);
-                setStatus('error', 'bi-exclamation-triangle-fill', '获取StatusFailed');
+                console.error('GetStatusFailed:', error);
+                setStatus('error', 'bi-exclamation-triangle-fill', 'GetStatusFailed');
                 resetProgress();
             });
         }
@@ -940,7 +940,7 @@
         setInterval(loadLogs, 10000);
         setInterval(updateStatus, 3000);
 
-        // 获取Version信息
+        // GetVersion信息
         function getVersionInfo() {
             fetch('/api/version', {
                 headers: addApiKeyHeader()
@@ -952,7 +952,7 @@
                 }
             })
             .catch(error => {
-                console.error('获取Version信息Failed:', error);
+                console.error('GetVersion信息Failed:', error);
                 dom.versionInfo.textContent = 'Version未知';
             });
         }

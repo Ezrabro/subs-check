@@ -357,7 +357,7 @@
                 <div class="toolbar-row">
                     <label class="search-box" for="searchInput">
                         <i class="bi bi-search"></i>
-                        <input type="search" id="searchInput" placeholder="搜索名称、服务器、SNI、IP 或解锁标签" autocomplete="off">
+                        <input type="search" id="searchInput" placeholder="搜索名称、Server、SNI、IP 或解锁标签" autocomplete="off">
                     </label>
                     <select id="countrySelect" class="form-select form-select-sm filter-select" aria-label="地区">
                         <option value="">全部地区</option>
@@ -427,8 +427,8 @@
         const TYPE_ORDER = ['vless', 'vmess', 'trojan', 'ss', 'ssr', 'hysteria2', 'hysteria', 'tuic', 'anytls', 'wireguard', 'snell', 'socks5', 'http'];
         const DETAIL_LABELS = {
             'cipher': '加密方式', 'flow': '流控', 'client-fingerprint': '客户端指纹', 'alpn': 'ALPN',
-            'skip-cert-verify': '跳过证书验证', 'ws-path': 'WS 路径', 'ws-host': 'WS Host',
-            'grpc-service-name': 'gRPC 服务名', 'h2-path': 'H2 路径', 'http-path': 'HTTP 路径',
+            'skip-cert-verify': '跳过证书验证', 'ws-path': 'WS Path', 'ws-host': 'WS Host',
+            'grpc-service-name': 'gRPC 服务名', 'h2-path': 'H2 Path', 'http-path': 'HTTP Path',
             'plugin': '插件', 'obfs': '混淆', 'protocol': '协议参数', 'up': '上行带宽', 'down': '下行带宽',
             'ports': 'Port Jump', 'congestion-controller': 'Congestion Control', 'udp-relay-mode': 'UDP Relay Mode', 'version': 'Version'
         };
@@ -436,7 +436,7 @@
         const COLUMNS = [
             { key: 'name', label: '名称', width: 'minmax(0, 1.6fr)', sort: 'name' },
             { key: 'type', label: '类型', width: '92px', sort: 'type', minWidth: 576 },
-            { key: 'server', label: '服务器', width: 'minmax(0, 1.25fr)', sort: 'server', minWidth: 992 },
+            { key: 'server', label: 'Server', width: 'minmax(0, 1.25fr)', sort: 'server', minWidth: 992 },
             { key: 'port', label: '端口', width: '64px', minWidth: 1200 },
             { key: 'sni', label: 'SNI', width: 'minmax(0, 1.1fr)', minWidth: 1200 },
             { key: 'tls', label: 'TLS', width: '40px', minWidth: 992 },
@@ -574,8 +574,8 @@
 
         function load() {
             if (!getApiKey()) {
-                dom.summary.textContent = '需要 API 密钥';
-                showNotice('bi-key', '需要 API 密钥', '请先在<a href="/admin">Dashboard</a>输入并Save API 密钥。');
+                dom.summary.textContent = 'Need API Key';
+                showNotice('bi-key', 'Need API Key', '请先在<a href="/admin">Dashboard</a>输入并Save API Key。');
                 return;
             }
             api('/api/results').then(setData).catch(function (err) {
@@ -835,7 +835,7 @@
         function renderDetail(n, shown) {
             const fields = [['完整名称', n.name]];
             if (!shown.type) fields.push(['类型', n.type]);
-            if (!shown.server) fields.push(['服务器', n.server]);
+            if (!shown.server) fields.push(['Server', n.server]);
             if (!shown.port) fields.push(['端口', n.port]);
             if (!shown.sni) fields.push(['SNI', n.sni || '—']);
             if (!shown.tls) fields.push(['TLS', n.tls ? '是' : '否']);
@@ -1072,7 +1072,7 @@
                 desc = '正在请求Built-in Sub-Store 转换，可以关闭弹窗，Done后链接自动生效';
             } else if (t.state === 'none') {
                 desc = t.preset
-                    ? 'Auto-written each round after check completes: ' + t.path + '（需要Enable sub-store）'
+                    ? 'Auto-written each round after check completes: ' + t.path + '（NeedEnable sub-store）'
                     : 'Not yet generated. Link accessible after generation, then auto-updated each round until disabled.';
             } else if (t.state === 'ready') {
                 desc = relTime(t.generatedAt) + 'Generate · ' + formatSize(t.size) + ' · Auto-updated after each check completes';
