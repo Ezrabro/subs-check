@@ -1077,7 +1077,7 @@
             } else if (t.state === 'ready') {
                 desc = relTime(t.generatedAt) + '生成 · ' + formatSize(t.size) + ' · Auto-updated after each check completes';
             } else if (t.state === 'outdated') {
-                desc = relTime(t.generatedAt) + '生成 · 内容来自上一轮检测，本轮检测Done后自动更新';
+                desc = relTime(t.generatedAt) + 'Generated · Content from previous round, updated after each check completes';
             } else if (t.state === 'failed') {
                 desc = '生成失败：' + t.error + (t.generatedAt ? ' · 链接暂时提供' + relTime(t.generatedAt) + '生成的内容' : '');
             } else if (t.state === 'preset') {
@@ -1116,7 +1116,7 @@
                 (t.note ? '<span class="note">' + esc(t.note) + '</span>' : '') +
                 '<span class="state-pill state-' + esc(stateKey) + '">' + esc(stateLabel) + '</span></div>' +
                 '<div class="link-row"><div class="link-box mono" title="' + esc(url) + '">' + esc(url) + '</div>' + primary + '</div>' +
-                (t.id === 'clash' ? '<div class="detail-warn">Clash original kernel doesn't support VLESS, Hysteria2, TUIC, etc.，这些节点会被跳过</div>' : '') +
+                (t.id === 'clash' ? '<div class="detail-warn">Clash original kernel doesn'tt support VLESS, Hysteria2, TUIC, etc.，这些节点会被跳过</div>' : '') +
                 (exp.message ? '<div class="detail-error">' + esc(exp.message) + '</div>' : '') +
                 '<div class="action-row"><div class="action-desc">' + esc(desc) + '</div>' +
                 (buttons.length ? '<div class="action-buttons">' + buttons.join('') + '</div>' : '') + '</div>';
