@@ -346,7 +346,7 @@
                 <div class="page-sub" id="summary">Loading...</div>
             </div>
             <button id="openExport" class="btn btn-primary" type="button">
-                <i class="bi bi-box-arrow-up-right"></i>导出订阅
+                <i class="bi bi-box-arrow-up-right"></i>Export Sub
             </button>
         </div>
 
@@ -362,7 +362,7 @@
                     <select id="countrySelect" class="form-select form-select-sm filter-select" aria-label="地区">
                         <option value="">全部地区</option>
                     </select>
-                    <button id="resetFilters" class="btn btn-link reset-link" type="button" hidden>清除筛选</button>
+                    <button id="resetFilters" class="btn btn-link reset-link" type="button" hidden>Clear Filter</button>
                     <div class="toolbar-count" id="countText"></div>
                 </div>
                 <div class="toolbar-row">
@@ -380,7 +380,7 @@
             </div>
             <div id="nodeTable"></div>
             <div id="emptyFilter" class="empty-filter" hidden>
-                没有匹配的节点 · <a href="#" id="emptyReset">清除筛选</a>
+                No matching nodes · <a href="#" id="emptyReset">Clear Filter</a>
             </div>
             <div id="tableFooter" class="table-footer" hidden>
                 <button id="showMore" class="btn btn-ghost btn-sm" type="button">显示更多</button>
@@ -394,21 +394,21 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div>
-                        <h5 class="modal-title" id="exportTitle">导出订阅</h5>
-                        <div class="modal-sub">节点来自本轮Results，由Built-in Sub-Store 转换为各客户端格式</div>
+                        <h5 class="modal-title" id="exportTitle">Export Sub</h5>
+                        <div class="modal-sub">Nodes from this round's Results, converted by Built-in Sub-Store to client formats</div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
                 </div>
                 <div class="modal-body" id="exportBody">
                     <div id="exportDisabled" class="alert alert-warning" hidden>
-                        <i class="bi bi-exclamation-triangle me-1"></i>未启用 sub-store（配置中 sub-store-port 为空），无法导出订阅。
+                        <i class="bi bi-exclamation-triangle me-1"></i>sub-store not enabled (sub-store-port 为空），无法Export Sub。
                     </div>
                     <div id="targetGroups" class="target-groups"></div>
                     <div id="targetDetail" class="target-detail" hidden></div>
                 </div>
                 <div class="modal-footer-note">
                     <i class="bi bi-lock"></i>
-                    <span>生成需要 API 密钥；生成后链接无需密钥即可访问（与 /sub/ 相同），每轮检测Done后自动更新，重启后继续有效，停用后失效。</span>
+                    <span>Generation requires API key; links accessible without key after generation (same as /sub/), auto-updated after each check round, valid after restart, invalid after disable.</span>
                 </div>
             </div>
         </div>
@@ -430,7 +430,7 @@
             'skip-cert-verify': '跳过证书验证', 'ws-path': 'WS 路径', 'ws-host': 'WS Host',
             'grpc-service-name': 'gRPC 服务名', 'h2-path': 'H2 路径', 'http-path': 'HTTP 路径',
             'plugin': '插件', 'obfs': '混淆', 'protocol': '协议参数', 'up': '上行带宽', 'down': '下行带宽',
-            'ports': '端口跳跃', 'congestion-controller': '拥塞控制', 'udp-relay-mode': 'UDP 中继模式', 'version': 'Version'
+            'ports': 'Port Jump', 'congestion-controller': 'Congestion Control', 'udp-relay-mode': 'UDP Relay Mode', 'version': 'Version'
         };
         // Columns narrower than minWidth are hidden; their values move to the detail panel.
         const COLUMNS = [
@@ -442,7 +442,7 @@
             { key: 'tls', label: 'TLS', width: '40px', minWidth: 992 },
             { key: 'udp', label: 'UDP', width: '40px', minWidth: 992 },
             { key: 'media', label: '流媒体', width: 'minmax(0, 1.7fr)', sort: 'media', minWidth: 768, needsMedia: true },
-            { key: 'speed', label: '速度', width: '150px', narrowWidth: '76px', sort: 'speed', needsSpeed: true },
+            { key: 'speed', label: 'Speed', width: '150px', narrowWidth: '76px', sort: 'speed', needsSpeed: true },
             { key: 'chev', label: '', width: '20px' }
         ];
         const SORTERS = {
@@ -581,7 +581,7 @@
             api('/api/results').then(setData).catch(function (err) {
                 dom.summary.textContent = '加载失败';
                 if (err.unauthorized) {
-                    showNotice('bi-key', 'API 密钥无效', '请回到<a href="/admin">Dashboard</a>重新输入 API 密钥。');
+                    showNotice('bi-key', 'Invalid API Key', 'Please return to <a href="/admin">Dashboard</a> and re-enter API key.');
                 } else {
                     showNotice('bi-exclamation-triangle', '加载Results失败', esc(err.message));
                 }
@@ -591,14 +591,14 @@
         function setData(data) {
             const nodes = data.nodes || [];
             if (!data.checkedAt) {
-                dom.summary.textContent = '暂无Results';
-                showNotice('bi-inbox', '暂无Results', 'Done一轮检测后，可以在这里查看Node List。');
+                dom.summary.textContent = 'No Results';
+                showNotice('bi-inbox', 'No Results', 'View Node List here after one check round completes.');
                 return;
             }
             dom.summary.innerHTML = 'Done于 ' + esc(formatDateTime(new Date(data.checkedAt))) +
-                '<span class="sep">·</span>共 <span class="count">' + nodes.length + '</span> 个节点';
+                '<span class="sep">·</span>Total <span class="count">' + nodes.length + '</span> 个节点';
             if (!nodes.length) {
-                showNotice('bi-inbox', '本轮没有可用节点', '全部节点都未Passed检测或被过滤。');
+                showNotice('bi-inbox', 'No available nodes this round', 'All nodes failed check or were filtered out.');
                 return;
             }
 
@@ -751,7 +751,7 @@
             dom.emptyFilter.hidden = state.view.length > 0;
             dom.tableFooter.hidden = remaining <= 0;
             dom.showMore.textContent = '显示更多（还有 ' + remaining + ' 个）';
-            dom.countText.textContent = hasFilters() ? '匹配 ' + state.view.length + ' / ' + total + ' 个节点' : '';
+            dom.countText.textContent = hasFilters() ? 'Matching ' + state.view.length + ' / ' + total + ' 个节点' : '';
             dom.resetFilters.hidden = !hasFilters();
             syncChips();
         }
@@ -844,7 +844,7 @@
             if (n.ip) fields.push(['出口 IP', n.ip]);
             if (n.country) fields.push(['地区', n.country]);
             if (n.ipRisk) fields.push(['IP 风险', n.ipRisk]);
-            if (n.subTag) fields.push(['订阅标签', n.subTag]);
+            if (n.subTag) fields.push(['Subscription Tag', n.subTag]);
             (n.details || []).forEach(function (d) {
                 let v = d.v;
                 if (d.k === 'skip-cert-verify') v = v === 'true' ? '是' : '否';
@@ -1072,16 +1072,16 @@
                 desc = '正在请求Built-in Sub-Store 转换，可以关闭弹窗，Done后链接自动生效';
             } else if (t.state === 'none') {
                 desc = t.preset
-                    ? '每轮检测Done时自动写入 ' + t.path + '（需要启用 sub-store）'
-                    : '尚未生成。生成后这个链接才能访问，之后每轮检测Done自动更新，直到停用';
+                    ? 'Auto-written each round after check completes: ' + t.path + '（需要启用 sub-store）'
+                    : 'Not yet generated. Link accessible after generation, then auto-updated each round until disabled.';
             } else if (t.state === 'ready') {
-                desc = relTime(t.generatedAt) + '生成 · ' + formatSize(t.size) + ' · 每轮检测Done后自动更新';
+                desc = relTime(t.generatedAt) + '生成 · ' + formatSize(t.size) + ' · Auto-updated after each check completes';
             } else if (t.state === 'outdated') {
                 desc = relTime(t.generatedAt) + '生成 · 内容来自上一轮检测，本轮检测Done后自动更新';
             } else if (t.state === 'failed') {
                 desc = '生成失败：' + t.error + (t.generatedAt ? ' · 链接暂时提供' + relTime(t.generatedAt) + '生成的内容' : '');
             } else if (t.state === 'preset') {
-                desc = '每轮检测Done时写入 ' + t.path + ' · ' + relTime(t.generatedAt) + '更新 · ' + formatSize(t.size);
+                desc = 'Written each round after check completes: ' + t.path + ' · ' + relTime(t.generatedAt) + '更新 · ' + formatSize(t.size);
             }
 
             let primary;
@@ -1104,7 +1104,7 @@
             }
             if (hasFile && !t.preset) {
                 const disabled = busy || pending || cooldown > 0 || !exp.enabled;
-                const label = t.state === 'failed' ? '重试' : '重新生成';
+                const label = t.state === 'failed' ? 'Retry' : 'Regenerate';
                 buttons.push('<button type="button" class="btn btn-outline-secondary btn-sm" data-action="generate"' + (disabled ? ' disabled' : '') + '>' +
                     '<i class="bi bi-arrow-clockwise me-1"></i>' + label + (cooldown > 0 ? '（' + cooldown + ' 秒）' : '') + '</button>');
             }
@@ -1116,7 +1116,7 @@
                 (t.note ? '<span class="note">' + esc(t.note) + '</span>' : '') +
                 '<span class="state-pill state-' + esc(stateKey) + '">' + esc(stateLabel) + '</span></div>' +
                 '<div class="link-row"><div class="link-box mono" title="' + esc(url) + '">' + esc(url) + '</div>' + primary + '</div>' +
-                (t.id === 'clash' ? '<div class="detail-warn">Clash 原版内核不支持 VLESS、Hysteria2、TUIC 等协议，这些节点会被跳过</div>' : '') +
+                (t.id === 'clash' ? '<div class="detail-warn">Clash original kernel doesn't support VLESS, Hysteria2, TUIC, etc.，这些节点会被跳过</div>' : '') +
                 (exp.message ? '<div class="detail-error">' + esc(exp.message) + '</div>' : '') +
                 '<div class="action-row"><div class="action-desc">' + esc(desc) + '</div>' +
                 (buttons.length ? '<div class="action-buttons">' + buttons.join('') + '</div>' : '') + '</div>';
@@ -1197,7 +1197,7 @@
             if (action === 'generate') {
                 mutate(t, 'POST');
             } else if (action === 'disable') {
-                if (window.confirm('停用后 ' + t.label + ' 的订阅链接将无法访问，也不再自动更新。确定停用吗？')) mutate(t, 'DELETE');
+                if (window.confirm('After disabling: ' + t.label + ' subscription links will become inaccessible and won't auto-update. Confirm disable?')) mutate(t, 'DELETE');
             } else if (action === 'copy-link') {
                 copyText(url).then(function () { markCopied(t.id + ':link'); }).catch(function (err) {
                     exp.message = err.message;

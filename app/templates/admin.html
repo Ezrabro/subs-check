@@ -311,7 +311,7 @@
                             <span class="phase-text">
                                 <span class="phase-name">Liveness</span>
                                 <span class="phase-count" id="phaseCount1"></span>
-                                <span class="phase-link-hint">查看结果</span>
+                                <span class="phase-link-hint">View Results</span>
                             </span>
                             <i class="bi bi-chevron-right phase-link-chev"></i>
                         </div>
@@ -320,7 +320,7 @@
                             <span class="phase-text">
                                 <span class="phase-name">Streaming + Rename</span>
                                 <span class="phase-count" id="phaseCount2"></span>
-                                <span class="phase-link-hint">查看结果</span>
+                                <span class="phase-link-hint">View Results</span>
                             </span>
                             <i class="bi bi-chevron-right phase-link-chev"></i>
                         </div>
@@ -329,7 +329,7 @@
                             <span class="phase-text">
                                 <span class="phase-name">Speed Test</span>
                                 <span class="phase-count" id="phaseCount3"></span>
-                                <span class="phase-link-hint">查看结果</span>
+                                <span class="phase-link-hint">View Results</span>
                             </span>
                             <i class="bi bi-chevron-right phase-link-chev"></i>
                         </div>
@@ -355,7 +355,7 @@
                 <div class="panel-header">
                     <h2 class="panel-title"><i class="bi bi-sliders"></i>Config Editor器</h2>
                     <div class="panel-actions">
-                        <button id="toggleConfig" class="icon-btn bordered" type="button" title="显示/隐藏配置">
+                        <button id="toggleConfig" class="icon-btn bordered" type="button" title="Show/Hide Config">
                             <i class="bi bi-eye-slash"></i>
                         </button>
                         <button id="reloadConfig" class="btn btn-ghost btn-sm" type="button">
@@ -534,7 +534,7 @@
             });
         });
 
-        // 处理未授权响应
+        // 处理Unauthorized响应
         function handleUnauthorized(response, showAlert = true) {
             if (response.status === 401) {
                 if (showAlert) {
@@ -552,7 +552,7 @@
             })
             .then(response => {
                 if (handleUnauthorized(response, false)) return;
-                if (!response.ok) throw new Error('加载配置失败');
+                if (!response.ok) throw new Error('Failed to load config');
                 return response.json();
             })
             .then(data => {
@@ -560,7 +560,7 @@
                 return data;
             })
             .catch(error => {
-                console.error('加载配置失败:', error);
+                console.error('Failed to load config:', error);
             });
         }
 
@@ -574,7 +574,7 @@
                 body: JSON.stringify({ content })
             })
             .then(response => {
-                if (handleUnauthorized(response, true)) throw new Error('未授权');
+                if (handleUnauthorized(response, true)) throw new Error('Unauthorized');
                 return response.json();
             })
             .then(data => {
@@ -586,7 +586,7 @@
                 }
             })
             .catch(error => {
-                if (error.message !== '未授权') alert('保存失败: ' + error.message);
+                if (error.message !== 'Unauthorized') alert('保存失败: ' + error.message);
             });
         });
 
@@ -603,7 +603,7 @@
 
         // 强制关闭
         document.getElementById('forceClose').addEventListener('click', function() {
-            if (!confirm('确定要强制停止当前阶段吗？已有结果将被保留。')) return;
+            if (!confirm('Force stop current phase? Existing results will be kept.')) return;
 
             const button = this;
             const icon = button.querySelector('i');
@@ -616,11 +616,11 @@
                 headers: addApiKeyHeader()
             })
             .then(response => {
-                if (handleUnauthorized(response, true)) throw new Error('未授权');
+                if (handleUnauthorized(response, true)) throw new Error('Unauthorized');
                 return response.json();
             })
             .catch(error => {
-                if (error.message !== '未授权') {
+                if (error.message !== 'Unauthorized') {
                     console.error('强制停止失败:', error);
                     alert('强制停止失败: ' + error.message);
                 }
@@ -643,12 +643,12 @@
                 headers: addApiKeyHeader()
             })
             .then(response => {
-                if (handleUnauthorized(response, true)) throw new Error('未授权');
+                if (handleUnauthorized(response, true)) throw new Error('Unauthorized');
                 return response.json();
             })
             .then(data => { loadLogs(); })
             .catch(error => {
-                if (error.message !== '未授权') console.error('触发检测失败:', error);
+                if (error.message !== 'Unauthorized') console.error('Failed to trigger check:', error);
             })
             .finally(() => {
                 setTimeout(() => { icon.className = originalIcon; button.disabled = false; }, 500);
@@ -661,7 +661,7 @@
                 headers: addApiKeyHeader()
             })
             .then(response => {
-                if (handleUnauthorized(response, false)) throw new Error('未授权');
+                if (handleUnauthorized(response, false)) throw new Error('Unauthorized');
                 return response.json();
             })
             .then(data => {
@@ -684,7 +684,7 @@
                 return data;
             })
             .catch(error => {
-                if (error.message !== '未授权') {
+                if (error.message !== 'Unauthorized') {
                     dom.logs.textContent = '加载Logs失败: ' + error.message;
                 }
             });
