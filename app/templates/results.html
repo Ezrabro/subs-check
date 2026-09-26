@@ -519,7 +519,7 @@
                         throw err;
                     }
                     if (!resp.ok) {
-                        const err = new Error(body.error || ('请求失败 (HTTP ' + resp.status + ')'));
+                        const err = new Error(body.error || ('请求Failed (HTTP ' + resp.status + ')'));
                         err.body = body;
                         throw err;
                     }
@@ -575,15 +575,15 @@
         function load() {
             if (!getApiKey()) {
                 dom.summary.textContent = '需要 API 密钥';
-                showNotice('bi-key', '需要 API 密钥', '请先在<a href="/admin">Dashboard</a>输入并保存 API 密钥。');
+                showNotice('bi-key', '需要 API 密钥', '请先在<a href="/admin">Dashboard</a>输入并Save API 密钥。');
                 return;
             }
             api('/api/results').then(setData).catch(function (err) {
-                dom.summary.textContent = '加载失败';
+                dom.summary.textContent = '加载Failed';
                 if (err.unauthorized) {
                     showNotice('bi-key', 'Invalid API Key', 'Please return to <a href="/admin">Dashboard</a> and re-enter API key.');
                 } else {
-                    showNotice('bi-exclamation-triangle', '加载Results失败', esc(err.message));
+                    showNotice('bi-exclamation-triangle', '加载ResultsFailed', esc(err.message));
                 }
             });
         }
@@ -979,12 +979,12 @@
             { key: 'core', name: '内核与通用格式' }
         ];
         const STATE_META = {
-            none: '未生成',
-            ready: '已生成',
+            none: '未Generate',
+            ready: '已Generate',
             outdated: '待更新',
-            generating: '生成中',
-            failed: '生成失败',
-            preset: '每轮预生成'
+            generating: 'Generate中',
+            failed: 'GenerateFailed',
+            preset: '每轮预Generate'
         };
 
         const exp = {
@@ -1044,7 +1044,7 @@
                     const indicator = busy
                         ? '<span class="spinner-border spinner-xs text-primary" role="status" aria-hidden="true"></span>'
                         : '<span class="dot dot-' + esc(t.state) + '"></span>';
-                    const label = t.preset && t.state === 'none' ? '尚未生成' : (busy ? '生成中' : STATE_META[t.state] || t.state);
+                    const label = t.preset && t.state === 'none' ? '尚未Generate' : (busy ? 'Generate中' : STATE_META[t.state] || t.state);
                     return '<button type="button" class="target-tile' + (t.id === exp.selected ? ' selected' : '') +
                         '" data-target="' + esc(t.id) + '"><span class="tile-label ellipsis">' + esc(t.label) +
                         (t.note ? '<small>' + esc(t.note) + '</small>' : '') + '</span>' +
@@ -1065,21 +1065,21 @@
             const hasFile = t.state === 'preset' || !!t.generatedAt;
             const cooldown = cooldownLeft(t);
             const stateKey = busy ? 'generating' : t.state;
-            const stateLabel = t.preset && t.state === 'none' ? '尚未生成' : STATE_META[stateKey] || stateKey;
+            const stateLabel = t.preset && t.state === 'none' ? '尚未Generate' : STATE_META[stateKey] || stateKey;
 
             let desc = '';
             if (busy) {
                 desc = '正在请求Built-in Sub-Store 转换，可以关闭弹窗，Done后链接自动生效';
             } else if (t.state === 'none') {
                 desc = t.preset
-                    ? 'Auto-written each round after check completes: ' + t.path + '（需要启用 sub-store）'
+                    ? 'Auto-written each round after check completes: ' + t.path + '（需要Enable sub-store）'
                     : 'Not yet generated. Link accessible after generation, then auto-updated each round until disabled.';
             } else if (t.state === 'ready') {
-                desc = relTime(t.generatedAt) + '生成 · ' + formatSize(t.size) + ' · Auto-updated after each check completes';
+                desc = relTime(t.generatedAt) + 'Generate · ' + formatSize(t.size) + ' · Auto-updated after each check completes';
             } else if (t.state === 'outdated') {
                 desc = relTime(t.generatedAt) + 'Generated · Content from previous round, updated after each check completes';
             } else if (t.state === 'failed') {
-                desc = '生成失败：' + t.error + (t.generatedAt ? ' · 链接暂时提供' + relTime(t.generatedAt) + '生成的内容' : '');
+                desc = 'GenerateFailed：' + t.error + (t.generatedAt ? ' · 链接暂时提供' + relTime(t.generatedAt) + 'Generate的内容' : '');
             } else if (t.state === 'preset') {
                 desc = 'Written each round after check completes: ' + t.path + ' · ' + relTime(t.generatedAt) + '更新 · ' + formatSize(t.size);
             }
@@ -1087,13 +1087,13 @@
             let primary;
             if (!hasFile && !t.preset) {
                 primary = '<button type="button" class="btn btn-primary" data-action="generate"' + (busy || pending || !exp.enabled ? ' disabled' : '') + '>' +
-                    (busy ? '<span class="spinner-border spinner-xs me-1" aria-hidden="true"></span>生成中' : '<i class="bi bi-magic me-1"></i>生成链接') +
+                    (busy ? '<span class="spinner-border spinner-xs me-1" aria-hidden="true"></span>Generate中' : '<i class="bi bi-magic me-1"></i>Generate链接') +
                     '</button>';
             } else {
                 const copied = exp.copied === t.id + ':link';
                 primary = '<button type="button" class="btn ' + (copied ? 'btn-success' : 'btn-primary') + '" data-action="copy-link"' +
                     (hasFile ? '' : ' disabled') + '>' +
-                    (copied ? '<i class="bi bi-check-lg me-1"></i>已复制' : '<i class="bi bi-copy me-1"></i>复制链接') + '</button>';
+                    (copied ? '<i class="bi bi-check-lg me-1"></i>已复制' : '<i class="bi bi-copy me-1"></i>Copy link') + '</button>';
             }
 
             const buttons = [];
@@ -1109,7 +1109,7 @@
                     '<i class="bi bi-arrow-clockwise me-1"></i>' + label + (cooldown > 0 ? '（' + cooldown + ' 秒）' : '') + '</button>');
             }
             if (t.enabled && !t.preset) {
-                buttons.push('<button type="button" class="btn btn-outline-danger btn-sm" data-action="disable"' + (pending ? ' disabled' : '') + '>停用</button>');
+                buttons.push('<button type="button" class="btn btn-outline-danger btn-sm" data-action="disable"' + (pending ? ' disabled' : '') + '>Disable</button>');
             }
 
             return '<div class="target-head"><span class="name">' + esc(t.label) + '</span>' +
@@ -1212,7 +1212,7 @@
                 }).then(copyText).then(function () {
                     markCopied(t.id + ':content');
                 }).catch(function (err) {
-                    exp.message = '复制内容失败：' + err.message;
+                    exp.message = '复制内容Failed：' + err.message;
                     renderExport();
                 });
             }

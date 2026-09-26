@@ -279,7 +279,7 @@
                         <i class="bi bi-eye-slash"></i>
                     </button>
                 </div>
-                <button id="saveApiKey" class="btn btn-soft btn-sm" type="button">保存密钥</button>
+                <button id="saveApiKey" class="btn btn-soft btn-sm" type="button">Save密钥</button>
             </div>
             <div class="cb-actions">
                 <span id="statusContainer" class="status-pill">
@@ -298,7 +298,7 @@
         <div class="workspace">
             <section class="panel">
                 <div class="panel-header">
-                    <h2 class="panel-title"><i class="bi bi-terminal"></i>最近Logs</h2>
+                    <h2 class="panel-title"><i class="bi bi-terminal"></i>Recent Logs</h2>
                     <button id="refreshLogs" class="btn btn-ghost btn-sm" type="button">
                         <i class="bi bi-arrow-repeat"></i>刷新
                     </button>
@@ -362,7 +362,7 @@
                             <i class="bi bi-arrow-repeat"></i>Reload
                         </button>
                         <button id="saveConfig" class="btn btn-primary btn-sm" type="button">
-                            <i class="bi bi-save"></i>保存
+                            <i class="bi bi-save"></i>Save
                         </button>
                     </div>
                 </div>
@@ -432,7 +432,7 @@
             }
         });
 
-        // 保存API Key到本地存储
+        // SaveAPI Key到本地存储
         dom.saveApiKey.addEventListener('click', function() {
             const apiKey = dom.apiKey.value.trim();
             localStorage.setItem('apiKey', apiKey);
@@ -450,19 +450,19 @@
                     alert('Invalid API key, please check and retry');
                     return false;
                 } else if (response.ok) {
-                    alert('API Key有效，已保存到本地');
+                    alert('API Key有效，已Save到本地');
                     loadConfig();
                     loadLogs();
                     updateStatus();
                     getVersionInfo();
                     return true;
                 } else {
-                    throw new Error('验证失败');
+                    throw new Error('验证Failed');
                 }
             })
             .catch(error => {
-                console.error('验证API Key失败:', error);
-                alert('验证API Key时出错，但已保存到本地存储');
+                console.error('验证API KeyFailed:', error);
+                alert('验证API Key时出错，但已Save到本地存储');
             })
             .finally(() => {
                 button.disabled = false;
@@ -475,13 +475,13 @@
             return localStorage.getItem('apiKey') || '';
         }
 
-        // 添加API Key到请求头
+        // AddAPI Key到请求头
         function addApiKeyHeader(headers = {}) {
             const apiKey = getApiKey();
             return { ...headers, 'X-API-Key': apiKey };
         }
 
-        // 初始化编辑器
+        // 初始化Edit器
         require(['vs/editor/editor.main'], function() {
             monaco.languages.register({ id: 'yaml' });
             monaco.languages.setMonarchTokensProvider('yaml', {
@@ -545,7 +545,7 @@
             return false;
         }
 
-        // 加载配置
+        // Load config
         function loadConfig() {
             return fetch('/api/config', {
                 headers: addApiKeyHeader()
@@ -579,18 +579,18 @@
             })
             .then(data => {
                 if (data.error) {
-                    alert('保存失败: ' + data.error);
+                    alert('SaveFailed: ' + data.error);
                 } else {
                     alert(data.message);
                     updateStatus();
                 }
             })
             .catch(error => {
-                if (error.message !== 'Unauthorized') alert('保存失败: ' + error.message);
+                if (error.message !== 'Unauthorized') alert('SaveFailed: ' + error.message);
             });
         });
 
-        // 重新加载配置
+        // 重新Load config
         document.getElementById('reloadConfig').addEventListener('click', function() {
             const button = this;
             const icon = button.querySelector('i');
@@ -621,8 +621,8 @@
             })
             .catch(error => {
                 if (error.message !== 'Unauthorized') {
-                    console.error('强制停止失败:', error);
-                    alert('强制停止失败: ' + error.message);
+                    console.error('强制停止Failed:', error);
+                    alert('强制停止Failed: ' + error.message);
                 }
             })
             .finally(() => {
@@ -666,7 +666,7 @@
             })
             .then(data => {
                 if (data.error) {
-                    dom.logs.textContent = '加载Logs失败: ' + data.error;
+                    dom.logs.textContent = '加载LogsFailed: ' + data.error;
                 } else {
                     const isScrolledToBottom = dom.logs.scrollHeight - dom.logs.clientHeight <= dom.logs.scrollTop + 1;
                     const fragment = document.createDocumentFragment();
@@ -685,7 +685,7 @@
             })
             .catch(error => {
                 if (error.message !== 'Unauthorized') {
-                    dom.logs.textContent = '加载Logs失败: ' + error.message;
+                    dom.logs.textContent = '加载LogsFailed: ' + error.message;
                 }
             });
         }
@@ -694,7 +694,7 @@
             return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
         }
 
-        // 为Logs添加颜色
+        // 为LogsAdd颜色
         const LOG_LEVEL_CLASS = { INF: 'log-info', ERR: 'log-error', WRN: 'log-warn', DBG: 'log-debug' };
         function colorizeLog(log) {
             log = escapeHtml(log);
@@ -739,7 +739,7 @@
                 step.classList.remove('active', 'done');
 
                 if (i < phase) {
-                    // 已Done的阶段：用后端保存的结果
+                    // 已Done的阶段：用后端Save的结果
                     step.classList.add('done');
                     if (result) {
                         count.textContent = label + ': ' + result.available + '/' + result.total;
@@ -820,7 +820,7 @@
             updatePhaseSteps(phase, available, total, phaseResults);
         }
 
-        // 重置进度条到初始Status
+        // Reset progress
         function resetProgress() {
             dom.progressText.textContent = 'N/A';
             dom.progressPercent.textContent = 'N/A';
@@ -919,8 +919,8 @@
                 }
             })
             .catch(error => {
-                console.error('获取Status失败:', error);
-                setStatus('error', 'bi-exclamation-triangle-fill', '获取Status失败');
+                console.error('获取StatusFailed:', error);
+                setStatus('error', 'bi-exclamation-triangle-fill', '获取StatusFailed');
                 resetProgress();
             });
         }
@@ -952,7 +952,7 @@
                 }
             })
             .catch(error => {
-                console.error('获取Version信息失败:', error);
+                console.error('获取Version信息Failed:', error);
                 dom.versionInfo.textContent = 'Version未知';
             });
         }
