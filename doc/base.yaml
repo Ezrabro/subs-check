@@ -1,4 +1,4 @@
-proxy-providers:
+# Config Reference (English)
   ProviderALL:
     url: https:// 
     type: http
